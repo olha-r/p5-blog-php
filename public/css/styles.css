@@ -1,0 +1,85 @@
+.navbar {
+	height: 80px;
+	width: 100%;
+}
+
+#form_contact {
+	
+	margin: 2% 10%;
+}
+footer {
+	padding-top: 25px;
+}
+
+.fab, .social-icon {
+	margin: 20px 10px 10px 10px;
+	font-size: 25px;
+	width: 30px;
+}
+
+.text-dark {
+	margin-top: 10px;
+	padding-bottom: 10px;
+}
+
+.post {
+	margin: 20px 50px;
+}
+
+/*formulaire d'inscription*/
+.form-control {
+	border-color: #eee;
+	min-height: 41px;
+	box-shadow: none !important;
+}
+.inscription-form input {
+	background: #f1f1f1;
+}
+.inscription-form {
+	width: 800px;
+	margin: 0 auto;
+	padding: 30px 0;
+}
+.inscription-form h2 {
+	color: #333;
+	margin: 0 0 30px 0;
+	display: inline-block;
+	padding: 0 30px 10px 0;
+	border-bottom: 3px solid darkred;
+}
+.inscription-form form {
+	color: black;
+	border-radius: 3px;
+	margin-bottom: 15px;
+	background: #fff;
+	box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+	padding: 30px;
+}
+.inscription-form .form-group {
+	margin-bottom: 20px;
+}
+.inscription-form label {
+	font-weight: normal;
+	font-size: 16px;
+}
+
+.inscription-form .btn {
+	font-size: 16px;
+	font-weight: bold;
+	background: grey;
+	border: none;
+	margin-top: 20px;
+	min-width: 140px;
+}
+.inscription-form .btn:hover, .inscription-form .btn:focus {
+	background: darkred;
+	outline: none !important;
+}
+
+.inscription-form form a {
+	color: darkred;
+	text-decoration: none;
+}
+.inscription-form form a:hover {
+	text-decoration: underline;
+}
