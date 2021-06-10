@@ -3,6 +3,7 @@
 // Chargement des classes
 require_once('model/PostManager.php');
 require_once('model/CommentManager.php');
+require_once('model/ContactMailManager.php');
 
 function listPosts()
 {
@@ -37,4 +38,11 @@ function addComment()
     else {
         header('Location: index.php?action=post&id=' . $_GET['id']);
     }
+}
+
+function contactMail()
+{
+    $contactMail = new \Olha\Blog\Model\ContactMailManager();
+    require('view/frontend/contactMailView.php');
+
 }

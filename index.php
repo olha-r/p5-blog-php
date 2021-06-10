@@ -27,9 +27,12 @@ try {
                 throw new Exception('Aucun identifiant de billet envoyé');
             }
         }
+        elseif ($_GET['action'] == 'contactUs') {
+           contactMail();
+        }
     }
     else {
-        listPosts();
+        contactMail();
     }
 }
 catch(Exception $e) {

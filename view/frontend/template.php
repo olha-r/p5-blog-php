@@ -13,23 +13,23 @@
 <!-- Navigation-->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark text-uppercase " id="mainNav">
     <div class="container">
-        <a class="navbar-brand" href="...">Projet 3 - OC</a>
+        <a class="navbar-brand" href="index.php?action=contactUs">Projet 3 - OC</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarToggler">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link  active" aria-current="page" href="...">Accueil</a>
+                    <a class="nav-link  active" aria-current="page" href="index.php?action=contactUs">Accueil</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link  " aria-current="page" href="...">Blog</a>
+                    <a class="nav-link  " aria-current="page" href="index.php?action=listPosts">Blog</a>
                 </li>
                 <form class="nav-item">
-                    <a class="btn btn-outline-light mr-auto" href="...">Inscription</a>
+                    <a class="btn btn-outline-light mr-auto" href="index.php?action=signIn">Inscription</a>
                 </form>
                 <form class="nav-item">
-                    <a class="btn btn-outline-light mr-auto" href="...">Connexion</a>
+                    <a class="btn btn-outline-light mr-auto" href="index.php?action=signUp">Connexion</a>
                 </form>
             </ul>
         </div>
