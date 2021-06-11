@@ -2,7 +2,7 @@
 
 <?php ob_start(); ?>
 
-<!-- Header-->
+
 <header class="bg-light">
     <div class="container-fluid py-5 text-center flex-column">
         <img class="rounded-circle" src="/monblog/public/img/rauletolha.jpg" alt="..." />
