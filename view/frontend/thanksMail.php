@@ -1,4 +1,5 @@
 <?php ob_start(); ?>
+
     <h2 class="text-secondary text-center text-uppercase mb-3">
         Message important</h2>
     <p>

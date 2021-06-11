@@ -6,6 +6,9 @@
 #form_contact {
 	margin: 2% 10%;
 }
+input {
+	background: #f1f1f1;
+}
 footer {
 	padding-top: 25px;
 }
@@ -65,13 +68,13 @@ footer {
 .signin-form .btn {
 	font-size: 16px;
 	font-weight: bold;
-	background: grey;
+	background: darkred;
 	border: none;
 	margin-top: 20px;
 	min-width: 140px;
 }
 .signin-form .btn:hover, .inscription-form .btn:focus {
-	background: darkred;
+	background: grey;
 	outline: none !important;
 }
 

@@ -2,14 +2,14 @@
 
 <?php ob_start(); ?>
 
-
-<header class="bg-light">
-    <div class="container-fluid py-5 text-center flex-column">
-        <img class="rounded-circle" src="/monblog/public/img/rauletolha.jpg" alt="..." />
-        <h1 class="fw-bold">Salut ! C'est Olha ! </h1>
-        <p>Je suis étudiante - développeur PHP chez OpenClassrooms</p>
-    </div>
-</header>
+    <!-- Header-->
+    <header class="bg-light">
+        <div class="container-fluid py-5 text-center flex-column">
+            <img class="rounded-circle" src="/monblog/public/img/rauletolha.jpg" alt="..." />
+            <h1 class="fw-bold">Mon blog !</h1>
+            <p>Je suis étudiante - développeur PHP chez OpenClassrooms</p>
+        </div>
+    </header>
 
 
 <!-- Contact Section-->

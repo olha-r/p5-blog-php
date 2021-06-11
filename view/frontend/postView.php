@@ -9,7 +9,7 @@
             <h3 class="card-title">
                 <?= htmlspecialchars($post['title']) ?>
                 <em class="text-muted">le <?= $post['creation_date_fr'] ?></em>
-                <em class="text-muted">Auteur: <?= $post['pseudo'] ?></em>
+                <em class="text-muted">Auteur: <?= $post['login_name'] ?></em>
             </h3>
 
             <p>

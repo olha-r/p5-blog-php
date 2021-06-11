@@ -1,16 +1,16 @@
 <?php $title = 'Mon blog'; ?>
 
 <?php ob_start(); ?>
-    <!-- Header-->
-    <header class="bg-light">
-        <div class="container-fluid py-5 text-center flex-column">
-            <img class="rounded-circle" src="/monblog/public/img/rauletolha.jpg" alt="..." />
-            <h1 class="fw-bold">Mon blog !</h1>
-            <p>Je suis étudiante - développeur PHP chez OpenClassrooms</p>
-        </div>
-    </header>
+<!-- Header-->
+<header class="bg-light">
+    <div class="container-fluid py-5 text-center flex-column">
+        <img class="rounded-circle" src="/monblog/public/img/rauletolha.jpg" alt="..." />
+        <h1 class="fw-bold">Mon blog !</h1>
+        <p>Je suis étudiante - développeur PHP chez OpenClassrooms</p>
+    </div>
+</header>
 
-    <p>Derniers billets du blog </p>
+<p>Derniers billets du blog </p>
 
 
 <?php
@@ -23,7 +23,7 @@ while ($data = $posts->fetch())
             <h3 class="card-title">
                 <?= htmlspecialchars($data['title']) ?>
                 <em class="text-muted">Publié le <?= $data['creation_date_fr'] ?></em>
-                <em class="text-muted">Auteur:  <?= $data['author_post'] ?></em>
+                <em class="text-muted">Auteur:  <?= $data['login_name'] ?></em>
             </h3>
 
             <p class="card-text">
