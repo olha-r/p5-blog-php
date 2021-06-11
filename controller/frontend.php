@@ -4,6 +4,7 @@
 require_once('model/PostManager.php');
 require_once('model/CommentManager.php');
 require_once('model/ContactMailManager.php');
+require_once('model/UsersManager.php');
 
 function listPosts()
 {
@@ -29,9 +30,7 @@ function post()
 function addComment()
 {
     $commentManager = new \Olha\Blog\Model\CommentManager();
-
     $affectedLines = $commentManager->postComment($_GET['id'],$_POST['author'],$_POST['comment']);
-
     if ($affectedLines === false) {
         throw new Exception('Impossible d\'ajouter le commentaire !');
     }
@@ -44,5 +43,12 @@ function contactMail()
 {
     $contactMail = new \Olha\Blog\Model\ContactMailManager();
     require('view/frontend/contactMailView.php');
+
+}
+
+function insertNewUser()
+{
+    $newUser = new \Olha\Blog\Model\UsersManager();
+    require('view/frontend/signUpView.php');
 
 }

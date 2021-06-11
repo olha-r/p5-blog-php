@@ -26,10 +26,10 @@
                     <a class="nav-link  " aria-current="page" href="index.php?action=listPosts">Blog</a>
                 </li>
                 <form class="nav-item">
-                    <a class="btn btn-outline-light mr-auto" href="index.php?action=signIn">Inscription</a>
+                    <a class="btn btn-outline-light mr-auto" href="index.php?action=signUp">Inscription</a>
                 </form>
                 <form class="nav-item">
-                    <a class="btn btn-outline-light mr-auto" href="index.php?action=signUp">Connexion</a>
+                    <a class="btn btn-outline-light mr-auto" href="index.php?action=signIn">Connexion</a>
                 </form>
             </ul>
         </div>
