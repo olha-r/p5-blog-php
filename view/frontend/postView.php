@@ -1,3 +1,5 @@
+
+
 <?php $title = htmlspecialchars($post['title']); ?>
 
 <?php ob_start(); ?>
@@ -20,8 +22,11 @@
 
     <h2>Commentaires</h2>
 
+
     <div id="add-comments">
         <h3>Ajouter un commentaire</h3>
+
+
         <form action="index.php?action=addComment&amp;id=<?= $post['id'] ?>" method="post">
             <div class="form-outline mb-4">
                 <label for="author">Auteur</label><br />
@@ -45,6 +50,7 @@ while ($comment = $comments->fetch())
     <?php
 }
 ?>
+
 <?php $content = ob_get_clean(); ?>
 
 <?php require('template.php'); ?>

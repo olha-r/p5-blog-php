@@ -12,7 +12,6 @@ class PostManager extends Manager
         $req = $db->query('
                     SELECT *, DATE_FORMAT(creation_date, \'%d/%m/%Y à %Hh%imin%ss\') AS creation_date_fr
                     FROM posts
-                    /*LEFT JOIN users on users.id = posts.author_post*/
                     ORDER BY creation_date
                     DESC LIMIT 0, 5
                     

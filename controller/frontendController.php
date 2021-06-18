@@ -3,8 +3,8 @@
         // Chargement des classes
 require_once('model/PostManager.php');
 require_once('model/CommentManager.php');
-
 require_once('model/UsersManager.php');
+require_once('model/LoginManager.php');
 
 
         //POST FUNCTIONS
@@ -39,7 +39,9 @@ function addComment()
         throw new Exception('Impossible d\'ajouter le commentaire !');
     }
     else {
+
         header('Location: index.php?action=post&id=' . $_GET['id']);
+       /* $_SESSION['error']['success']="Votre commentaire est publié.";*/
     }
 }
 
@@ -75,29 +77,7 @@ function contactMail()
     require('view/frontend/contactMailView.php');
 }
 
-/*
-function login ($login_name, $password) {
-    $user = new \Olha\Blog\Model\UsersManager();
-    $user_data = $user->getUserData();
-    $password_ok = password_verify($password, $user_data['password']);
-    if (empty($user_data)) {
-        throw new Exception("Nous n'avons pas reconnu ton pseudo");
-    }
-    if (!$password_ok) {
-        throw new Exception("Le mot de passe invalides.");
-    }
-    $_SESSION['login_name'] = $login_name;
-    $_SESSION['id'] = (int) $user_data['id'];
-    $_SESSION['email'] = $user_data['email'];
-    $_SESSION['creation_date'] = $user_data['creation_date'];
-    listPosts();
-    require ('view/frontend/signInView.php');
-
-}
-*/
-
         //USERS FUNCTIONS
-
 
 function addNewUser()
 {
@@ -130,7 +110,34 @@ function addNewUser()
     }
     else {
 
-    include ('view/frontend/signUpView.php');
+    require ('view/frontend/signUpView.php');
     }
 }
 
+function login_user()
+{
+    $loginManager = new \Olha\Blog\Model\LoginManager();
+    $resultat=$loginManager->signIn();
+    // Comparaison du pass envoyé via le formulaire avec la base
+
+
+    if (!$resultat) {
+        throw new Exception('Mauvais identifiant ou mot de passe !');
+    }
+    else {
+        $isPasswordCorrect = password_verify($_POST['password'], $resultat['password']);
+        if ($isPasswordCorrect) {
+            session_start();
+            $_SESSION['id'] = $resultat['id'];
+            $_SESSION['login_name'] = $_POST['login_name'];
+            echo 'Vous êtes connecté !';
+           /* $_SESSION['error']['success']='Vous êtes connecté !';*/
+            header('Location: ');
+            exit();
+        } else {
+            $_SESSION['error']='Mauvais identifiant ou mot de passe !';
+            header('Location: index.php?action=signIn');
+        }
+    }
+
+}

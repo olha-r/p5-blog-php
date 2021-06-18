@@ -23,7 +23,7 @@ while ($data = $posts->fetch())
             <h3 class="card-title">
                 <?= htmlspecialchars($data['title']) ?>
                 <em class="text-muted">Publié le <?= $data['creation_date_fr'] ?></em>
-                <em class="text-muted">Auteur:  <?= $data['login_name'] ?></em>
+
             </h3>
 
             <p class="card-text">

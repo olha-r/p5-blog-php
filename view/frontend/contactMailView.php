@@ -1,4 +1,7 @@
-<?php $title = "Page d'accueil"; ?>
+<?php $title = "Page d'accueil";
+
+$error_msg = null;
+?>
 
 <?php ob_start(); ?>
 
@@ -15,7 +18,10 @@
 <!-- Contact Section-->
 <div id="form_contact">
     <h2>Me contacter</h2>
+<?php  ?>
+    <div>
 
+    </div>
     <form action="index.php?action=contactUs" method="post">
 
         <!-- Name input -->

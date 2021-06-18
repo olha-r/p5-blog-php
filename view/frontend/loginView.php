@@ -1,3 +1,4 @@
+
 <?php $title = "Se connecter"; ?>
 
 <?php ob_start(); ?>
@@ -6,6 +7,11 @@
         <form action="index.php?action=signIn" method="post" class="form-horizontal">
             <div class="col-xs-8 col-xs-offset-4">
                 <h2>Connectez-vous</h2>
+
+                <?php if (isset($_SESSION['error']) && !empty($_SESSION['error'])) : ?>
+                <?= $_SESSION['error'] ?>
+                <?php endif; ?>
+
             </div>
             <div class="form-group" >
                 <label class="control-label col-xs-4">Pseudo</label>
@@ -20,7 +26,8 @@
                 </div>
             </div>
 
-            <button type="submit" name="connexion" class="btn btn-danger btn-lg">Se connecter</button>
+            <input type="submit" value="Se connecter" class="btn btn-danger btn-lg/>
+            <br/>
             <div class="text-center">Vous n'avez pas encore de compte ? <a href="index.php?action=signUp">Inscrivez-vous</a></div>
 
         </form>
@@ -29,3 +36,7 @@
 <?php $content = ob_get_clean(); ?>
 
 <?php require('template.php'); ?>
+
+<?php unset($_SESSION['error']); ?>
+
+

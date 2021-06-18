@@ -1,5 +1,6 @@
 <?php
-require('controller/frontend.php');
+session_start();
+require('controller/frontendController.php');
 
 try {
     if (isset($_GET['action'])) {
@@ -36,8 +37,18 @@ try {
         elseif ($_GET['action'] === 'signUp') {
             addNewUser();
         }
-
-
+        elseif ($_GET['action'] === 'signIn') {
+            if (isset($_POST['login_name']) && isset($_POST['password'])
+                && !empty($_POST['login_name']) && !empty($_POST['password'])
+            ) {
+                login_user(
+                    strip_tags($_POST['login_name']),
+                    strip_tags($_POST['password'])
+                );
+            } else {
+                require ('view/frontend/loginView.php');
+            }
+        }
     }
     else {
         contactMail();
@@ -49,24 +60,11 @@ catch(Exception $e) {
 
 
 
-/*
-        elseif ($_GET['action'] === 'signUp') {
-            if (isset($_POST['new_login_name']) && !empty($_POST['new_login_name'])
-                && isset($_POST['new_password_1']) && !empty($_POST['new_password_1'])
-                && isset($_POST['new_password_2']) && !empty($_POST['new_password_2'])
-                && isset($_POST['new_email']) && !empty($_POST['new_email'])
-            ) {
-                addNewUser(
-                    strip_tags($_POST['new_login_name']),
-                    strip_tags($_POST['new_password_1']),
-                    strip_tags($_POST['new_password_2']),
-                    strip_tags($_POST['new_email'])
-                );
-            } else {
-                throw new Exception("Il manque des données nécessaires pour la création d'un compte.");
-            }
-        }
-*/
+
+
+
+
+
 
         /*
         elseif ($_GET['action'] === 'signIn') {
@@ -81,3 +79,4 @@ catch(Exception $e) {
                     throw new Exception('Il manque des données nécessaires à la connexion.');
                 }
         }*/
+
