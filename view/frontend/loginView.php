@@ -3,13 +3,14 @@
 
 <?php ob_start(); ?>
 
-    <div class="signIn-form">
+<div class="row justify-content-center">
+    <div class="col-md-8  col-lg-6" id="signin-form">
         <form action="index.php?action=signIn" method="post" class="form-horizontal">
             <div class="col-xs-8 col-xs-offset-4">
                 <h2>Connectez-vous</h2>
 
                 <?php if (isset($_SESSION['error']) && !empty($_SESSION['error'])) : ?>
-                <?= $_SESSION['error'] ?>
+                    <div class="alert alert-danger"><?= $_SESSION['error']; ?></div>
                 <?php endif; ?>
 
             </div>
@@ -26,12 +27,13 @@
                 </div>
             </div>
 
-            <input type="submit" value="Se connecter" class="btn btn-danger btn-lg/>
+            <input type="submit" value="Se connecter" class="btn btn-lg btn-outline-danger"/>
             <br/>
             <div class="text-center">Vous n'avez pas encore de compte ? <a href="index.php?action=signUp">Inscrivez-vous</a></div>
 
-        </form>
+    </form>
     </div>
+</div>
 
 <?php $content = ob_get_clean(); ?>
 

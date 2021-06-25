@@ -1,7 +1,7 @@
 <?php
 session_start();
 require('controller/frontendController.php');
-
+require('controller/backendController.php');
 try {
     if (isset($_GET['action'])) {
         if ($_GET['action'] === 'listPosts') {
@@ -23,7 +23,9 @@ try {
                     addComment($_GET['id'], $_POST['author'], $_POST['comment']);
                 }
                 else {
-                    throw new Exception('Tous les champs ne sont pas remplis !');
+                    $_SESSION['error']['type']= "Tous les champs ne sont pas remplis !";
+                    header('Location: index.php?action=post&id=' . $_GET['id']);
+                   /* throw new Exception('Tous les champs ne sont pas remplis !');*/
                 }
             }
             else {
@@ -34,9 +36,11 @@ try {
         elseif ($_GET['action'] === 'contactUs') {
             contactMail();
         }
+
         elseif ($_GET['action'] === 'signUp') {
             addNewUser();
         }
+
         elseif ($_GET['action'] === 'signIn') {
             if (isset($_POST['login_name']) && isset($_POST['password'])
                 && !empty($_POST['login_name']) && !empty($_POST['password'])
@@ -48,7 +52,31 @@ try {
             } else {
                 require ('view/frontend/loginView.php');
             }
+
         }
+        elseif ($_GET['action'] === 'dashboard') {
+            require_once('view/frontend/profileView.php');
+        }
+        elseif ($_GET['action'] === 'logout') {
+            logout();
+        }
+        elseif ($_GET['action'] === 'createPost') {
+            addPost();
+        }
+        elseif ($_GET['action'] === 'dashboardAdmin') {
+            displayAllPosts();
+        }
+        elseif ($_GET['action'] === 'displayComments') {
+            displayAllComments();
+        }
+        elseif ($_GET['action'] === 'deletePost') {
+            deletePost();
+        }
+        elseif ($_GET['action'] === 'modifyPost') {
+            modifyPost();
+        }
+
+
     }
     else {
         contactMail();
@@ -57,26 +85,3 @@ try {
 catch(Exception $e) {
     echo 'Erreur : ' . $e->getMessage();
 }
-
-
-
-
-
-
-
-
-
-        /*
-        elseif ($_GET['action'] === 'signIn') {
-                if (isset($_POST['login_name']) && isset($_POST['password'])
-                    && !empty($_POST['login_name']) && !empty($_POST['password'])
-                ) {
-                    login(
-                        strip_tags($_POST['login_name']),
-                        strip_tags($_POST['password'])
-                    );
-                } else {
-                    throw new Exception('Il manque des données nécessaires à la connexion.');
-                }
-        }*/
-

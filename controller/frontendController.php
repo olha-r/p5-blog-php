@@ -4,7 +4,7 @@
 require_once('model/PostManager.php');
 require_once('model/CommentManager.php');
 require_once('model/UsersManager.php');
-require_once('model/LoginManager.php');
+
 
 
         //POST FUNCTIONS
@@ -36,18 +36,20 @@ function addComment()
     $commentManager = new \Olha\Blog\Model\CommentManager();
     $affectedLines = $commentManager->postComment($_GET['id'],$_POST['author'],$_POST['comment']);
     if ($affectedLines === false) {
-        throw new Exception('Impossible d\'ajouter le commentaire !');
+        $_SESSION['error']= "Impossible d'ajouter le commentaire !";
+        header('Location: index.php?action=post&id=' . $_GET['id']);
     }
     else {
-
+        $_SESSION['error']= "Votre commentaire est publié.";
         header('Location: index.php?action=post&id=' . $_GET['id']);
-       /* $_SESSION['error']['success']="Votre commentaire est publié.";*/
+
     }
 }
 
 
 function contactMail()
 {
+
     if (isset($_POST['submit'])) {
         $to = "ole4ka.safonova@gmail.com";
         $from = $_POST['email'];
@@ -72,7 +74,9 @@ function contactMail()
     }
     else
     {
-        echo "Le message n'est pas envoyé";
+       /* $_SESSION['error']= "Le message n'est pas envoyé !";
+        header('Location: index.php?action=contactUs');*/
+       echo "Le message n'est pas envoyé";
     }
     require('view/frontend/contactMailView.php');
 }
@@ -102,11 +106,12 @@ function addNewUser()
         throw new Exception("Désolé mais l'adresse mail saisie n'est pas valide.");
     }
     $new_password = password_hash($_POST['new_password_1'], PASSWORD_DEFAULT);
-    $added_user = $newUser->insertNewUser($_POST['new_login_name'], $new_password, $_POST['new_email']);
+    $added_user = $newUser->insertNewUser($_POST['new_login_name'], $new_password, $_POST['new_email'], 1);
 
     if ($added_user === false) {
         throw new Exception('Une erreur est survenue lors de l\'enregistrement');
     }
+
     }
     else {
 
@@ -114,25 +119,29 @@ function addNewUser()
     }
 }
 
+
+
 function login_user()
 {
-    $loginManager = new \Olha\Blog\Model\LoginManager();
+    $loginManager = new \Olha\Blog\Model\UsersManager();
     $resultat=$loginManager->signIn();
     // Comparaison du pass envoyé via le formulaire avec la base
 
 
     if (!$resultat) {
-        throw new Exception('Mauvais identifiant ou mot de passe !');
+        $_SESSION['error']='Mauvais identifiant ou mot de passe !';
+        header('Location: index.php?action=signIn');
     }
     else {
         $isPasswordCorrect = password_verify($_POST['password'], $resultat['password']);
         if ($isPasswordCorrect) {
             session_start();
+            /*  тест или мы вошли на сайт и созддать 2 новых сессии */
             $_SESSION['id'] = $resultat['id'];
             $_SESSION['login_name'] = $_POST['login_name'];
-            echo 'Vous êtes connecté !';
-           /* $_SESSION['error']['success']='Vous êtes connecté !';*/
-            header('Location: ');
+            /*echo 'Vous êtes connecté !';*/
+            /*$_SESSION['error']='Vous êtes connecté !';*/
+            header('Location: index.php?action=dashboard');
             exit();
         } else {
             $_SESSION['error']='Mauvais identifiant ou mot de passe !';
@@ -140,4 +149,12 @@ function login_user()
         }
     }
 
+}
+
+
+function logout()
+{
+    $_SESSION = array();
+    session_destroy();
+    header('Location: index.php?action=contactUs');
 }
