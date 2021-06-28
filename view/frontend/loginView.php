@@ -8,16 +8,11 @@
         <form action="index.php?action=signIn" method="post" class="form-horizontal">
             <div class="col-xs-8 col-xs-offset-4">
                 <h2>Connectez-vous</h2>
-
-                <?php if (isset($_SESSION['error']) && !empty($_SESSION['error'])) : ?>
-                    <div class="alert alert-danger"><?= $_SESSION['error']; ?></div>
-                <?php endif; ?>
-
             </div>
             <div class="form-group" >
                 <label class="control-label col-xs-4">Pseudo</label>
                 <div class="col-xs-8">
-                    <input type="text" class="form-control" name="login_name" required="required">
+                    <input type="text" class="form-control" name="user_name" required="required">
                 </div>
             </div>
             <div class="form-group">

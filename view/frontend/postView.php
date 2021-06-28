@@ -29,7 +29,7 @@
             <div class="col-lg-12">
                   <span>
                       Auteur:
-                      <strong><?= $post['login_name'] ?></strong>
+                      <strong><?= $post['user_name'] ?></strong>
                   </span>
                 <span>
                     le

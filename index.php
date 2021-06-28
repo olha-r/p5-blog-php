@@ -4,7 +4,11 @@ require('controller/frontendController.php');
 require('controller/backendController.php');
 try {
     if (isset($_GET['action'])) {
-        if ($_GET['action'] === 'listPosts') {
+        if ($_GET['action'] === 'homePage') {
+            require_once ('view/frontend/homePageView.php');
+        }
+
+        elseif ($_GET['action'] === 'listPosts') {
             listPosts();
         }
 
@@ -42,14 +46,15 @@ try {
         }
 
         elseif ($_GET['action'] === 'signIn') {
-            if (isset($_POST['login_name']) && isset($_POST['password'])
-                && !empty($_POST['login_name']) && !empty($_POST['password'])
+            if (isset($_POST['user_name']) && isset($_POST['password'])
+                && !empty($_POST['user_name']) && !empty($_POST['password'])
             ) {
                 login_user(
-                    strip_tags($_POST['login_name']),
+                    strip_tags($_POST['user_name']),
                     strip_tags($_POST['password'])
                 );
             } else {
+                $_SESSION['error']['type']= "Tous les champs ne sont pas remplis !";
                 require ('view/frontend/loginView.php');
             }
 
@@ -79,7 +84,7 @@ try {
 
     }
     else {
-        contactMail();
+        require_once ('view/frontend/homePageView.php');
     }
 }
 catch(Exception $e) {

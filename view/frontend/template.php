@@ -22,21 +22,24 @@
 <!-- Navigation-->
 <nav class="navbar navbar-expand-lg navbar-light bg-light text-uppercase" id="mainNav">
     <div class="container-fluid">
-        <a class="navbar-brand" href="index.php?action=contactUs">Projet 3 - OC</a>
+        <a class="navbar-brand" href="index.php?action=homePage">Projet 3 - OC</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbar">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link  active" aria-current="page" href="index.php?action=contactUs">Accueil</a>
+                    <a class="nav-link  active" aria-current="page" href="index.php?action=homePage">Accueil</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link  " aria-current="page" href="index.php?action=listPosts">Tous les billets</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link  " aria-current="page" href="index.php?action=contactUs">Contact</a>
+                </li>
             </ul>
             <ul class="navbar-right">
-                <?php if (!isset($_SESSION['id']) and !isset($_SESSION['login_name'])) : ?>
+                <?php if (!isset($_SESSION['id']) and !isset($_SESSION['user_name'])) : ?>
                     <a class="btn btn-outline-dark navbar-right" href="index.php?action=signUp">Inscription</a>
                     <a class="btn btn-outline-dark navbar-right" href="index.php?action=signIn">Connexion</a>
 

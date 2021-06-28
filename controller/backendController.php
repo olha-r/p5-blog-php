@@ -1,11 +1,12 @@
 <?php
 
 require_once('model/BackendPostManager.php');
+require_once('model/PostManager.php');
 
 
 function addPost()
 {
-    if (isset($_SESSION['id']) && !empty($_SESSION['id'])) {
+    if (isset($_SESSION['admin']) && !empty($_SESSION['admin'])) {
         if (isset($_POST['title']) && isset($_POST['content'])) {
             $backendPostManager = new \Olha\Blog\Model\BackendPostManager();
             $added_post = $backendPostManager->addNewPost($_POST['title'],$_POST['content'], $_SESSION['id']);
@@ -24,7 +25,8 @@ function addPost()
     }
     else
     {
-      header('Location: index.php?action=contactUs');
+        header('./view/backend/createPostView.php');
+     /* header('Location: index.php?action=contactUs');*/
     }
 
     }
@@ -36,12 +38,28 @@ function displayAllPosts()
     $allPosts=$backendPostManager->getAllPosts();
     require_once ('view/backend/dashboardAdminView.php');
 }
-/*
-function deletePost ()
-{}
+
 
 function modifyPost ()
-{}
-
+{
+    if (isset($_GET['id']) && $_GET['id'] > 0) {
+        $postManager = new \Olha\Blog\Model\PostManager();
+        $post = $postManager->getPost($_GET['id']);
+        require_once ('view/backend/editPostView.php');
+    }
+    else {
+        throw new Exception('Aucun identifiant de billet envoyé');
+    }
+}
+/*
+function deletePost ()
+{
+    if (isset($_POST['submit'])) {
+        $backendPostManager = new \Olha\Blog\Model\BackendPostManager();
+        $del_post = $backendPostManager->deletePost();
+}
+}
+*/
+/*
 function displayAllComment ()
 {}*/

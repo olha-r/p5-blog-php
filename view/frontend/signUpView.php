@@ -11,7 +11,7 @@
                 <div class="form-group" >
                     <label class="control-label col-xs-4">Pseudo</label>
                     <div class="col-xs-8">
-                        <input type="text" class="form-control" name="new_login_name" required="required">
+                        <input type="text" class="form-control" name="new_user_name" required="required">
                     </div>
                 </div>
                 <div class="form-group">

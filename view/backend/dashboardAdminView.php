@@ -33,10 +33,12 @@ while ($data = $allPosts->fetch())
 
 
         <div class="col-lg-3">
-            <a href="index.php?action=modifyPost" class="btn btn-primary">Voir ou Modifier</a>
+
+            <a href="index.php?action=modifyPost&amp;id=<?= $data['id'] ?>" class="btn btn-primary">Voir ou Modifier</a>
         </div>
         <div class="col-lg-3">
-            <a href="index.php?action=deletePost" class="btn btn-warning">Supprimer</a>
+            <input type="submit" value="Supprimer" name="submit"  class="btn btn-warning"">
+           <!-- <a href="index.php?action=deletePost" class="btn btn-warning"></a>-->
         </div>
     </div>
     <?php

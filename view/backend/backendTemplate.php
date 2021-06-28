@@ -15,6 +15,7 @@
 <div id="backend-header">
     <div class="container-fluid">
         <h1 class="fw-bold">Administation du blog !</h1>
+
     </div>
 </div>
 
@@ -31,9 +32,22 @@
                 <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded " href="index.php?action=displayComments"><i class="fas fa-comments"></i> Commentaires</a></li>
                 <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded " href="index.php?action=createPost"><i class="far fa-newspaper"></i> Créer un billet</a></li>
                 <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded " href="index.php">Site public</a></li>
+                <ul class="navbar-right">
+                    <?php if (!isset($_SESSION['id']) and !isset($_SESSION['user_name'])) {
+                        header('index.php?action=homePage');
+                    }
+
+                    else { ?>
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="index.php?action=logout">Se déconnecter</a>
+                        </li>
+                    <?php } ?>
+                </ul>
             </ul>
         </div>
 </nav>
+
+
 
 <?= $content ?>
 

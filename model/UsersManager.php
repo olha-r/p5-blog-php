@@ -12,20 +12,20 @@ class UsersManager extends Manager
         $users_data = $db->prepare('
                             SELECT *
                             FROM users 
-                            WHERE login_name = ? ');
+                            WHERE user_name = ? ');
         $users_data->execute(array($pseudo));
         return $users_data->fetch();
     }
 
 
-    public function insertNewUser($new_login_name, $new_password, $new_email)
+    public function insertNewUser($new_user_name, $new_password, $new_email, $role)
     {
         $db = $this->dbConnect();
         $insertNewUser = $db->prepare('
-                                INSERT INTO users (login_name, password, email, creation_date)
-                                VALUES(?, ?, ?, NOW())');
+                                INSERT INTO users (user_name, password, email, role, creation_date)
+                                VALUES(?, ?, ?, ?,  NOW()) ');
         return $insertNewUser->execute(
-            array($new_login_name,$new_password, $new_email)
+            array($new_user_name,$new_password, $new_email, $role)
         );
 
     }
@@ -37,10 +37,10 @@ public function signIn()
 
 //  Récupération de l'utilisateur et de son password hashé
     $req = $db->prepare('
-                            SELECT id, password
+                            SELECT id, password, role
                             FROM users 
-                            WHERE login_name = ?');
-    $req->execute(array($_POST['login_name']));
+                            WHERE user_name = ?');
+    $req->execute(array($_POST['user_name']));
     return $resultat = $req->fetch();
 }
 
