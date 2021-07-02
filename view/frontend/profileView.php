@@ -1,10 +1,13 @@
 
-<?php $title = "Se connecter"; ?>
+<?php $title = "Mon compte"; ?>
 
 <?php ob_start(); ?>
 
 
-<h1>Mon account</h1>
+<div>
+    <h1>Mon account</h1>
+</div>
+
 
 <?php if (isset($_SESSION['error']) && !empty($_SESSION['error'])) : ?>
     <div class="alert alert-success"><?= $_SESSION['error']; ?></div>

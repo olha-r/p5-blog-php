@@ -2,7 +2,7 @@
 
 require_once('model/BackendPostManager.php');
 require_once('model/PostManager.php');
-
+require_once('model/BackendCommentManager.php');
 
 function addPost()
 {
@@ -15,7 +15,7 @@ function addPost()
             }
             else {
                 $_SESSION['error']= "Votre post est ajouté.";
-                /*header('monblog/backendIndex.php?action=displayAllPosts');*/
+                header('monblog/backendIndex.php?action=displayAllPosts');
                 echo 'Votre post est ajouté.';
             }
         }
@@ -31,14 +31,17 @@ function addPost()
 
     }
 
-
 function displayAllPosts()
 {
-    $backendPostManager = new \Olha\Blog\Model\BackendPostManager();
-    $allPosts=$backendPostManager->getAllPosts();
-    require_once ('view/backend/dashboardAdminView.php');
+    if (isset($_SESSION['admin']) && !empty($_SESSION['admin'])) {
+        $backendPostManager = new \Olha\Blog\Model\BackendPostManager();
+        $allPosts=$backendPostManager->getAllPosts();
+        require_once ('view/backend/dashboardAdminView.php');
+    }
+   else {
+       header('Location: index.php?action=homePage');
+   }
 }
-
 
 function modifyPost ()
 {
@@ -51,15 +54,52 @@ function modifyPost ()
         throw new Exception('Aucun identifiant de billet envoyé');
     }
 }
-/*
+
+function editPost ()
+{
+
+    if (isset($_POST['edit']) && !empty(['edit'])) {
+        $backendPostManager = new \Olha\Blog\Model\BackendPostManager();
+        $edit = $backendPostManager->editPost($_POST['edit-title'], $_POST['edit-content'],  $_GET['id']);
+if ($edit === false) {
+    echo "Une erreur est survenue. Impossible de mofifier l'article.!";
+    $_SESSION['error']= "Une erreur est survenue. Impossible de mofifier l'article.!";
+}
+else {
+    $_SESSION['error']= "Votre article est modifié.";
+    header('Location: index.php?action=dashboardAdmin');
+}
+
+    }
+    else {
+        throw new Exception('Aucun identifiant de billet envoyé');
+    }
+}
+
 function deletePost ()
 {
-    if (isset($_POST['submit'])) {
-        $backendPostManager = new \Olha\Blog\Model\BackendPostManager();
-        $del_post = $backendPostManager->deletePost();
+if (isset($_POST['delete']) && !empty($_POST['delete'])) {
+    $backendPostManager = new \Olha\Blog\Model\BackendPostManager();
+    $delete = $backendPostManager->deletePost($_POST['id']);
+   if ($delete === false) {
+        $_SESSION['error']= "Une erreur est survenue. Impossible de supprimer l'article.!";
+    }
+    else {
+        $_SESSION['error']= "Votre article est supprimé.";
+        header('Location: index.php?action=dashboardAdmin');
+    }
+
+}
+else {
+    require_once ('./view/backend/dashboardAdminView.php');
 }
 }
-*/
-/*
-function displayAllComment ()
-{}*/
+
+
+function displayAllComments ()
+{
+    $backendCommentManager = new \Olha\Blog\Model\BackendCommentManager();
+    $all_comments = $backendCommentManager->getAllComments();
+
+    require_once ('./view/backend/backendCommentsView.php');
+}

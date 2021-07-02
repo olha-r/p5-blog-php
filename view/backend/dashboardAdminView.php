@@ -1,51 +1,50 @@
-
 <?php ob_start(); ?>
 
+    <div class="row" id="dashboard-admin" style="background-color: #eeeeee">
+        <div class="col-lg-12">
+            <h3>
+                Liste des billets
+            </h3>
+        </div>
 
-<div class="row">
-    <div class="col-lg-12">
-        <h3> Liste des billets </h3>
-    </div>
+
+        <div class="col-lg-12">
+            <table class="table table-hover">
+                <thead class="col-lg-12">
+                <tr>
+                    <th>Date de publication</th>
+                    <th>Titre</th>
+                    <th colspan="2">Action</th>
+
+                </tr>
+                </thead>
+                <tbody>
+
+                <?php
+                while ($data = $allPosts->fetch())
+                {
+                    ?>
+                    <tr>
+                        <td><?= $data['creation_date_fr'] ?></td>
+                        <td><?= htmlspecialchars($data['title']) ?></td>
+                        <td><a href="index.php?action=modifyPost&amp;id=<?= $data['id'] ?>" class="btn btn-primary">Voir ou Modifier</a> </td>
+                        <td> <form action="index.php?action=deletePost" method="POST">
+                                <input type="hidden" value="<?= $data['id']; ?>" name="id" >
+                                <input type="submit" value="Supprimer" name="delete"  class="btn btn-warning">
+                                <!--<a href="index.php?action=deletePost" class="btn btn-warning">Supprimer</a> -->
+                            </form>
+                        </td>
+                    </tr>
+                    <?php
+                }
+                $allPosts->closeCursor();
+                ?>
+                </tbody>
+            </table>
+        </div>
 </div>
 
-    <div class="row" >
-        <div class="col-lg-3">
-            <h6> Date de publication</h6>
-        </div>
-        <div class="col-lg-3">
-            <h6> Titre</h6>
-        </div>
-        <div class="col-lg-6">
-            <h6> Action</h6>
-        </div>
-    </div>
-<?php
-while ($data = $allPosts->fetch())
-{
-?>
-    <div class="row" >
-        <div class="col-lg-3">
-            <p><?= $data['creation_date_fr'] ?></p>
-        </div>
-        <div class="col-lg-3">
-            <p><?= htmlspecialchars($data['title']) ?></p>
-        </div>
-
-
-        <div class="col-lg-3">
-
-            <a href="index.php?action=modifyPost&amp;id=<?= $data['id'] ?>" class="btn btn-primary">Voir ou Modifier</a>
-        </div>
-        <div class="col-lg-3">
-            <input type="submit" value="Supprimer" name="submit"  class="btn btn-warning"">
-           <!-- <a href="index.php?action=deletePost" class="btn btn-warning"></a>-->
-        </div>
-    </div>
-    <?php
-}
-$allPosts->closeCursor();
-?>
 
 <?php $content = ob_get_clean(); ?>
 
-<?php require 'backendTemplate.php'; ?>
+<?php require('backendTemplate.php'); ?>

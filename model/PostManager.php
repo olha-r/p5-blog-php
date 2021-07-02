@@ -23,7 +23,7 @@ class PostManager extends Manager
     {
         $db = $this->dbConnect();
         $req = $db->prepare('
-                    SELECT *, title, content, author_post, DATE_FORMAT(posts.creation_date, \'%d/%m/%Y à %Hh%imin%ss\') AS creation_date_fr
+                    SELECT *, posts.id AS postId, DATE_FORMAT(posts.creation_date, \'%d/%m/%Y à %Hh%imin%ss\') AS creation_date_fr
                     FROM posts
                     LEFT JOIN users on users.id = posts.author_post
                     WHERE posts.id = ?

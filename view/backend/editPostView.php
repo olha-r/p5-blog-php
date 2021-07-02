@@ -2,7 +2,8 @@
 
 <?php ob_start(); ?>
 
-    <div class="row">
+
+    <div class="row" id="edit-view" style="background-color: #eeeeee">
         <div class="col-lg-12">
             <p>
                 <a href="index.php?action=dashboardAdmin" class="btn btn-secondary">
@@ -11,20 +12,21 @@
                 </a>
             </p>
         </div>
-    </div>
 
-    <div class="row" id="post-view">
+
+    <div class="row" id="edit-post-view">
+        <form method="post" action="index.php?action=editPost&amp;id=<?= $post['postId'] ?>">
         <div class="col-lg-12">
-            <h3>
-                <?= htmlspecialchars($post['title']) ?>
-            </h3>
+            <input type="text" name="edit-title" placeholder="Titre" value="<?= htmlspecialchars($post['title']) ?>" class="form-control">
+
             <hr>
             <p></p>
-            <p>
+            <textarea name="edit-content" placeholder="Contenu de l'article" class="form-control" rows="10">
                 <?= nl2br(htmlspecialchars($post['content'])) ?>
-            </p>
+            </textarea>
             <p></p>
             <hr>
+            <input type="submit" value="Modifier" name="edit">
             <div class="row">
                 <div class="col-lg-12">
                   <span>
@@ -38,6 +40,8 @@
                 </div>
             </div>
         </div>
+        </form>
+    </div>
     </div>
 
 

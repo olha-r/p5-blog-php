@@ -1,8 +1,10 @@
 <?php ob_start(); ?>
 
-    <section class="page-section">
         <div class="container mt-lg-5 mt-4">
             <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Créer mon article</h2>
+            <?php if (isset($_SESSION['error']) && !empty($_SESSION['error'])) : ?>
+                <div class="alert alert-success"><?= $_SESSION['error']; ?></div>
+            <?php endif; ?>
             <!-- Add Post Section Form-->
             <div class="row">
                 <div class="col-lg-10 mx-lg-auto mx-3 mb-0 p-3 bg-white shadow">
@@ -30,7 +32,7 @@
                 </div>
             </div>
         </div>
-    </section>
+
 
 <?php $content = ob_get_clean(); ?>
 

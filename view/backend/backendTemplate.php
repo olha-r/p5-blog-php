@@ -1,23 +1,23 @@
+
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
-    <title>Mon blog - Dashboard</title>
+    <title><?= $title ?></title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
-    <link href="../../public/css/styles.css" rel="stylesheet" />
+    <link href="./public/css/styles.css" rel="stylesheet" />
     <script src="https://kit.fontawesome.com/55a2989d96.js" crossorigin="anonymous"></script>
 
-
 </head>
-
 <body>
 <!-- Header-->
 <div id="backend-header">
     <div class="container-fluid">
-        <h1 class="fw-bold">Administation du blog !</h1>
+        <h1 class="fw-bold">Administration du blog !</h1>
 
     </div>
 </div>
+
 
 <!-- Navigation-->
 <nav class="navbar navbar-expand-lg navbar-light bg-light text-uppercase" id="backendNav">
@@ -47,9 +47,16 @@
         </div>
 </nav>
 
+<div class="frontend-container">
+    <div class="container">
+
+        <?= $content ?>
+    </div>
+</div>
 
 
-<?= $content ?>
+
+
 
 <!-- Footer-->
 <footer class="text-center bg-secondary copyright">
@@ -70,3 +77,9 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
 </body>
 </html>
+
+
+
+
+
+

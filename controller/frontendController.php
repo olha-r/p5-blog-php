@@ -128,23 +128,26 @@ function login_user()
     else {
         $isPasswordCorrect = password_verify($_POST['password'], $resultat['password']);
         if ($isPasswordCorrect) {
-            if ($resultat['role'] = 'admin') {
-                session_start();
+            if ($resultat['role'] == 'member') {
+
+                $_SESSION['id'] = $resultat['id'];
+                $_SESSION['member'] = $_POST['user_name'];
+                /*echo 'Vous êtes connecté !';*/
+                $_SESSION['error']=  'Vous êtes connecté , '.$_POST['user_name'] .' !';
+                /*var_dump($_SESSION['user_name'], $_SESSION['id']);
+                 die();*/
+                header('Location: index.php?action=dashboard');
+                exit();
                 /*  тест или мы вошли на сайт и созддать 2 новых сессии */
+
+            }
+            else {
                 $_SESSION['id'] = $resultat['id'];
                 $_SESSION['admin'] = $_POST['user_name'];
                 $_SESSION['error']='Bienvenue, '.$_POST['user_name'].'!';
                 header('Location: index.php?action=dashboardAdmin');
-                exit();
-            }
-            elseif ($resultat['role'] = 'member'){
-                session_start();
-                $_SESSION['id'] = $resultat['id'];
-                $_SESSION['user_name'] = $_POST['user_name'];
-                /*echo 'Vous êtes connecté !';*/
-                $_SESSION['error']='Vous êtes connecté !';
-                header('Location: index.php?action=dashboard');
-                exit();
+                /*var_dump($_SESSION['admin'], $_SESSION['id']);
+                 die();*/
             }
         } else {
             $_SESSION['error']='Mauvais identifiant ou mot de passe !';
@@ -157,5 +160,6 @@ function logout()
 {
     $_SESSION = array();
     session_destroy();
-    header('Location: index.php?action=contactUs');
+
+    header('Location: index.php?action=homePage');
 }
