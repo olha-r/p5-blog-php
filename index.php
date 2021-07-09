@@ -7,11 +7,9 @@ try {
         if ($_GET['action'] === 'homePage') {
             require_once ('view/frontend/homePageView.php');
         }
-
         elseif ($_GET['action'] === 'listPosts') {
             listPosts();
         }
-
         elseif ($_GET['action'] === 'post') {
             if (isset($_GET['id']) && $_GET['id'] > 0) {
                 post();
@@ -20,21 +18,8 @@ try {
                 throw new Exception('Aucun identifiant de billet envoyé');
             }
         }
-
         elseif ($_GET['action'] === 'addComment') {
-            if (isset($_GET['id']) && $_GET['id'] > 0) {
-                if (!empty($_POST['author']) && !empty($_POST['comment'])) {
-                    addComment($_GET['id'], $_POST['author'], $_POST['comment']);
-                }
-                else {
-                    $_SESSION['error']['type']= "Tous les champs ne sont pas remplis !";
-                    header('Location: index.php?action=post&id=' . $_GET['id']);
-                   /* throw new Exception('Tous les champs ne sont pas remplis !');*/
-                }
-            }
-            else {
-                throw new Exception('Aucun identifiant de billet envoyé');
-            }
+            addComment();
         }
         elseif ($_GET['action'] === 'contactUs') {
             contactMail();
@@ -80,7 +65,6 @@ try {
         elseif ($_GET['action'] === 'editPost') {
             editPost();
         }
-
     }
     else {
         require_once ('view/frontend/homePageView.php');

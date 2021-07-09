@@ -1,7 +1,26 @@
 
-
 <?php ob_start(); ?>
 
+<?php
+if(isset($_SESSION['success']))
+{
+    ?>
+    <div class="alert alert-success">
+        <?php echo $_SESSION['success']; ?>
+    </div>
+    <?php
+}
+unset($_SESSION['success']);
+if(isset($_SESSION['error']))
+{
+    ?>
+    <div class="alert alert-danger">
+        <?php echo $_SESSION['error']; ?>
+    </div>
+    <?php
+}
+unset($_SESSION['error']);
+?>
 
     <div class="row" id="edit-view" style="background-color: #eeeeee">
         <div class="col-lg-12">
@@ -21,9 +40,7 @@
 
             <hr>
             <p></p>
-            <textarea name="edit-content" placeholder="Contenu de l'article" class="form-control" rows="10">
-                <?= nl2br(htmlspecialchars($post['content'])) ?>
-            </textarea>
+            <textarea name="edit-content" placeholder="Contenu de l'article" class="form-control" rows="10"><?= htmlspecialchars($post['content']) ?></textarea>
             <p></p>
             <hr>
             <input type="submit" value="Modifier" name="edit">

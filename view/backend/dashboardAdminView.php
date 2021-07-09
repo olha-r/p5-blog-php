@@ -1,5 +1,24 @@
 <?php ob_start(); ?>
-
+<?php
+if(isset($_SESSION['success']))
+{
+    ?>
+    <div class="alert alert-success">
+        <?php echo $_SESSION['success']; ?>
+    </div>
+    <?php
+}
+unset($_SESSION['success']);
+if(isset($_SESSION['error']))
+{
+    ?>
+    <div class="alert alert-danger">
+        <?php echo $_SESSION['error']; ?>
+    </div>
+    <?php
+}
+unset($_SESSION['error']);
+?>
     <div class="row" id="dashboard-admin" style="background-color: #eeeeee">
         <div class="col-lg-12">
             <h3>

@@ -3,7 +3,7 @@
 <html>
 <head>
     <meta charset="utf-8" />
-    <title><?= $title ?></title>
+    <title>Administration du blog</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
     <link href="./public/css/styles.css" rel="stylesheet" />
     <script src="https://kit.fontawesome.com/55a2989d96.js" crossorigin="anonymous"></script>
@@ -33,14 +33,14 @@
                 <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded " href="index.php?action=createPost"><i class="far fa-newspaper"></i> Créer un billet</a></li>
                 <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded " href="index.php">Site public</a></li>
                 <ul class="navbar-right">
-                    <?php if (!isset($_SESSION['id']) and !isset($_SESSION['user_name'])) {
+                    <?php if (!isset($_SESSION['admin'])) {
                         header('index.php?action=homePage');
                     }
 
                     else { ?>
-                        <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="index.php?action=logout">Se déconnecter</a>
-                        </li>
+
+                            <a class="btn btn-outline-primary" aria-current="page" href="index.php?action=logout">Se déconnecter</a>
+
                     <?php } ?>
                 </ul>
             </ul>
