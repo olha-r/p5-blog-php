@@ -1,17 +1,35 @@
 <?php ob_start(); ?>
-
         <div class="container mt-lg-5 mt-4">
             <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Créer mon article</h2>
-            <?php if (isset($_SESSION['error']) && !empty($_SESSION['error'])) : ?>
-                <div class="alert alert-success"><?= $_SESSION['error']; ?></div>
-            <?php endif; ?>
+<?php
+if(isset($_SESSION['success']))
+{
+    ?>
+    <div class="alert alert-success">
+        <?php echo $_SESSION['success']; ?>
+    </div>
+    <?php
+}
+unset($_SESSION['success']);
+if(isset($_SESSION['error']))
+{
+    ?>
+    <div class="alert alert-danger">
+        <?php echo $_SESSION['error']; ?>
+    </div>
+    <?php
+}
+unset($_SESSION['error']);
+?>
+
+
             <!-- Add Post Section Form-->
             <div class="row">
                 <div class="col-lg-10 mx-lg-auto mx-3 mb-0 p-3 bg-white shadow">
                     <form method="post" action="index.php?action=createPost" class="center mb-3">
                         <div class="form-group">
                             <h4>Titre de l'article</h4>
-                            <input type="text" class="form-control" name="title" required rows="1" cols="30" value="<?php if(isset($title)){ echo $title; }?>">
+                            <input type="text" class="form-control" name="title" required rows="1" cols="30" value="<?php if(isset($_POST['title'])){ echo $_POST['title']; }?>">
                         </div>
                         <div class="form-group">
                             <h4>Contenu de l'article</h4>

@@ -1,11 +1,34 @@
 <?php $title = "Page d'accueil";
-
-$error_msg = null;
 ?>
+
+
 
 <?php ob_start(); ?>
 
+<?php
+if(isset($_SESSION['success']))
+{
+    ?>
+    <div class="alert alert-success">
+        <?php echo $_SESSION['success']; ?>
+    </div>
+    <?php
+}
+unset($_SESSION['success']);
+
+if(isset($_SESSION['error']))
+{
+    ?>
+    <div class="alert alert-danger">
+        <?php echo $_SESSION['error']; ?>
+    </div>
+    <?php
+}
+unset($_SESSION['error']);
+?>
+
 <div class="jumbotron">
+
     <div class="row">
         <div class="col-lg-6" id="about-me">
             <h2>Raulet Olha</h2>
@@ -21,5 +44,8 @@ $error_msg = null;
 
 
 <?php $content = ob_get_clean(); ?>
+
+
+
 
 <?php require('template.php'); ?>'

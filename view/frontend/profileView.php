@@ -9,13 +9,13 @@
 </div>
 
 
-<?php if (isset($_SESSION['error']) && !empty($_SESSION['error'])) : ?>
-    <div class="alert alert-success"><?= $_SESSION['error']; ?></div>
+<?php if (isset($_SESSION['success']) && !empty($_SESSION['success'])) : ?>
+    <div class="alert alert-success"><?= $_SESSION['success']; ?></div>
 <?php endif; ?>
 
 <?php
 
-if (isset($_SESSION['id']) and isset($_SESSION['login_name'])) {
+if (isset($_SESSION['member'])) {
     echo 'Bonjour ' . $_SESSION['login_name'];
 
 }

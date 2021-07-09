@@ -2,6 +2,27 @@
 
 <?php ob_start(); ?>
 
+<?php
+if(isset($_SESSION['success']))
+{
+    ?>
+    <div class="alert alert-success">
+        <?php echo $_SESSION['success']; ?>
+    </div>
+    <?php
+}
+unset($_SESSION['success']);
+if(isset($_SESSION['error']))
+{
+    ?>
+    <div class="alert alert-danger">
+        <?php echo $_SESSION['error']; ?>
+    </div>
+    <?php
+}
+unset($_SESSION['error']);
+?>
+
 <div class="row justify-content-center">
         <div class="col-md-8  col-lg-6" id="signup-form">
             <form action="index.php?action=signUp" method="post" class="form-horizontal">
