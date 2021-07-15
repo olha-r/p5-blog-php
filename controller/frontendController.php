@@ -9,7 +9,20 @@ require_once('model/UsersManager.php');
 
 function listPosts()
 {
-    $postManager = new \Olha\Blog\Model\PostManager();
+    /*
+    $limit = 5;
+    $page = '';
+    if (isset($_GET["page"])) {
+        $page = $_GET["page"];
+    } else {
+        $page = 1;
+    }
+
+    $start_from = ($page - 1) * $limit;
+*/
+
+
+    $postManager = new OC\Blog_php\Model\PostManager();
     $posts = $postManager->getPosts();
 
 
@@ -19,8 +32,8 @@ function listPosts()
 function post()
 {
     if (isset($_GET['id']) && $_GET['id'] > 0) {
-        $postManager = new \Olha\Blog\Model\PostManager();
-        $commentManager = new \Olha\Blog\Model\CommentManager();
+        $postManager = new OC\Blog_php\Model\PostManager();
+        $commentManager = new OC\Blog_php\Model\CommentManager();
 
         $post = $postManager->getPost($_GET['id']);
         $comments = $commentManager->getComments($_GET['id']);
@@ -39,7 +52,7 @@ function addComment()
 {
     if (isset($_GET['id']) && $_GET['id'] > 0) {
         if (!empty($_POST['comment'])) {
-            $commentManager = new \Olha\Blog\Model\CommentManager();
+            $commentManager = new OC\Blog_php\Model\CommentManager();
             $comments = $commentManager->postComment($_GET['id'],$_SESSION['member']['id'],$_POST['comment']);
             if ($comments === false) {
                 $_SESSION['error']= "Impossible d'ajouter le commentaire !";
@@ -106,7 +119,7 @@ function contactMail()
 function addNewUser()
 {
     if (isset($_POST['submit'])) {
-    $newUser = new \Olha\Blog\Model\UsersManager();
+    $newUser = new OC\Blog_php\Model\UsersManager();
     $user_data = $newUser->checkIfUserExist($_POST['new_user_name']);
 
         if (!empty($user_data)) {
@@ -166,7 +179,7 @@ function login_user()
     ) {
        /* strip_tags($_POST['user_name']),
             strip_tags($_POST['password'])*/
-        $loginManager = new \Olha\Blog\Model\UsersManager();
+        $loginManager = new OC\Blog_php\Model\UsersManager();
         $resultat=$loginManager->signIn();
 
         if (!$resultat) {

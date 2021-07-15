@@ -1,6 +1,6 @@
 <?php
 
-namespace Olha\Blog\Model;
+namespace OC\Blog_php\Model;
 
 require_once("model/Manager.php");
 

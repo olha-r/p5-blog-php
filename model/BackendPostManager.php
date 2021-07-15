@@ -1,6 +1,6 @@
 <?php
 
-namespace Olha\Blog\Model;
+namespace OC\Blog_php\Model;
 
 require_once("model/Manager.php");
 
@@ -36,7 +36,6 @@ class BackendPostManager extends Manager
         ');
        $del_post = $deleted_post->execute(array($id));
        return $del_post;
-        var_dump($del_post);
     }
 
     public function editPost($title, $content, $id)

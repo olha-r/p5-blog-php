@@ -49,6 +49,13 @@ try {
         elseif ($_GET['action'] === 'editPost') {
             editPost();
         }
+        elseif ($_GET['action'] === 'validateComment') {
+            validateComment();
+        }
+        elseif ($_GET['action'] === 'notValidateComment') {
+            notValidateComment();
+        }
+
     }
     else {
         require_once ('view/frontend/homePageView.php');
