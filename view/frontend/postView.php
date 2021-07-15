@@ -54,7 +54,7 @@
         while ($comment = $comments->fetch())
         {
             ?>
-            <p><strong><?= htmlspecialchars($comment['author_comment']) ?></strong> le <?= $comment['comment_date_fr'] ?></p>
+            <p><strong><?= htmlspecialchars($comment['user_name']) ?></strong> le <?= $comment['comment_date_fr'] ?></p>
             <p><?= nl2br(htmlspecialchars($comment['comment'])) ?></p>
             <hr>
             <?php
@@ -70,10 +70,7 @@
 
     </div>
     <div class="col-lg-6">
-<?php
-var_dump($_SESSION['member']);
 
-?>
             <h3>
                 Ajouter un commentaires
             </h3>

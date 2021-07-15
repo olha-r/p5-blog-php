@@ -16,7 +16,7 @@
 <?php
 
 if (isset($_SESSION['member'])) {
-    echo 'Bonjour ' . $_SESSION['login_name'];
+    echo 'Bonjour ' . $_SESSION['member']['user_name'];
 
 }
 ?>

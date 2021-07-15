@@ -34,4 +34,5 @@ class PostManager extends Manager
 
         return $post;
     }
+
 }

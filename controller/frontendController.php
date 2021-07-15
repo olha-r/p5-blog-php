@@ -12,19 +12,25 @@ function listPosts()
     $postManager = new \Olha\Blog\Model\PostManager();
     $posts = $postManager->getPosts();
 
+
     require('view/frontend/listPostsView.php');
 }
 
 function post()
 {
-    $postManager = new \Olha\Blog\Model\PostManager();
-    $commentManager = new \Olha\Blog\Model\CommentManager();
+    if (isset($_GET['id']) && $_GET['id'] > 0) {
+        $postManager = new \Olha\Blog\Model\PostManager();
+        $commentManager = new \Olha\Blog\Model\CommentManager();
 
-    $post = $postManager->getPost($_GET['id']);
-    $comments = $commentManager->getComments($_GET['id']);
-    /* var_dump($post);
-      die();*/
-    require('view/frontend/postView.php');
+        $post = $postManager->getPost($_GET['id']);
+        $comments = $commentManager->getComments($_GET['id']);
+
+        require('view/frontend/postView.php');
+    }
+    else {
+        throw new Exception('Aucun identifiant de billet envoyé');
+    }
+
 }
 
         //COMMENT FUNCTIONS
@@ -103,41 +109,48 @@ function addNewUser()
     $newUser = new \Olha\Blog\Model\UsersManager();
     $user_data = $newUser->checkIfUserExist($_POST['new_user_name']);
 
-    if (!empty($user_data)) {
+        if (!empty($user_data)) {
         $_SESSION['error']= "Désolé mais ce pseudo existe déja!";
         header('Location: index.php?action=signUp');
         /*throw new Exception('Désolé mais ce pseudo existe déja!');*/
-    }
-    if (strlen($_POST['new_user_name']) >16) {
+        }
+        if (strlen($_POST['new_user_name']) >16) {
         $_SESSION['error']= "Ce pseudo dépasse 16 caractères";
         header('Location: index.php?action=signUp');
         /*throw new Exception('Ce pseudo dépasse 16 caractères ');*/
-    }
-    if (!preg_match('#(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[\W])(?=.{8,16})(?!.*[\s])#', $_POST['new_password_1'])){
+        }
+        if (!preg_match('#(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[\W])(?=.{8,16})(?!.*[\s])#', $_POST['new_password_1'])){
         $_SESSION['error']= "Le mot de passe doit contenir: entre 8 et 16 caractères avec au moins une majuscule, une minuscule, un chiffre et un caractère spécial.";
         header('Location: index.php?action=signUp');
         /*throw new Exception('Le mot de passe doit contenir: entre 8 et 16 caractères avec au moins une majuscule, une minuscule, un chiffre et un caractère spécial.');*/
-    }
-    if ($_POST['new_password_1'] != $_POST['new_password_2']) {
+        }
+        if ($_POST['new_password_1'] != $_POST['new_password_2']) {
         $_SESSION['error']= "Désolé mais les mots de passe saisis ne sont pas identiques.";
         header('Location: index.php?action=signUp');
         /*throw new Exception('Désolé mais les mots de passe saisis ne sont pas identiques. ');*/
-    }
+        }
 
-    if (!preg_match('#^[0-9a-z._-]+@[a-z0-9.-_]{2,}\.[a-z]{2,4}$#', $_POST['new_email'])) {
+        if (!preg_match('#^[0-9a-z._-]+@[a-z0-9.-_]{2,}\.[a-z]{2,4}$#', $_POST['new_email'])) {
         $_SESSION['error']= "Désolé mais l'adresse mail saisie n'est pas valide.";
         header('Location: index.php?action=signUp');
         /*throw new Exception("Désolé mais l'adresse mail saisie n'est pas valide.");*/
-    }
-    $new_password = password_hash($_POST['new_password_1'], PASSWORD_DEFAULT);
-    $added_user = $newUser->insertNewUser($_POST['new_user_name'], $new_password, $_POST['new_email'], "member");
+        }
+        $new_password = password_hash($_POST['new_password_1'], PASSWORD_DEFAULT);
+        $added_user = $newUser->insertNewUser($_POST['new_user_name'], $new_password, $_POST['new_email'], "member");
 
-    if ($added_user === false) {
+        if ($added_user === false) {
         $_SESSION['error']= "Une erreur est survenue lors de l\'enregistrement";
         header('Location: index.php?action=signUp');
         /*throw new Exception('Une erreur est survenue lors de l\'enregistrement');*/
+        }
+        else {
+            $_SESSION['member'] = array('id' => $resultat['id'],
+                'user_name' => $_POST['new_user_name']);
+            $_SESSION['success']=  'Votre compte est créé, '.$_POST['new_user_name'] .' !';
+            header('Location: index.php?action=dashboard');
+            exit();
 
-    }
+        }
 
     }
     else {
@@ -148,43 +161,55 @@ function addNewUser()
 
 function login_user()
 {
-    $loginManager = new \Olha\Blog\Model\UsersManager();
-    $resultat=$loginManager->signIn();
+    if (isset($_POST['user_name']) && isset($_POST['password'])
+        && !empty($_POST['user_name']) && !empty($_POST['password'])
+    ) {
+       /* strip_tags($_POST['user_name']),
+            strip_tags($_POST['password'])*/
+        $loginManager = new \Olha\Blog\Model\UsersManager();
+        $resultat=$loginManager->signIn();
 
-    if (!$resultat) {
-        $_SESSION['error']='Mauvais identifiant ou mot de passe !';
-        header('Location: index.php?action=signIn');
-    }
-    else {
-        $isPasswordCorrect = password_verify($_POST['password'], $resultat['password']);
-        if ($isPasswordCorrect) {
-            if ($resultat['role'] == 'member') {
-
-               // $_SESSION['id'] = $resultat['id'];
-               // $_SESSION['member'] = $_POST['user_name'];
-                $_SESSION['member'] = array('id' => $resultat['id'],
-                                            'user_name' => $_POST['user_name']);
-
-                $_SESSION['success']=  'Vous êtes connecté , '.$_POST['user_name'] .' !';
-
-                header('Location: index.php?action=dashboard');
-                exit();
-            }
-            else {
-                // $_SESSION['id'] = $resultat['id'];
-               // $_SESSION['admin'] = $_POST['user_name'];
-                $_SESSION['admin'] = array('id' => $resultat['id'],
-                                            'user_name' => $_POST['user_name']);
-                $_SESSION['success']='Bienvenue, '.$_POST['user_name'].'!';
-
-                header('Location: index.php?action=dashboardAdmin');
-                exit();
-            }
-        } else {
+        if (!$resultat) {
             $_SESSION['error']='Mauvais identifiant ou mot de passe !';
             header('Location: index.php?action=signIn');
         }
+        else {
+            $isPasswordCorrect = password_verify($_POST['password'], $resultat['password']);
+            if ($isPasswordCorrect) {
+                if ($resultat['role'] == 'member') {
+
+                    // $_SESSION['id'] = $resultat['id'];
+                    // $_SESSION['member'] = $_POST['user_name'];
+                    $_SESSION['member'] = array('id' => $resultat['id'],
+                        'user_name' => $_POST['user_name']);
+
+                    $_SESSION['success']=  'Vous êtes connecté , '.$_POST['user_name'] .' !';
+
+                    header('Location: index.php?action=dashboard');
+                    exit();
+                }
+                else {
+                    // $_SESSION['id'] = $resultat['id'];
+                    // $_SESSION['admin'] = $_POST['user_name'];
+                    $_SESSION['admin'] = array('id' => $resultat['id'],
+                        'user_name' => $_POST['user_name']);
+                    $_SESSION['success']='Bienvenue, '.$_POST['user_name'].'!';
+
+                    header('Location: index.php?action=dashboardAdmin');
+                    exit();
+                }
+            } else {
+                $_SESSION['error']='Mauvais identifiant ou mot de passe !';
+                header('Location: index.php?action=signIn');
+            }
+        }
+    } else {
+        $_SESSION['error']= "Tous les champs ne sont pas remplis !";
+        require ('view/frontend/loginView.php');
     }
+
+
+
 }
 
 function logout()
@@ -194,3 +219,4 @@ function logout()
 
     header('Location: index.php?action=homePage');
 }
+

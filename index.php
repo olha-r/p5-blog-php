@@ -11,12 +11,7 @@ try {
             listPosts();
         }
         elseif ($_GET['action'] === 'post') {
-            if (isset($_GET['id']) && $_GET['id'] > 0) {
-                post();
-            }
-            else {
-                throw new Exception('Aucun identifiant de billet envoyé');
-            }
+            post();
         }
         elseif ($_GET['action'] === 'addComment') {
             addComment();
@@ -28,18 +23,7 @@ try {
             addNewUser();
         }
         elseif ($_GET['action'] === 'signIn') {
-            if (isset($_POST['user_name']) && isset($_POST['password'])
-                && !empty($_POST['user_name']) && !empty($_POST['password'])
-            ) {
-                login_user(
-                    strip_tags($_POST['user_name']),
-                    strip_tags($_POST['password'])
-                );
-            } else {
-                $_SESSION['error']= "Tous les champs ne sont pas remplis !";
-                require ('view/frontend/loginView.php');
-            }
-
+            login_user();
         }
         elseif ($_GET['action'] === 'dashboard') {
             require_once('view/frontend/profileView.php');

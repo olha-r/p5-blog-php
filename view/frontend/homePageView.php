@@ -1,7 +1,5 @@
-<?php $title = "Page d'accueil";
-?>
-
-
+<?php $title = "Page d'accueil";  ?>
+<?php $nav = "home_page";  ?>
 
 <?php ob_start(); ?>
 

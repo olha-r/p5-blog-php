@@ -1,4 +1,5 @@
 <?php $title = 'Mon blog'; ?>
+<?php $nav = "list_post";  ?>
 
 <?php ob_start(); ?>
 <?php

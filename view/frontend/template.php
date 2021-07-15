@@ -29,19 +29,19 @@
         <div class="collapse navbar-collapse" id="navbar">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link  active" aria-current="page" href="index.php?action=homePage">Accueil</a>
+                    <a class="nav-link  <?php if ($nav === "home_page") : ?> active <?php endif; ?>" aria-current="page" href="index.php?action=homePage">Accueil</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link  " aria-current="page" href="index.php?action=listPosts">Tous les billets</a>
+                    <a class="nav-link <?php if ($nav === "list_post") : ?> active <?php endif; ?>" aria-current="page" href="index.php?action=listPosts">Tous les billets</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link  " aria-current="page" href="index.php?action=contactUs">Contact</a>
+                    <a class="nav-link <?php if ($nav === "contact") : ?> active <?php endif; ?>" aria-current="page" href="index.php?action=contactUs">Contact</a>
                 </li>
             </ul>
             <ul class="navbar-right">
                 <?php if (!isset($_SESSION['member']) && !isset($_SESSION['admin'])) : ?>
-                    <a class="btn btn-outline-dark navbar-right" href="index.php?action=signUp">Inscription</a>
-                    <a class="btn btn-outline-dark navbar-right" href="index.php?action=signIn">Connexion</a>
+                    <a class="btn btn-outline-dark navbar-right <?php if ($nav === "signup") : ?> active <?php endif; ?>" href="index.php?action=signUp">Inscription</a>
+                    <a class="btn btn-outline-dark navbar-right <?php if ($nav === "login") : ?> active <?php endif; ?>" href="index.php?action=signIn">Connexion</a>
                 <?php else : ?>
 
                         <a class="btn btn-outline-primary " aria-current="page" href="index.php?action=logout">Se déconnecter</a>
