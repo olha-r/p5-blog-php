@@ -17,7 +17,7 @@
             ?>
             <tr>
                 <td><?= $data['comment_date'] ?></td>
-                <td><?= htmlspecialchars($data['author_comment']) ?></td>
+                <td><?= htmlspecialchars($data['user_name']) ?></td>
                 <td><?= htmlspecialchars($data['comment']) ?></td>
             </tr>
                 <?php

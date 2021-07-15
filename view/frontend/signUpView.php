@@ -1,4 +1,5 @@
 <?php $title = "Inscription"; ?>
+<?php $nav = "signup";  ?>
 
 <?php ob_start(); ?>
 

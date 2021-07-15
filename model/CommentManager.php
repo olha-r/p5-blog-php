@@ -10,8 +10,9 @@ class CommentManager extends Manager
     {
         $db = $this->dbConnect();
         $comments = $db->prepare('
-                            SELECT id, author_comment, comment, DATE_FORMAT(comment_date, \'%d/%m/%Y à %Hh%imin%ss\') AS comment_date_fr
-                            FROM comments 
+                            SELECT *, DATE_FORMAT(comment_date, \'%d/%m/%Y à %Hh%imin%ss\') AS comment_date_fr
+                            FROM comments
+                            LEFT JOIN users on users.id = comments.author_comment
                             WHERE post_id = ? 
                             ORDER BY comment_date 
                             DESC');
@@ -24,8 +25,8 @@ class CommentManager extends Manager
     {
         $db = $this->dbConnect();
         $comments = $db->prepare('
-                                INSERT INTO comments(post_id, author_comment, comment, comment_date) 
-                                VALUES(?, ?, ?, NOW())');
+                                INSERT INTO comments(post_id, author_comment, comment, comment_date, approval ) 
+                                VALUES(?, ?, ?, NOW(), 0)');
         $comments->execute(array($postId, $id_user, $comment));
 
     }

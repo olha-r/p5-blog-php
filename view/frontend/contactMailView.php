@@ -1,4 +1,5 @@
 <?php $title = "Contact us"; ?>
+<?php $nav = "contact";  ?>
 
 <?php ob_start(); ?>
 

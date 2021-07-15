@@ -1,5 +1,6 @@
 
 <?php $title = "Se connecter"; ?>
+<?php $nav = "login";  ?>
 
 <?php ob_start(); ?>
 
