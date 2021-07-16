@@ -2,34 +2,35 @@
 session_start();
 require('controller/frontendController.php');
 require('controller/backendController.php');
+$frontendController = new FrontendController();
 try {
     if (isset($_GET['action'])) {
         if ($_GET['action'] === 'homePage') {
             require_once ('view/frontend/homePageView.php');
         }
         elseif ($_GET['action'] === 'listPosts') {
-            listPosts();
+            $frontendController->listPosts();
         }
         elseif ($_GET['action'] === 'post') {
-            post();
+            $frontendController->post();
         }
         elseif ($_GET['action'] === 'addComment') {
-            addComment();
+            $frontendController->addComment();
         }
         elseif ($_GET['action'] === 'contactUs') {
-            contactMail();
+            $frontendController->contactMail();
         }
         elseif ($_GET['action'] === 'signUp') {
-            addNewUser();
+            $frontendController->addNewUser();
         }
         elseif ($_GET['action'] === 'signIn') {
-            login_user();
+            $frontendController->login_user();
         }
         elseif ($_GET['action'] === 'dashboard') {
             require_once('view/frontend/profileView.php');
         }
         elseif ($_GET['action'] === 'logout') {
-            logout();
+            $frontendController->logout();
         }
         elseif ($_GET['action'] === 'dashboardAdmin') {
             displayAllPosts();
