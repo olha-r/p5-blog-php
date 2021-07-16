@@ -2,10 +2,15 @@
 <?php $nav = "list_post";  ?>
 
 <?php ob_start(); ?>
+
+
+
 <?php
 while ($data = $posts->fetch())
 {
 ?>
+
+
 
 <div class="row" id="post-content">
     <div class="col-lg-12">

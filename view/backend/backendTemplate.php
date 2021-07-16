@@ -6,7 +6,9 @@
     <title>Administration du blog</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
     <link href="./public/css/styles.css" rel="stylesheet" />
-    <script src="https://kit.fontawesome.com/55a2989d96.js" crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,900&family=Raleway:wght@100;200;400&display=swap" rel="stylesheet">     <script src="https://kit.fontawesome.com/55a2989d96.js" crossorigin="anonymous"></script>
 
 </head>
 <body>
@@ -22,8 +24,8 @@
 <!-- Navigation-->
 <nav class="navbar navbar-expand-lg navbar-light bg-light text-uppercase" id="backendNav">
     <div class="container">
-        <a class="navbar-brand" href="index.php?action=dashboardAdmin">BLOG Admin</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
+        <a class="navbar-brand" href="index.php?action=dashboardAdmin">Liste des billets</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarToggler">
@@ -32,17 +34,18 @@
                 <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded " href="index.php?action=displayComments"><i class="fas fa-comments"></i> Commentaires</a></li>
                 <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded " href="index.php?action=createPost"><i class="far fa-newspaper"></i> Créer un billet</a></li>
                 <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded " href="index.php">Site public</a></li>
-                <ul class="navbar-right">
-                    <?php if (!isset($_SESSION['admin'])) {
-                        header('index.php?action=homePage');
-                    }
 
-                    else { ?>
+            </ul>
+            <ul class="navbar-right">
+                <?php if (!isset($_SESSION['admin'])) {
+                    header('index.php?action=homePage');
+                }
 
-                            <a class="btn btn-outline-primary" aria-current="page" href="index.php?action=logout">Se déconnecter</a>
+                else { ?>
 
-                    <?php } ?>
-                </ul>
+                    <a class="btn btn-outline-primary" aria-current="page" href="index.php?action=logout">Se déconnecter</a>
+
+                <?php } ?>
             </ul>
         </div>
 </nav>
@@ -59,19 +62,35 @@
 
 
 <!-- Footer-->
-<footer class="text-center bg-secondary copyright">
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-12 col-md-10 mx-auto" id="footer">
+            <footer>
+                <ul class="list-inline text-center">
+                    <li class="list-inline-item">
+                        <a href="index.php"> Site Public
+                            <span class="fa-stack">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fas fa-globe fa-stack-1x fa-inverse"></i>
 
-    <!-- Copyright Section-->
-    <p class="copyright ">
-        2021 Copyright &copy;
-        <a href="index.php" class="link-light">Raulet Olha</a>
-    </p>
-    <p class="copyright " >Projet 3 - Formation Développeur d'application - PHP <a href="https://openclassrooms.com/fr/" class="link-light"> Openclassrooms </a></p>
+                            </span>
+                        </a>
+                    </li>
+                </ul>
+
+                <!-- Copyright Section-->
+                <p class="copyright text-muted">
+                    2021 Copyright &copy;
+                    <a href="index.php">Raulet Olha</a>
+                </p>
+                <p class="copyright text-muted">Projet 3 - Formation Développeur d'application - PHP <a href="https://openclassrooms.com/fr/"> Openclassrooms </a></p>
 
 
 
-</footer>
-
+            </footer>
+        </div>
+    </div>
+</div>
 
 <!-- Bootstrap core JS-->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>

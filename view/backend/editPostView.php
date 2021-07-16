@@ -43,7 +43,7 @@ unset($_SESSION['error']);
             <textarea name="edit-content" placeholder="Contenu de l'article" class="form-control" rows="10"><?= htmlspecialchars($post['content']) ?></textarea>
             <p></p>
             <hr>
-            <input type="submit" value="Modifier" name="edit">
+            <input type="submit" value="Modifier" name="edit" class="btn btn-outline-danger">
             <div class="row">
                 <div class="col-lg-12">
                   <span>

@@ -4,9 +4,15 @@
 <head>
     <meta charset="utf-8" />
     <title><?= $title ?></title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">    <link href="./public/css/styles.css" rel="stylesheet" />
     <link href="./public/css/styles.css" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,900&family=Raleway:wght@100;200;400&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/55a2989d96.js" crossorigin="anonymous"></script>
+
+
 
 </head>
 
@@ -23,11 +29,11 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light text-uppercase" id="mainNav">
     <div class="container-fluid">
         <a class="navbar-brand" href="index.php?action=homePage">Projet 3 - OC</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbar">
-            <ul class="navbar-nav">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
                     <a class="nav-link  <?php if ($nav === "home_page") : ?> active <?php endif; ?>" aria-current="page" href="index.php?action=homePage">Accueil</a>
                 </li>
@@ -38,7 +44,7 @@
                     <a class="nav-link <?php if ($nav === "contact") : ?> active <?php endif; ?>" aria-current="page" href="index.php?action=contactUs">Contact</a>
                 </li>
             </ul>
-            <ul class="navbar-right">
+            <ul class="navbar-nav">
                 <?php if (!isset($_SESSION['member']) && !isset($_SESSION['admin'])) : ?>
                     <a class="btn btn-outline-dark navbar-right <?php if ($nav === "signup") : ?> active <?php endif; ?>" href="index.php?action=signUp">Inscription</a>
                     <a class="btn btn-outline-dark navbar-right <?php if ($nav === "login") : ?> active <?php endif; ?>" href="index.php?action=signIn">Connexion</a>
@@ -92,7 +98,7 @@
                 <!-- Footer Social Icons-->
                 <ul class="list-inline text-center">
                     <li class="list-inline-item">
-                        <a href="">
+                        <a href="https://www.linkedin.com/in/olha-raulet-9037a5203/">
                             <span class="fa-stack fa-lg">
                                 <i class="fa fa-circle fa-stack-2x"></i>
                                 <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
@@ -100,7 +106,7 @@
                         </a>
                     </li>
                     <li class="list-inline-item">
-                        <a href="">
+                        <a href="https://github.com/olha-r">
                             <span class="fa-stack fa-lg">
                                 <i class="fa fa-circle fa-stack-2x"></i>
                                 <i class="fa fa-github fa-stack-1x fa-inverse"></i>
@@ -123,6 +129,5 @@
 </div>
 
 <!-- Bootstrap core JS-->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
-</body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script></body>
 </html>
