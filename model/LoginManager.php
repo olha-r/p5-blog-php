@@ -12,10 +12,11 @@ class LoginManager extends Manager
 
 //  Récupération de l'utilisateur et de son password hashé
         $req = $db->prepare('
-                            SELECT id, password
+                            SELECT id, email, password
                             FROM users 
-                            WHERE user_name = ?');
+                            WHERE user_name = ?
+                            ');
         $req->execute(array($_POST['user_name']));
         return $resultat = $req->fetch();
-}
+    }
 }

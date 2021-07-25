@@ -9,6 +9,7 @@ class PostManager extends Manager
     public function getPosts()
     {
         $db = $this->dbConnect();
+
         $req = $db->query('
                     SELECT *, DATE_FORMAT(creation_date, \'%d/%m/%Y à %Hh%imin%ss\') AS creation_date_fr
                     FROM posts
@@ -18,8 +19,8 @@ class PostManager extends Manager
         ');
         return $req;
 
-
     }
+
 
     public function getPost($postId)
     {
@@ -37,12 +38,5 @@ class PostManager extends Manager
         return $post;
     }
 
-    public function count ()
-    {
-        $db = $this->dbConnect();
-        $total_nb_posts  = $db->query('SELECT COUNT(*) AS nb_posts FROM posts');
-        $total_posts = $total_nb_posts->fetch();
-        $nb_posts = $total_posts['nb_posts'];
-    }
 
 }

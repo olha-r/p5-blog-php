@@ -21,16 +21,6 @@ class BackendCommentManager extends Manager
         return $all_comments;
     }
 
-   /* public function validateComment ($commentId)
-    {
-        $db = $this->dbConnect();
-        $approved_comment = $db->prepare('
-                    UPDATE comments SET is_approved=1
-                    WHERE id_comment=?
-                    ');
-        $approved_comment->execute(array($commentId));
-    }*/
-
     public function notApproveComment($commentId)
     {
         $db = $this->dbConnect();

@@ -1,131 +1,172 @@
 body {
 
-	font-family: 'Raleway', sans-serif;
-	font-size: 27px;
-	line-height: 1.42857143;
-	color: #333;
-	background-color: #fff;
+    font-family: 'Roboto', sans-serif;
+    line-height: 1.5;
+    color: #333;
+    background-color: #fff;
+}
+body p {
+    font-size: 1.1rem;
+    text-align: justify;
+    text-indent: 20px;
 }
 
 #frontend-header, #backend-header {
-	background-color: #353535;
-	color: #eee;
-	height: 100px;
+    background-color: #353535;
+    color: #eee;
+    height: 100px;
 }
 
-#frontend-header h1, #frontend-header p, #backend-header h1, #backend-header p  {
+h1 {
 
-	font-family: 'Playfair Display', serif;
-	font-size: 55px;
-	text-align: center;
-	line-height: 100px;
+    font-family: 'Playfair Display 400', serif;
+    font-size: 55px;
+    text-align: center;
+    line-height: 100px;
+}
+
+h2, h3 {
+    font-family: 'Playfair Display 400', serif;
+    font-size: 2.2rem;
+
 }
 
 .navbar {
-	font-family: 'Playfair Display', serif;
-	text-align: center;
-	font-size: 0.8em;
+    font-family: 'Playfair Display 400', serif;
+    text-align: center;
+    font-size: 1.2rem;
 }
+
 .navbar-nav ul {
-	margin: 0;
+    margin: 0;
 }
+
 .navbar li, a {
-	padding: 10px;
+    padding: 10px;
 }
 
 .frontend-container {
-	background-image: url(../img/office.jpeg);
-	background-size: cover;
-	background-repeat: no-repeat;
-	padding-top: 100px;
-	padding-bottom: 50px;
-	min-height: 787px;
+    background-image: url(../img/office.jpeg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    padding-top: 100px;
+    padding-bottom: 50px;
+    min-height: 787px;
 }
 
 .container, .container-fluid, .row {
-	overflow: hidden;
+    overflow: hidden;
 }
 
 div {
-	display: block;
+    display: block;
 }
 
 #footer {
-	background-color: #353535;
-	width: 100%;
-	padding: 50px 0 65px;
-	bottom: 0;
+    background-color: #353535;
+    width: 100%;
+    padding: 50px 0 65px;
+    bottom: 0;
 }
+
 footer .list-inline {
-	margin: 0 0 25px 0;
-	padding: 0;
+    margin: 0 0 25px 0;
+    padding: 0;
 }
 
 footer a {
-	text-decoration: none;
+    text-decoration: none;
 }
+
 footer .copyright {
-	font-size: 14px;
-	margin-bottom: 0;
-	text-align: center;
+    font-size: 14px;
+    margin-bottom: 0;
+    text-align: center;
 }
+
 footer a {
-	text-decoration: none;
-	font-size: 14px;
+    text-decoration: none;
+    font-size: 14px;
 
 }
 
-.fa {
-	font-family: 'FontAwesome';
-
-}
 
 .jumbotron {
-	background-color: #eeeeee;
-	opacity: 0.9;
-	text-align: center;
+    background-color: #eeeeee;
+    opacity: 0.9;
+    text-align: center;
 }
 
 #about-me {
-	text-align: center;
-	margin: auto;
+    text-align: center;
+    margin: auto;
+}
+
+
+#contact-form, #post-content, #post-view, #comment-form, #add-comment-form, #signup-form, #signin-form, #edit-post-view, #edit-view, #dashboard-admin, #comment-user, #delete-user,  #comment-admin, #user-profile {
+    background-color: #eee;
+    opacity: 0.9;
+    font-size: 16px;
+    margin-top: 40px;
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    padding-top: 20px;
+}
+
+#post-create {
+    background-color: #eee;
+    opacity: 0.9;
+    font-size: 16px;
+    margin: 0 130px 30px 130px;
+
+    padding-top: 20px;
 }
 
 
 
-
-#contact-form, #post-content, #post-view, #comment-form, #add-comment-form, #signup-form, #signin-form, #edit-post-view,#edit-view, #dashboard-admin  {
-	background-color: #eee;
-	opacity: 0.9;
-	font-size: 16px;
-	margin-top: 40px;
-	margin-bottom: 30px;
-	padding-bottom: 20px;
-	padding-top: 20px;
+.btn-outline-danger, #post-create .btn-danger, #post-create .btn-dark {
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
 
-.btn-outline-danger {
-	margin-top: 20px;
-	margin-bottom: 20px;
+.btn-secondary, #edit-user-info {
+    width: 300px;
 }
+#btn-user-comment {
+    width: 200px;
+    background-color: #337ab7;
+    border-color: #337ab7;
+}
+
 
 .navbar-nav .btn {
-	margin-right: 10px;
+    margin-right: 10px;
 }
 
-a {
-	color: #337ab7;
+footer a {
+    color: #337ab7;
 }
 
-a:hover {
-	color: #18446E;
+footer a:hover {
+    color: #18446E;
+}
+
+.navbar a {
+    color: #353535;
+}
+.navbar .fa-stack:hover {
+    color: #D54C4C;
 }
 
 img {
-	max-width:100%;
-	max-height:100%;
+    max-width: 100%;
+    max-height: 100%;
 }
 
 table {
-	width: 100%;
+    width: 100%;
+}
+th {
+    font-size: 1.3rem;
+    font-family: 'Playfair Display 400', serif;
 }

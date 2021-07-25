@@ -1,4 +1,5 @@
 <?php ob_start(); ?>
+<?php $nav = "admin-posts"; ?>
 <?php
 if(isset($_SESSION['success']))
 {
@@ -19,15 +20,18 @@ if(isset($_SESSION['error']))
 }
 unset($_SESSION['error']);
 ?>
-    <div class="row" id="dashboard-admin" style="background-color: #eeeeee">
-        <div class="col-lg-12">
-            <h3>
+
+<div class="row justify-content-center" id="dashboard-admin">
+        <div class="col-lg-11">
+            <h3 class="text-center text-uppercase ">
                 Liste des billets
             </h3>
+            <hr>
+            <p></p>
         </div>
 
 
-        <div class="col-lg-12">
+        <div class="col-lg-11">
             <table class="table table-hover">
                 <thead class="col-lg-12">
                 <tr>
@@ -47,9 +51,10 @@ unset($_SESSION['error']);
                         <td><?= $data['creation_date_fr'] ?></td>
                         <td><?= htmlspecialchars($data['title']) ?></td>
                         <td><a href="index.php?action=modifyPost&amp;id=<?= $data['id'] ?>" class="btn btn-primary">Voir ou Modifier</a> </td>
-                        <td> <form action="index.php?action=deletePost" method="POST">
-                                <input type="hidden" value="<?= $data['id']; ?>" name="id" >
-                                <input type="submit" value="Supprimer" name="delete"  class="btn btn-warning">
+                        <td>
+                            <form action="index.php?action=deletePost" method="POST">
+                                <input type="hidden" value="<?= $data['id']; ?>" name="id">
+                                <input type="submit" value="Supprimer" name="delete" class="btn btn-warning">
                                 <!--<a href="index.php?action=deletePost" class="btn btn-warning">Supprimer</a> -->
                             </form>
                         </td>
