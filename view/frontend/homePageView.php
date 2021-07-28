@@ -1,5 +1,5 @@
 <?php $title = "Page d'accueil";  ?>
-<?php $nav = "home_page";  ?>
+<?php $nav = "home_page"; ?>
 
 <?php ob_start(); ?>
 
@@ -26,7 +26,6 @@ unset($_SESSION['error']);
 ?>
 
 <div class="jumbotron">
-
     <div class="row">
         <div class="col-lg-6" id="about-me">
             <h2>Raulet Olha</h2>

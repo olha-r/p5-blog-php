@@ -1,11 +1,10 @@
 <?php $title = "Contact us"; ?>
-<?php $nav = "contact";  ?>
+<?php $nav = "contact"; ?>
 
 <?php ob_start(); ?>
 
 <?php
-if(isset($_SESSION['success']))
-{
+if (isset($_SESSION['success'])) {
     ?>
     <div class="alert alert-success">
         <?php echo $_SESSION['success']; ?>
@@ -13,8 +12,7 @@ if(isset($_SESSION['success']))
     <?php
 }
 unset($_SESSION['success']);
-if(isset($_SESSION['error']))
-{
+if (isset($_SESSION['error'])) {
     ?>
     <div class="alert alert-danger">
         <?php echo $_SESSION['error']; ?>
@@ -25,7 +23,7 @@ unset($_SESSION['error']);
 ?>
 
 <!-- Contact Section-->
-<div class="row justify-content-center" >
+<div class="row justify-content-center">
     <div class="col-md-8 col-lg-6" id="contact-form">
         <form action="index.php?action=contactUs" method="post">
             <div class="col-xs-8 col-xs-offset-4">
@@ -33,27 +31,27 @@ unset($_SESSION['error']);
             </div>
             <!-- Name input -->
             <div class="form-group">
-                <label class="control-label col-xs-4" >Nom</label>
+                <label class="control-label col-xs-4">Nom</label>
                 <div class="col-xs-8">
-                <input type="text" name="name"  class="form-control" required>
+                    <input type="text" name="name" class="form-control" required>
                 </div>
             </div>
             <!-- Email input -->
             <div class="form-group">
-                <label class="control-label col-xs-4" >Email</label>
+                <label class="control-label col-xs-4">Email</label>
                 <div class="col-xs-8">
                     <input type="email" name="email" class="form-control" required>
                 </div>
             </div>
             <!-- Message input -->
             <div class="form-group">
-                <label class="control-label col-xs-4" >Message</label>
+                <label class="control-label col-xs-4">Message</label>
                 <div class="col-xs-8">
                     <textarea class="form-control" name="message" rows="4" required></textarea>
                 </div>
             </div>
             <!-- Submit button -->
-            <input type="submit" value="Envoyer" name="submit"  class="btn btn-lg btn-outline-danger"">
+            <input type="submit" value="Envoyer" name="submit" class="btn btn-lg btn-outline-danger"">
         </form>
     </div>
 </div>
