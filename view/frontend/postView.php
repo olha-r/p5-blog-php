@@ -21,6 +21,7 @@
         <hr>
         <p></p>
         <p>
+            <?= nl2br(htmlspecialchars($post['fragment'])) ?>
             <?= nl2br(htmlspecialchars($post['content'])) ?>
         </p>
         <p></p>
@@ -49,10 +50,8 @@
         <hr>
 
 
-
         <?php
-        while ($comment = $comments->fetch())
-        {
+        while ($comment = $comments->fetch()) {
             ?>
             <p><strong><?= htmlspecialchars($comment['user_name']) ?></strong> le <?= $comment['comment_date_fr'] ?></p>
             <p><?= nl2br(htmlspecialchars($comment['comment'])) ?></p>
@@ -64,26 +63,26 @@
 </div>
 
 
-
 <div class="row" id="add-comment-form">
     <div class="col-lg-6">
 
     </div>
     <div class="col-lg-6">
 
-            <h3>
-                Ajouter un commentaires
-            </h3>
-            <?php if (!isset($_SESSION['member']) && !isset($_SESSION['admin'])) : ?>
-<div class="alert alert-primary">
-   <p>Vous devez être connecté pour commenter.</p>
-</div>
-            <?php else : ?>
-        <form action="index.php?action=addComment&amp;id=<?= $post['postId'] ?>"  method="post">
+        <h3>
+            Ajouter un commentaires
+        </h3>
+        <?php if (!isset($_SESSION['member']) && !isset($_SESSION['admin'])) : ?>
+            <div class="alert alert-primary">
+                <p>Vous devez être connecté pour commenter.</p>
+            </div>
+        <?php else : ?>
+        <form action="index.php?action=addComment&amp;id=<?= $post['postId'] ?>" method="post">
 
             <div class="form-group">
-                <label class="form-label" for="comment">Commentaire</label><br />
-                <textarea id="comment" name="comment" class="form-control" rows="4" placeholder="Saisir commentaire" required></textarea>
+                <label class="form-label" for="comment">Commentaire</label><br/>
+                <textarea id="comment" name="comment" class="form-control" rows="4" placeholder="Saisir commentaire"
+                          required></textarea>
             </div>
             <div class="form-group">
                 <button type="submit" name="submit" class="btn btn-outline-danger">Envoyer</button>

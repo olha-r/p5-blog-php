@@ -6,13 +6,13 @@ require_once("model/Manager.php");
 
 class BackendPostManager extends Manager
 {
-    public function addNewPost($title, $content, $id_user)
+    public function addNewPost($title, $fragment, $content, $id_user)
     {
         $db = $this->dbConnect();
         $new_post = $db->prepare('
-                                INSERT INTO posts (title, content, author_post, creation_date) 
-                                VALUES(?, ?, ?, NOW())');
-        $added_post = $new_post->execute(array($title, $content, $id_user));
+                                INSERT INTO posts (title, fragment, content, author_post, creation_date) 
+                                VALUES(?, ?, ?, ?, NOW())');
+        $added_post = $new_post->execute(array($title, $fragment, $content, $id_user));
         return $added_post;
     }
 
@@ -34,8 +34,8 @@ class BackendPostManager extends Manager
                     DELETE FROM posts
                     WHERE id=?
         ');
-       $del_post = $deleted_post->execute(array($id));
-       return $del_post;
+        $del_post = $deleted_post->execute(array($id));
+        return $del_post;
     }
 
     public function editPost($title, $content, $id)
