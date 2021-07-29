@@ -2,7 +2,7 @@
 
 namespace OC\Blog_php\Model;
 
-require_once("model/Manager.php");
+require_once 'model/Manager.php';
 
 class BackendPostManager extends Manager
 {
@@ -22,7 +22,8 @@ class BackendPostManager extends Manager
         $allPosts = $db->query('
                     SELECT id, title,  DATE_FORMAT(creation_date, \'%d/%m/%Y à %Hh%imin%ss\') AS creation_date_fr
                     FROM posts
-                    ORDER BY creation_date                   
+                    ORDER BY creation_date
+                    DESC
         ');
         return $allPosts;
     }

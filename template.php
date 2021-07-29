@@ -10,27 +10,26 @@
     <link href="./public/css/styles.css" rel="stylesheet"/>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,700&family=Roboto&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,700&family=Roboto&display=swap"
+          rel="stylesheet">
     <script src="https://kit.fontawesome.com/55a2989d96.js" crossorigin="anonymous"></script>
-
-
 </head>
 
 <body>
-
 <!-- Header-->
-<div id="frontend-header">
-    <div class="container-fluid">
+<div id="frontend-header" class="container-fluid">
+    <?php if (isset($_SESSION['admin'])) : ?>
+        <h1 class="fw-bold">Administration du blog !</h1>
+    <?php else : ?>
         <h1 class="fw-bold">Mon blog !</h1>
-    </div>
+    <?php endif; ?>
 </div>
 
+
 <!-- Navigation-->
-
-
 <nav class="navbar navbar-expand-lg navbar-light bg-light text-uppercase" id="mainNav">
     <div class="container-fluid">
-        <a class="navbar-brand" href="index.php?action=homePage">Projet 3 - OC</a>
+        <a class="navbar-brand" href="index.php?action=homePage"><i class="fas fa-home"></i></a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar"
                 aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -41,21 +40,39 @@
                     <a class="nav-link  <?php if ($nav === "home_page") : ?> active <?php endif; ?>" aria-current="page"
                        href="index.php?action=homePage">Accueil</a>
                 </li>
-
-                <li class="nav-item">
-                    <a class="nav-link <?php if ($nav === "page") : ?> active <?php endif; ?>" aria-current="page"
-                       href="index.php?action=page">Page</a>
-                </li>
-
-
                 <li class="nav-item">
                     <a class="nav-link <?php if ($nav === "list_post") : ?> active <?php endif; ?>" aria-current="page"
-                       href="index.php?action=listPosts">Tous les billets</a>
+                       href="index.php?action=listPosts"><i class="fas fa-th-list"></i> Tous les billets</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link <?php if ($nav === "contact") : ?> active <?php endif; ?>" aria-current="page"
-                       href="index.php?action=contactUs">Contact</a>
-                </li>
+
+                <?php if (isset($_SESSION['admin'])) : ?>
+                    <li class="nav-item">
+                        <a class="nav-link  <?php if ($nav === "admin-posts") : ?> active <?php endif; ?>"
+                           aria-current="page"
+                           href="index.php?action=dashboardAdmin"><i class="fas fa-list-ol"></i> Liste des billets</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link <?php if ($nav === "admin-comment") : ?> active <?php endif; ?>"
+                           aria-current="page"
+                           href="index.php?action=displayComments"><i class="fas fa-comments"></i> Commentaires</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link <?php if ($nav === "admin-create-post") : ?> active <?php endif; ?>"
+                           aria-current="page"
+                           href="index.php?action=createPost"><i class="fas fa-newspaper"></i> Créer un billet</a>
+                    </li>
+
+                <?php else : ?>
+                    <li class="nav-item">
+                        <a class="nav-link <?php if ($nav === "page") : ?> active <?php endif; ?>" aria-current="page"
+                           href="index.php?action=page">Page</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link <?php if ($nav === "contact") : ?> active <?php endif; ?>"
+                           aria-current="page"
+                           href="index.php?action=contactUs"><i class="fas fa-envelope-open-text"></i> Contact</a>
+                    </li>
+                <?php endif; ?>
             </ul>
             <ul class="navbar-nav">
                 <?php if (!isset($_SESSION['member']) && !isset($_SESSION['admin'])) : ?>
@@ -64,18 +81,18 @@
                     <a class="btn btn-outline-dark navbar-right <?php if ($nav === "login") : ?> active <?php endif; ?>"
                        href="index.php?action=signIn">Connexion</a>
                 <?php else : ?>
-                    <a href="index.php?action=dashboard">
+                    <?php if (isset($_SESSION['member'])) : ?>
+                        <a href="index.php?action=dashboard">
                         <span class="fa-stack">
                                 <i class="fa fa-circle fa-stack-2x"></i>
                                 <i class="fas fa-user fa-stack-1x fa-inverse"></i>
-
                             </span>
-                    </a>
+                        </a>
+                    <?php endif; ?>
                     <a href="index.php?action=logout">
                         <span class="fa-stack">
                                 <i class="fa fa-circle fa-stack-2x"></i>
                                 <i class="fas fa-sign-out-alt fa-stack-1x fa-inverse"></i>
-
                             </span>
                     </a>
                 <?php endif; ?>
@@ -102,7 +119,6 @@
                             <span class="fa-stack">
                                 <i class="fa fa-circle fa-stack-2x"></i>
                                 <i class="fas fa-user-shield fa-stack-1x fa-inverse"></i>
-
                             </span>
                         </a>
                     </li>
@@ -143,8 +159,6 @@
                 </p>
                 <p class="copyright text-muted">Projet 3 - Formation Développeur d'application - PHP <a
                             href="https://openclassrooms.com/fr/"> Openclassrooms </a></p>
-
-
             </footer>
         </div>
     </div>
