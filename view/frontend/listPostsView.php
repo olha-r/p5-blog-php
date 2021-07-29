@@ -28,14 +28,10 @@ while ($data = $posts->fetch()) {
                 </span>
                 </div>
                 <div class="col-xs-5 col-sm-2 col-md-offset-3 col-md-3 col-lg-offset-4 col-lg-2">
-                    <a href="index.php?action=post&amp;id=<?= $data['id'] ?>" class="btn btn-primary">Commentaires</a>
-
+                    <a href="index.php?action=post&amp;id=<?= $data['id'] ?>" class="btn btn-primary" id="btn-posts">Commentaires</a>
                 </div>
-
             </div>
-
         </div>
-
     </div>
 
     <?php
@@ -44,4 +40,4 @@ $posts->closeCursor();
 ?>
 <?php $content = ob_get_clean(); ?>
 
-<?php require('template.php'); ?>
+<?php require_once 'template.php'; ?>

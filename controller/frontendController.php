@@ -1,10 +1,10 @@
 <?php
 
 // Chargement des classes
-require_once('model/PostManager.php');
-require_once('model/CommentManager.php');
-require_once('model/UsersManager.php');
-require_once('model/PaginationManager.php');
+require_once 'model/PostManager.php';
+require_once 'model/CommentManager.php';
+require_once 'model/UsersManager.php';
+require_once 'model/PaginationManager.php';
 
 class FrontendController
 {
@@ -30,7 +30,7 @@ class FrontendController
         $paginateManager = new OC\Blog_php\Model\PaginationManager();
         $posts = $paginateManager->getPosts($firstPostToDisplay, $nb_posts_per_page);
 
-        require('view/frontend/allPosts.php');
+        require_once 'view/frontend/allPosts.php';
     }
 
 
@@ -38,7 +38,7 @@ class FrontendController
     {
         $postManager = new OC\Blog_php\Model\PostManager();
         $posts = $postManager->getPosts();
-        require('view/frontend/listPostsView.php');
+        require_once 'view/frontend/listPostsView.php';
     }
 
     public function post()
@@ -50,7 +50,7 @@ class FrontendController
             $post = $postManager->getPost($_GET['id']);
             $comments = $commentManager->getComments($_GET['id']);
 
-            require('view/frontend/postView.php');
+            require_once 'view/frontend/postView.php';
         } else {
             throw new Exception('Aucun identifiant de billet envoyé');
         }
@@ -110,10 +110,7 @@ class FrontendController
             header('Location: index.php?action=contactUs');
             /* return require ('view/frontend/thanksMail.php');*/
         } else {
-
-            require_once('view/frontend/contactMailView.php');
-
-
+            require_once 'view/frontend/contactMailView.php';
         }
 
     }
@@ -125,10 +122,10 @@ class FrontendController
             $userManager = new OC\Blog_php\Model\UsersManager();
 
             $user_info = $userManager->getUser($_SESSION['member']['id']);
-           $frontendController = new OC\Blog_php\Model\CommentManager();
-          $user_comments = $frontendController->getUserComments($_SESSION['member']['id']);
+            $frontendController = new OC\Blog_php\Model\CommentManager();
+            $user_comments = $frontendController->getUserComments($_SESSION['member']['id']);
 
-            require_once('view/frontend/profileView.php');
+            require_once 'view/frontend/profileView.php';
         } else {
             $_SESSION['error'] = "Aucun user identifiant envoyé !";
             header('Location: index.php?dashboard');
@@ -180,12 +177,9 @@ class FrontendController
                 $_SESSION['success'] = 'Votre compte est créé, ' . $_POST['new_user_name'] . ' !';
                 header('Location: index.php?action=dashboard');
                 exit();
-
             }
-
         } else {
-
-            require('view/frontend/signUpView.php');
+            require_once 'view/frontend/signUpView.php';
         }
     }
 
@@ -232,7 +226,7 @@ class FrontendController
             }
         } else {
             //$_SESSION['error'] = "Tous les champs ne sont pas remplis !";
-            require('view/frontend/loginView.php');
+            require_once 'view/frontend/loginView.php';
         }
 
 
@@ -248,7 +242,7 @@ class FrontendController
     //HOME PAGE
     public function home_page()
     {
-        require_once('view/frontend/homePageView.php');
+        require_once 'view/frontend/homePageView.php';
     }
 
     public function updateUserInfo()
@@ -288,8 +282,7 @@ class FrontendController
                     $frontendController = new OC\Blog_php\Model\UsersManager();
                     $edited_password = password_hash($_POST['edit-password-first'], PASSWORD_DEFAULT);
                     $edit_password = $frontendController->update_password($edited_password, $_GET['id']);
-                    if ($edit_password === false)
-                    {
+                    if ($edit_password === false) {
                         $_SESSION['error'] = "Une erreur est survenue. Impossible de mofifier mot de passe !";
                         header('Location: index.php?action=dashboard');
                     } else {
@@ -297,8 +290,8 @@ class FrontendController
                         header('Location: index.php?action=dashboard');
                     }
                 }
-                }
-            } else {
+            }
+        } else {
             $_SESSION['error'] = "Aucun mot de passe envoyé !";
             header('Location: index.php?action=dashboard');
         }
@@ -320,7 +313,7 @@ class FrontendController
                 header('Location: index.php?action=dashboard');
             }
         } else {
-            require_once('./view/frontend/profileView.php');
+            require_once './view/frontend/profileView.php';
         }
     }
 
@@ -339,7 +332,7 @@ class FrontendController
                 header('Location: index.php');
             }
         } else {
-            require_once('./view/frontend/profileView.php');
+            require_once './view/frontend/profileView.php';
         }
     }
 

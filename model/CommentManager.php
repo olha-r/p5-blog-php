@@ -2,7 +2,7 @@
 
 namespace OC\Blog_php\Model;
 
-require_once("model/Manager.php");
+require_once 'model/Manager.php';
 
 class CommentManager extends Manager
 {
@@ -17,7 +17,6 @@ class CommentManager extends Manager
                             ORDER BY comment_date 
                             DESC');
         $comments->execute(array($postId));
-
         return $comments;
     }
 

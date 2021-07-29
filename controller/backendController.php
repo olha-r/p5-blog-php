@@ -1,31 +1,35 @@
 <?php
 
-require_once('model/BackendPostManager.php');
-require_once('model/PostManager.php');
-require_once('model/BackendCommentManager.php');
+require_once 'model/BackendPostManager.php';
+require_once 'model/PostManager.php';
+require_once 'model/BackendCommentManager.php';
 
 class BackendController
 {
     function addPost()
     {
         if (isset($_SESSION['admin']) && !empty($_SESSION['admin'])) {
-            if (isset($_POST['title']) && isset($_POST['content'])) {
-                $backendPostManager = new OC\Blog_php\Model\BackendPostManager();
+            if (isset($_POST['submit'])) {
+                if (isset($_POST['title']) && isset($_POST['fragment']) && isset($_POST['content'])
+                    && !empty($_POST['title']) && !empty($_POST['fragment']) && !empty($_POST['content'])) {
+                    $backendPostManager = new OC\Blog_php\Model\BackendPostManager();
+                    $added_post = $backendPostManager->addNewPost($_POST['title'], $_POST['fragment'], $_POST['content'], $_SESSION['admin']['id']);
 
-                $added_post = $backendPostManager->addNewPost($_POST['title'], $_POST['fragment'], $_POST['content'], $_SESSION['admin']['id']);
-
-                if ($added_post === false) {
-                    $_SESSION['error'] = "Une erreur est survenue. Impossible d'enregistrer l'article.!";
-                    header('Location: index.php?action=createPost');
+                    if ($added_post === false) {
+                        $_SESSION['error'] = "Une erreur est survenue. Impossible d'enregistrer l'article.!";
+                        header('Location: index.php?action=createPost');
+                    } else {
+                        $_SESSION['success'] = "Votre article est ajouté.";
+                        header('Location: index.php?action=dashboardAdmin');
+                    }
                 } else {
-                    $_SESSION['success'] = "Votre post est ajouté.";
-                    header('Location: index.php?action=dashboardAdmin');
+                    require_once './view/backend/createPostView.php';
                 }
             } else {
-                require('./view/backend/createPostView.php');
+                require_once './view/backend/createPostView.php';
             }
         } else {
-            require('./view/backend/createPostView.php');
+            require_once './view/backend/createPostView.php';
         }
 
     }
@@ -35,7 +39,7 @@ class BackendController
         if (isset($_SESSION['admin']) && !empty($_SESSION['admin'])) {
             $backendPostManager = new OC\Blog_php\Model\BackendPostManager();
             $allPosts = $backendPostManager->getAllPosts();
-            require_once('view/backend/dashboardAdminView.php');
+            require_once 'view/backend/backendListPostsView.php';
         } else {
             $_SESSION['error'] = "Vous n'avez pas le droit !";
             header('Location: index.php?action=homePage');
@@ -47,7 +51,7 @@ class BackendController
         if (isset($_GET['id']) && $_GET['id'] > 0) {
             $postManager = new OC\Blog_php\Model\PostManager();
             $post = $postManager->getPost($_GET['id']);
-            require_once('view/backend/editPostView.php');
+            require_once 'view/backend/editPostView.php';
         } else {
             $_SESSION['error'] = "Aucun identifiant de billet envoyé !";
             header('Location: index.php?action=modifyPost');
@@ -87,7 +91,7 @@ class BackendController
                 header('Location: index.php?action=dashboardAdmin');
             }
         } else {
-            require_once('./view/backend/dashboardAdminView.php');
+            require_once './view/backend/backendListPostsView.php';
         }
     }
 
@@ -96,7 +100,7 @@ class BackendController
         $backendCommentManager = new OC\Blog_php\Model\BackendCommentManager();
         $all_comments = $backendCommentManager->getAllComments();
 
-        require_once('./view/backend/backendCommentsView.php');
+        require_once './view/backend/backendCommentsView.php';
     }
 
     function validateComment()
@@ -112,7 +116,7 @@ class BackendController
                 header('Location: index.php?action=displayComments');
             }
         } else {
-            require_once('./view/backend/backendCommentsView.php');
+            require_once './view/backend/backendCommentsView.php';
         }
 
     }
@@ -131,7 +135,7 @@ class BackendController
                 header('Location: index.php?action=displayComments');
             }
         } else {
-            require_once('./view/backend/backendCommentsView.php');
+            require_once './view/backend/backendCommentsView.php';
         }
     }
 

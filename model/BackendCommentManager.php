@@ -2,7 +2,7 @@
 
 namespace OC\Blog_php\Model;
 
-require_once("model/Manager.php");
+require_once 'model/Manager.php';
 
 class BackendCommentManager extends Manager
 {

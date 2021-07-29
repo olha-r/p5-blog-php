@@ -1,7 +1,7 @@
 <?php
 session_start();
-require('controller/frontendController.php');
-require('controller/backendController.php');
+require_once 'controller/frontendController.php';
+require_once 'controller/backendController.php';
 $frontendController = new FrontendController();
 $backendConroller = new BackendController();
 try {

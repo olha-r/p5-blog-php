@@ -1,5 +1,5 @@
+<?php $title = "Administration du blog"; ?>
 <?php ob_start(); ?>
-
 <?php
 if (isset($_SESSION['success'])) {
     ?>
@@ -18,23 +18,32 @@ if (isset($_SESSION['error'])) {
 }
 unset($_SESSION['error']);
 ?>
-
-<div class="row" id="edit-view">
-    <div class="col-lg-12">
-        <p>
+    <div class="row">
+        <div class="col-lg-12">
             <a href="index.php?action=dashboardAdmin" class="btn btn-secondary">
                 <i class="fa fa-long-arrow-left"></i>
                 Retour à la liste des billets
             </a>
-        </p>
+        </div>
+    </div>
+
+<div class="row justify-content-center" id="edit-post-view">
+
+    <div class="col-sm-11 col-lg-6">
+        <h3 class="text-center text-uppercase ">
+            Modifier l'article
+        </h3>
+        <hr>
+        <p></p>
     </div>
 
 
-    <div class="row" id="edit-post-view">
+    <div class="row">
         <form method="post" action="index.php?action=editPost&amp;id=<?= $post['postId'] ?>">
             <div class="col-lg-12">
                 <h4>Titre de l'article</h4>
-                <input type="text" name="edit-title" placeholder="Titre" value="<?= htmlspecialchars($post['title']) ?>"
+                <input type="text" name="edit-title" placeholder="Titre"
+                       value="<?= htmlspecialchars($post['title']) ?>"
                        class="form-control">
                 <hr>
                 <p></p>
@@ -48,7 +57,10 @@ unset($_SESSION['error']);
                           rows="10"><?= htmlspecialchars($post['content']) ?></textarea>
                 <p></p>
                 <hr>
-                <input type="submit" value="Modifier" name="edit" class="btn btn-outline-danger">
+                <div class="row justify-content-md-center">
+                    <input type="submit" value="Modifier" name="edit" class="btn btn-outline-danger" id="btn-edit-post">
+
+                </div>
                 <div class="row">
                     <div class="col-lg-12">
                   <span>
@@ -69,4 +81,4 @@ unset($_SESSION['error']);
 
 <?php $content = ob_get_clean(); ?>
 
-<?php require('backendTemplate.php'); ?>
+<?php require_once 'template.php'; ?>
