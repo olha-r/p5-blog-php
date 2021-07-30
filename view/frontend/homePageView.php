@@ -22,6 +22,21 @@ if (isset($_SESSION['error'])) {
 }
 unset($_SESSION['error']);
 ?>
+<<<<<<< HEAD
+=======
+
+    <div class="jumbotron">
+        <div class="row">
+            <div class="col-lg-6 col-md-10" id="about-me">
+                <h2>Raulet Olha</h2>
+                <p>Je suis étudiante - développeur PHP chez OpenClassrooms</p>
+            </div>
+            <div class="col-lg-6 col-md-10">
+                <img class="img-responsive" src="/monblog/public/img/programmer.png" alt="programmer-img"/>
+            </div>
+        </div>
+    </div>
+>>>>>>> main
 
     <div class="jumbotron">
         <div class="row">
@@ -35,7 +50,12 @@ unset($_SESSION['error']);
         </div>
     </div>
 
-
 <?php $content = ob_get_clean(); ?>
 
+<<<<<<< HEAD
 <?php require_once './template.php'; ?>
+
+<?php unset($_SESSION['error']); ?>
+=======
+<?php require_once './template.php'; ?>
+>>>>>>> main

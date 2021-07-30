@@ -2,10 +2,16 @@
 
 namespace OC\Blog_php\Model;
 
+<<<<<<< HEAD
+use Olha\Blog\Model\Manager;
+
+=======
+>>>>>>> main
 require_once 'model/Manager.php';
 
 class BackendCommentManager extends Manager
 {
+
     public function getAllComments()
     {
         $db = $this->dbConnect();
@@ -42,4 +48,8 @@ class BackendCommentManager extends Manager
         $approved_comment = $approved_comment->execute(array($commentId));
         return $approved_comment;
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> main

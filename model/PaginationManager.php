@@ -2,10 +2,19 @@
 
 namespace OC\Blog_php\Model;
 
+<<<<<<< HEAD
+use Olha\Blog\Model\Manager;
+
+=======
+>>>>>>> main
 require_once 'model/Manager.php';
 
 class PaginationManager extends Manager
 {
+<<<<<<< HEAD
+
+=======
+>>>>>>> main
     public  function count_posts()
     {
         $db = $this->dbConnect();
@@ -23,9 +32,16 @@ class PaginationManager extends Manager
                         ORDER BY creation_date 
                         DESC
                         LIMIT ?, ?
+<<<<<<< HEAD
+                        ");
+        $req->execute(array((int)$firstPostToDisplay,(int)$nb_posts_per_page));
+        return $req;
+    }
+=======
 
                         ");
         $req->execute(array((int)$firstPostToDisplay,(int)$nb_posts_per_page));
 return $req;
 }
+>>>>>>> main
 }

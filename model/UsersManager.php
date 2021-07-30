@@ -2,10 +2,16 @@
 
 namespace OC\Blog_php\Model;
 
+<<<<<<< HEAD
+use Olha\Blog\Model\Manager;
+
+=======
+>>>>>>> main
 require_once 'model/Manager.php';
 
 class UsersManager extends Manager
 {
+
     public function checkIfUserExist($pseudo)
     {
         $db = $this->dbConnect();
@@ -23,9 +29,14 @@ class UsersManager extends Manager
         $insertNewUser = $db->prepare('
                                 INSERT INTO users (user_name, password, email, role, creation_date)
                                 VALUES(?, ?, ?, ?,  NOW()) ');
+<<<<<<< HEAD
+        $insertNewUser->execute(
+=======
         return $insertNewUser->execute(
+>>>>>>> main
             array($new_user_name, $new_password, $new_email, $role)
         );
+        return $db->lastInsertId();
 
     }
 
@@ -39,6 +50,7 @@ class UsersManager extends Manager
         $req->execute(array($_POST['user_name']));
         return $resultat = $req->fetch();
     }
+<<<<<<< HEAD
 
     public function getUser()
     {
@@ -52,6 +64,21 @@ class UsersManager extends Manager
         return $resultat;
     }
 
+=======
+
+    public function getUser()
+    {
+        $db = $this->dbConnect();
+        $req = $db->prepare('
+                            SELECT user_name, email, password
+                            FROM users 
+                            WHERE id = ?');
+        $req->execute(array($_SESSION['member']['id']));
+        $resultat = $req->fetch();
+        return $resultat;
+    }
+
+>>>>>>> main
     public function update_user($user_name, $email, $id)
     {
         $db = $this->dbConnect();

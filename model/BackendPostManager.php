@@ -2,10 +2,19 @@
 
 namespace OC\Blog_php\Model;
 
+<<<<<<< HEAD
+use Olha\Blog\Model\Manager;
+
+=======
+>>>>>>> main
 require_once 'model/Manager.php';
 
 class BackendPostManager extends Manager
 {
+<<<<<<< HEAD
+
+=======
+>>>>>>> main
     public function addNewPost($title, $fragment, $content, $id_user)
     {
         $db = $this->dbConnect();
@@ -49,5 +58,3 @@ class BackendPostManager extends Manager
         $edit_post->execute(array($title, $content, $id));
     }
 }
-
-
