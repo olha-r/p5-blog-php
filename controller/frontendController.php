@@ -172,11 +172,11 @@ class FrontendController
                 header('Location: index.php?action=signUp');
                 /*throw new Exception('Une erreur est survenue lors de l\'enregistrement');*/
             } else {
-                $_SESSION['member'] = array('id' => $resultat['id'],
+                $_SESSION['member'] = array('id' => $added_user,
                     'user_name' => $_POST['new_user_name']);
                 $_SESSION['success'] = 'Votre compte est créé, ' . $_POST['new_user_name'] . ' !';
                 header('Location: index.php?action=dashboard');
-                exit();
+
             }
         } else {
             require_once 'view/frontend/signUpView.php';
@@ -207,9 +207,6 @@ class FrontendController
                         $_SESSION['success'] = 'Bienvenue, ' . $_POST['user_name'] . '!';
 
                         header('Location: index.php?action=dashboardAdmin');
-                        exit();
-
-
                     } else {
                         // $_SESSION['id'] = $resultat['id'];
                         // $_SESSION['member'] = $_POST['user_name'];
@@ -217,7 +214,6 @@ class FrontendController
                             'user_name' => $_POST['user_name']);
                         $_SESSION['success'] = 'Vous êtes connecté ! ';
                         header('Location: index.php?action=dashboard');
-                        exit();
                     }
                 } else {
                     $_SESSION['error'] = 'Mauvais identifiant ou mot de passe !';

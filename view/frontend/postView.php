@@ -64,7 +64,7 @@
         <div class="col-lg-6">
         </div>
         <div class="col-lg-6">
-            <h3>Ajouter un commentaires</h3>
+            <h3>Ajouter un commentaire</h3>
             <?php if (!isset($_SESSION['member']) && !isset($_SESSION['admin'])) : ?>
                 <div class="alert alert-primary">
                     <p>Vous devez être connecté pour commenter.</p>
@@ -86,3 +86,5 @@
 <?php $content = ob_get_clean(); ?>
 
 <?php require_once 'template.php'; ?>
+
+<?php unset($_SESSION['error']); ?>
