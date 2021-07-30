@@ -1,14 +1,17 @@
 <?php
 
-namespace Olha\Blog\Model;
+namespace OC\Blog_php\Model;
 
-require_once("model/Manager.php");
+use Olha\Blog\Model\Manager;
+
+require_once 'model/Manager.php';
 
 class PostManager extends Manager
 {
     public function getPosts()
     {
         $db = $this->dbConnect();
+
         $req = $db->query('
                     SELECT *, DATE_FORMAT(creation_date, \'%d/%m/%Y à %Hh%imin%ss\') AS creation_date_fr
                     FROM posts
@@ -17,7 +20,9 @@ class PostManager extends Manager
                     
         ');
         return $req;
+
     }
+
 
     public function getPost($postId)
     {
@@ -34,4 +39,6 @@ class PostManager extends Manager
 
         return $post;
     }
+
+
 }

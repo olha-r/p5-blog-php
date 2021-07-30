@@ -1,91 +1,61 @@
 <?php
 session_start();
-require('controller/frontendController.php');
-require('controller/backendController.php');
+require_once 'controller/frontendController.php';
+require_once 'controller/backendController.php';
+$frontendController = new FrontendController();
+$backendController = new BackendController();
 try {
     if (isset($_GET['action'])) {
         if ($_GET['action'] === 'homePage') {
-            require_once ('view/frontend/homePageView.php');
+            $frontendController->home_page();
+        }   elseif ($_GET['action'] === 'listPosts') {
+            $frontendController->listPosts();
         }
 
-        elseif ($_GET['action'] === 'listPosts') {
-            listPosts();
-        }
 
         elseif ($_GET['action'] === 'post') {
-            if (isset($_GET['id']) && $_GET['id'] > 0) {
-                post();
-            }
-            else {
-                throw new Exception('Aucun identifiant de billet envoyé');
-            }
+            $frontendController->post();
+        } elseif ($_GET['action'] === 'addComment') {
+            $frontendController->addComment();
+        } elseif ($_GET['action'] === 'contactUs') {
+            $frontendController->contactMail();
+        } elseif ($_GET['action'] === 'signUp') {
+            $frontendController->addNewUser();
+        } elseif ($_GET['action'] === 'signIn') {
+            $frontendController->login_user();
+        } elseif ($_GET['action'] === 'dashboard') {
+            $frontendController->user_dashboard();
+        } elseif ($_GET['action'] === 'logout') {
+            $frontendController->logout();
+        } elseif ($_GET['action'] === 'editUser') {
+            $frontendController->updateUserInfo();
+        } elseif ($_GET['action'] === 'editPassword') {
+            $frontendController->updateUserPassword();
+        } elseif ($_GET['action'] === 'deleteUserComment') {
+            $frontendController->deleteUserComment();
+        } elseif ($_GET['action'] === 'deleteUser') {
+            $frontendController->deleteUser();
+        } elseif ($_GET['action'] === 'dashboardAdmin') {
+            $backendController->displayAllPosts();
+        } elseif ($_GET['action'] === 'createPost') {
+            $backendController->addPost();
+        } elseif ($_GET['action'] === 'displayComments') {
+            $backendController->displayAllComments();
+        } elseif ($_GET['action'] === 'deletePost') {
+            $backendController->deletePost();
+        } elseif ($_GET['action'] === 'modifyPost') {
+            $backendController->modifyPost();
+        } elseif ($_GET['action'] === 'editPost') {
+            $backendController->editPost();
+        } elseif ($_GET['action'] === 'validateComment') {
+            $backendController->validateComment();
+        } elseif ($_GET['action'] === 'notValidateComment') {
+            $backendController->notValidateComment();
         }
 
-        elseif ($_GET['action'] === 'addComment') {
-            if (isset($_GET['id']) && $_GET['id'] > 0) {
-                if (!empty($_POST['author']) && !empty($_POST['comment'])) {
-                    addComment($_GET['id'], $_POST['author'], $_POST['comment']);
-                }
-                else {
-                    $_SESSION['error']['type']= "Tous les champs ne sont pas remplis !";
-                    header('Location: index.php?action=post&id=' . $_GET['id']);
-                   /* throw new Exception('Tous les champs ne sont pas remplis !');*/
-                }
-            }
-            else {
-                throw new Exception('Aucun identifiant de billet envoyé');
-            }
-        }
-        elseif ($_GET['action'] === 'contactUs') {
-            contactMail();
-        }
-        elseif ($_GET['action'] === 'signUp') {
-            addNewUser();
-        }
-        elseif ($_GET['action'] === 'signIn') {
-            if (isset($_POST['user_name']) && isset($_POST['password'])
-                && !empty($_POST['user_name']) && !empty($_POST['password'])
-            ) {
-                login_user(
-                    strip_tags($_POST['user_name']),
-                    strip_tags($_POST['password'])
-                );
-            } else {
-                $_SESSION['error']= "Tous les champs ne sont pas remplis !";
-                require ('view/frontend/loginView.php');
-            }
-
-        }
-        elseif ($_GET['action'] === 'dashboard') {
-            require_once('view/frontend/profileView.php');
-        }
-        elseif ($_GET['action'] === 'logout') {
-            logout();
-        }
-        elseif ($_GET['action'] === 'dashboardAdmin') {
-            displayAllPosts();
-        }
-        elseif ($_GET['action'] === 'createPost') {
-            addPost();
-        }
-        elseif ($_GET['action'] === 'displayComments') {
-            displayAllComments();
-        }
-        elseif ($_GET['action'] === 'deletePost') {
-            deletePost();
-        }
-        elseif ($_GET['action'] === 'modifyPost') {
-            modifyPost();
-        }
-        elseif ($_GET['action'] === 'editPost') {
-            editPost();
-        }
-
+    } else {
+        $frontendController->home_page();
     }
-    else {
-        require_once ('view/frontend/homePageView.php');
-    }
-}
-catch(Exception $e) {
+} catch (Exception $e) {
     echo 'Erreur : ' . $e->getMessage();
 }
