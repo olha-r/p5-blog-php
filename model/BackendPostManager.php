@@ -8,6 +8,7 @@ require_once 'model/Manager.php';
 
 class BackendPostManager extends Manager
 {
+
     public function addNewPost($title, $fragment, $content, $id_user)
     {
         $db = $this->dbConnect();

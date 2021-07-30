@@ -34,6 +34,7 @@ while ($data = $posts->fetch()) {
         </div>
     </div>
 
+
     <?php
 }
 $posts->closeCursor();

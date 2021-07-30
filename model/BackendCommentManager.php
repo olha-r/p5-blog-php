@@ -8,6 +8,7 @@ require_once 'model/Manager.php';
 
 class BackendCommentManager extends Manager
 {
+
     public function getAllComments()
     {
         $db = $this->dbConnect();

@@ -57,7 +57,6 @@ unset($_SESSION['error']);
         </div>
     </div>
 
-
 <?php $content = ob_get_clean(); ?>
 
 <?php require_once './template.php'; ?>

@@ -8,6 +8,7 @@ require_once 'model/Manager.php';
 
 class UsersManager extends Manager
 {
+
     public function checkIfUserExist($pseudo)
     {
         $db = $this->dbConnect();

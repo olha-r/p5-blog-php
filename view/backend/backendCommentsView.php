@@ -63,7 +63,6 @@ unset($_SESSION['error']);
         <?php $all_comments->closeCursor(); ?>
     </div>
 
-
 <?php $content = ob_get_clean(); ?>
 
 <?php require_once 'template.php'; ?>

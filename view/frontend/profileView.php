@@ -62,7 +62,8 @@ if (isset($_SESSION['member'])) : ?>
                                        class="form-control" required>
                             </div>
                             <div class="col-lg-6">
-                                <input type="password" name="edit-password-second" placeholder="Confirmer le mot de passe"
+                                <input type="password" name="edit-password-second"
+                                       placeholder="Confirmer le mot de passe"
                                        class="form-control" required>
                                 <input type="submit" value="Modifier mot de passe" name="update-password"
                                        class="btn btn-outline-danger" id="edit-password">
@@ -87,7 +88,8 @@ if (isset($_SESSION['member'])) : ?>
                 <?php
                 while ($comment = $user_comments->fetch()) {
                     ?>
-                    <p><strong><?= htmlspecialchars($comment['user_name']) ?></strong> le <?= $comment['comment_date_fr'] ?>
+                    <p><strong><?= htmlspecialchars($comment['user_name']) ?></strong>
+                        le <?= $comment['comment_date_fr'] ?>
                     </p>
                     <p><?= nl2br(htmlspecialchars($comment['comment'])) ?></p>
                     <form action="index.php?action=deleteUserComment" method="POST">
@@ -102,6 +104,7 @@ if (isset($_SESSION['member'])) : ?>
             </div>
         </div>
     </div>
+
 
 <?php $content = ob_get_clean(); ?>
 

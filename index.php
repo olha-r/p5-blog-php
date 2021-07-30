@@ -52,7 +52,6 @@ try {
         } elseif ($_GET['action'] === 'notValidateComment') {
             $backendController->notValidateComment();
         }
-
     } else {
         $frontendController->home_page();
     }

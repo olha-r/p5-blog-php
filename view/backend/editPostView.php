@@ -58,7 +58,8 @@ unset($_SESSION['error']);
                     <p></p>
                     <hr>
                     <div class="row justify-content-md-center">
-                        <input type="submit" value="Modifier" name="edit" class="btn btn-outline-danger" id="btn-edit-post">
+                        <input type="submit" value="Modifier" name="edit" class="btn btn-outline-danger"
+                               id="btn-edit-post">
 
                     </div>
                     <div class="row">
@@ -77,7 +78,6 @@ unset($_SESSION['error']);
             </form>
         </div>
     </div>
-
 
 <?php $content = ob_get_clean(); ?>
 

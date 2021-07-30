@@ -56,7 +56,8 @@ unset($_SESSION['error']);
         <div class="row justify-content-md-center">
             <div class="col-lg-3">
                 <div class="form-group">
-                    <button type="submit" name="submit" class="btn btn-primary" id="btn-create-post">Enregistrer</button>
+                    <button type="submit" name="submit" class="btn btn-primary" id="btn-create-post">Enregistrer
+                    </button>
                 </div>
                 </form>
             </div>
@@ -65,7 +66,6 @@ unset($_SESSION['error']);
             </div>
         </div>
     </div>
-
 
 <?php $content = ob_get_clean(); ?>
 

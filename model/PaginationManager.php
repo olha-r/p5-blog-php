@@ -8,6 +8,7 @@ require_once 'model/Manager.php';
 
 class PaginationManager extends Manager
 {
+
     public  function count_posts()
     {
         $db = $this->dbConnect();

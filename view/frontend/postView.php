@@ -49,7 +49,8 @@
             <?php
             while ($comment = $comments->fetch()) {
                 ?>
-                <p><strong><?= htmlspecialchars($comment['user_name']) ?></strong> le <?= $comment['comment_date_fr'] ?></p>
+                <p><strong><?= htmlspecialchars($comment['user_name']) ?></strong> le <?= $comment['comment_date_fr'] ?>
+                </p>
                 <p><?= nl2br(htmlspecialchars($comment['comment'])) ?></p>
                 <hr>
                 <?php
@@ -81,7 +82,6 @@
             </form>
         </div>
     </div>
-
 
 <?php $content = ob_get_clean(); ?>
 

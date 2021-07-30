@@ -52,13 +52,13 @@ unset($_SESSION['error']);
                         <input type="password" class="form-control" name="new_password_2" required="required">
                     </div>
                 </div>
-                <input type="submit" name="submit" class="btn btn-lg btn-outline-danger" id="btn-signup" value="S'inscrire">
+                <input type="submit" name="submit" class="btn btn-lg btn-outline-danger" id="btn-signup"
+                       value="S'inscrire">
                 <div class="text-center">Vous avez déjà un compte ? <a href="index.php?action=signIn">Connectez-vous</a>
                 </div>
             </form>
         </div>
     </div>
-
 
 <?php $content = ob_get_clean(); ?>
 

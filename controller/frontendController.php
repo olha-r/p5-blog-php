@@ -228,8 +228,6 @@ class FrontendController
             //$_SESSION['error'] = "Tous les champs ne sont pas remplis !";
             require_once 'view/frontend/loginView.php';
         }
-
-
     }
 
     public function logout()
@@ -295,8 +293,6 @@ class FrontendController
             $_SESSION['error'] = "Aucun mot de passe envoyé !";
             header('Location: index.php?action=dashboard');
         }
-
-
     }
 
     function deleteUserComment()

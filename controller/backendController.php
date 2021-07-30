@@ -6,6 +6,7 @@ require_once 'model/BackendCommentManager.php';
 
 class BackendController
 {
+
     function addPost()
     {
         if (isset($_SESSION['admin']) && !empty($_SESSION['admin'])) {
