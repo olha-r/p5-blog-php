@@ -2,8 +2,11 @@
 
 namespace OC\Blog_php\Model;
 
+<<<<<<< HEAD
 use Olha\Blog\Model\Manager;
 
+=======
+>>>>>>> main
 require_once 'model/Manager.php';
 
 class PostManager extends Manager

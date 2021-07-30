@@ -62,9 +62,17 @@ unset($_SESSION['error']);
         <?php endwhile; ?>
         <?php $all_comments->closeCursor(); ?>
     </div>
+<<<<<<< HEAD
 
 <?php $content = ob_get_clean(); ?>
 
 <?php require_once 'template.php'; ?>
 
 <?php unset($_SESSION['error']); ?>
+=======
+
+
+<?php $content = ob_get_clean(); ?>
+
+<?php require_once 'template.php'; ?>
+>>>>>>> main

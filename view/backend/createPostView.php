@@ -20,8 +20,13 @@ if (isset($_SESSION['error'])) {
 }
 unset($_SESSION['error']);
 ?>
+<<<<<<< HEAD
 
 
+=======
+
+
+>>>>>>> main
     <!-- Add Post Section Form-->
     <div class="row justify-content-center" id="post-create">
         <div class="col-sm-11 col-lg-6">
@@ -51,7 +56,23 @@ unset($_SESSION['error']);
                     <textarea id="editor" type="text" class="form-control" name="content" required rows="20"
                               cols="30" placeholder="Décrivez votre article"></textarea>
                 </div>
+<<<<<<< HEAD
+=======
         </div>
+
+        <div class="row justify-content-md-center">
+            <div class="col-lg-3">
+                    <div class="form-group">
+                        <button type="submit" name="submit" class="btn btn-primary" id="btn-create-post">Enregistrer</button>
+                    </div>
+                </form>
+            </div>
+            <div class="col-lg-3">
+                <a class="btn btn-danger" id="btn-cancel-post" href="index.php?action=dashboardAdmin">Annuler</a>
+            </div>
+>>>>>>> main
+        </div>
+    </div>
 
         <div class="row justify-content-md-center">
             <div class="col-lg-3">
@@ -69,6 +90,10 @@ unset($_SESSION['error']);
 
 <?php $content = ob_get_clean(); ?>
 
+<<<<<<< HEAD
 <?php require_once 'template.php'; ?>
 
 <?php unset($_SESSION['error']); ?>
+=======
+<?php require_once 'template.php'; ?>
+>>>>>>> main

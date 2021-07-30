@@ -2,8 +2,11 @@
 
 namespace OC\Blog_php\Model;
 
+<<<<<<< HEAD
 use Olha\Blog\Model\Manager;
 
+=======
+>>>>>>> main
 require_once 'model/Manager.php';
 
 class CommentManager extends Manager
@@ -30,6 +33,7 @@ class CommentManager extends Manager
                                 INSERT INTO comments(post_id, author_comment, comment, comment_date, is_approved ) 
                                 VALUES(?, ?, ?, NOW(), 0)');
         $comments->execute(array($postId, $id_user, $comment));
+<<<<<<< HEAD
 
     }
 
@@ -48,6 +52,26 @@ class CommentManager extends Manager
 
     }
 
+=======
+
+    }
+
+    public function getUserComments($idUser)
+{
+    $db = $this->dbConnect();
+    $user_comments = $db->prepare('
+                            SELECT *, DATE_FORMAT(comment_date, \'%d/%m/%Y à %Hh%imin%ss\') AS comment_date_fr
+                            FROM comments
+                            LEFT JOIN users on users.id = comments.author_comment
+                            WHERE users.id = ?
+                            ORDER BY comment_date 
+                            DESC');
+    $user_comments->execute(array($idUser));
+    return $user_comments;
+
+}
+
+>>>>>>> main
     public function deleteUserComment($commentUserId)
     {
         $db = $this->dbConnect();

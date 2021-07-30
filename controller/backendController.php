@@ -6,7 +6,10 @@ require_once 'model/BackendCommentManager.php';
 
 class BackendController
 {
+<<<<<<< HEAD
 
+=======
+>>>>>>> main
     function addPost()
     {
         if (isset($_SESSION['admin']) && !empty($_SESSION['admin'])) {
@@ -40,7 +43,11 @@ class BackendController
         if (isset($_SESSION['admin']) && !empty($_SESSION['admin'])) {
             $backendPostManager = new OC\Blog_php\Model\BackendPostManager();
             $allPosts = $backendPostManager->getAllPosts();
+<<<<<<< HEAD
             require_once 'view/backend/backendListPostView.php';
+=======
+            require_once 'view/backend/backendListPostsView.php';
+>>>>>>> main
         } else {
             $_SESSION['error'] = "Vous n'avez pas le droit !";
             header('Location: index.php?action=homePage');
@@ -119,6 +126,7 @@ class BackendController
         } else {
             require_once './view/backend/backendCommentsView.php';
         }
+<<<<<<< HEAD
 
     }
 
@@ -141,3 +149,27 @@ class BackendController
     }
 
 }
+=======
+
+    }
+
+    function notValidateComment()
+    {
+        if (isset($_POST['not_validate']) && !empty($_POST['not_validate'])) {
+            $backendCommentManager = new OC\Blog_php\Model\BackendCommentManager();
+            $not_valid_comment = $backendCommentManager->notApproveComment($_POST['commentId']);
+
+            if ($not_valid_comment === false) {
+                $_SESSION['error'] = "Une erreur est survenue. Impossible de supprimer le commentaire!";
+                header('Location: index.php?action=displayComments');
+            } else {
+                $_SESSION['success'] = "Le commentaire est supprimé.";
+                header('Location: index.php?action=displayComments');
+            }
+        } else {
+            require_once './view/backend/backendCommentsView.php';
+        }
+    }
+
+}
+>>>>>>> main
