@@ -65,7 +65,6 @@ unset($_SESSION['error']);
 
     <?php require_once 'template.php'; ?>
 
+    <?php unset($_SESSION['success']); ?>
+
     <?php unset($_SESSION['error']); ?>
-
-<?php unset($_SESSION['success']); ?>
-
