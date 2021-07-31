@@ -2,10 +2,13 @@
 
 namespace OC\Blog_php\Model;
 
+use Olha\Blog\Model\Manager;
+
 require_once 'model/Manager.php';
 
 class UsersManager extends Manager
 {
+
     public function checkIfUserExist($pseudo)
     {
         $db = $this->dbConnect();
@@ -23,9 +26,10 @@ class UsersManager extends Manager
         $insertNewUser = $db->prepare('
                                 INSERT INTO users (user_name, password, email, role, creation_date)
                                 VALUES(?, ?, ?, ?,  NOW()) ');
-        return $insertNewUser->execute(
+        $insertNewUser->execute(
             array($new_user_name, $new_password, $new_email, $role)
         );
+        return $db->lastInsertId();
 
     }
 

@@ -20,7 +20,7 @@ if (isset($_SESSION['error'])) {
 unset($_SESSION['error']);
 ?>
 
-    <div class="row justify-content-center" id="comment-admin">
+<div class="row justify-content-center" id="comment-admin">
     <div class="col-sm-11 col-lg-6">
         <h3 class="text-center text-uppercase ">
             Liste des commentaires
@@ -63,7 +63,11 @@ unset($_SESSION['error']);
         <?php $all_comments->closeCursor(); ?>
     </div>
 
+    <?php $content = ob_get_clean(); ?>
 
-<?php $content = ob_get_clean(); ?>
+    <?php require_once 'template.php'; ?>
 
-<?php require_once 'template.php'; ?>
+    <?php unset($_SESSION['error']); ?>
+
+    <?php unset($_SESSION['success']); ?>
+

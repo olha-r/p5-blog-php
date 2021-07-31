@@ -6,6 +6,7 @@ require_once 'model/BackendCommentManager.php';
 
 class BackendController
 {
+
     function addPost()
     {
         if (isset($_SESSION['admin']) && !empty($_SESSION['admin'])) {
@@ -39,7 +40,7 @@ class BackendController
         if (isset($_SESSION['admin']) && !empty($_SESSION['admin'])) {
             $backendPostManager = new OC\Blog_php\Model\BackendPostManager();
             $allPosts = $backendPostManager->getAllPosts();
-            require_once 'view/backend/backendListPostsView.php';
+            require_once 'view/backend/backendListPostView.php';
         } else {
             $_SESSION['error'] = "Vous n'avez pas le droit !";
             header('Location: index.php?action=homePage');

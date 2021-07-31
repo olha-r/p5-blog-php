@@ -3,17 +3,13 @@ session_start();
 require_once 'controller/frontendController.php';
 require_once 'controller/backendController.php';
 $frontendController = new FrontendController();
-$backendConroller = new BackendController();
 try {
     if (isset($_GET['action'])) {
         if ($_GET['action'] === 'homePage') {
             $frontendController->home_page();
         }   elseif ($_GET['action'] === 'listPosts') {
             $frontendController->listPosts();
-        }
-
-
-        elseif ($_GET['action'] === 'post') {
+        } elseif ($_GET['action'] === 'post') {
             $frontendController->post();
         } elseif ($_GET['action'] === 'addComment') {
             $frontendController->addComment();
@@ -36,23 +32,22 @@ try {
         } elseif ($_GET['action'] === 'deleteUser') {
             $frontendController->deleteUser();
         } elseif ($_GET['action'] === 'dashboardAdmin') {
-            $backendConroller->displayAllPosts();
+            (new BackendController())->displayAllPosts();
         } elseif ($_GET['action'] === 'createPost') {
-            $backendConroller->addPost();
+            (new BackendController())->addPost();
         } elseif ($_GET['action'] === 'displayComments') {
-            $backendConroller->displayAllComments();
+            (new BackendController())->displayAllComments();
         } elseif ($_GET['action'] === 'deletePost') {
-            $backendConroller->deletePost();
+            (new BackendController())->deletePost();
         } elseif ($_GET['action'] === 'modifyPost') {
-            $backendConroller->modifyPost();
+            (new BackendController())->modifyPost();
         } elseif ($_GET['action'] === 'editPost') {
-            $backendConroller->editPost();
+            (new BackendController())->editPost();
         } elseif ($_GET['action'] === 'validateComment') {
-            $backendConroller->validateComment();
+            (new BackendController())->validateComment();
         } elseif ($_GET['action'] === 'notValidateComment') {
-            $backendConroller->notValidateComment();
+            (new BackendController())->notValidateComment();
         }
-
     } else {
         $frontendController->home_page();
     }

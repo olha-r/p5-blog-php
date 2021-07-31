@@ -34,6 +34,7 @@ while ($data = $posts->fetch()) {
         </div>
     </div>
 
+
     <?php
 }
 $posts->closeCursor();
@@ -41,3 +42,8 @@ $posts->closeCursor();
 <?php $content = ob_get_clean(); ?>
 
 <?php require_once 'template.php'; ?>
+
+<?php unset($_SESSION['error']); ?>
+
+<?php unset($_SESSION['success']); ?>
+
