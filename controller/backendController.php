@@ -1,6 +1,11 @@
 <?php
 
+namespace OC\Blog\Controller;
+
 use OC\Blog\SuperGlobal\SuperGlobals;
+use OC\Blog\Model\BackendCommentManager;
+use OC\Blog\Model\BackendPostManager;
+use OC\Blog\Model\PostManager;
 
 require_once 'SuperGlobal/SuperGlobal.php';
 require_once 'model/BackendPostManager.php';
@@ -21,7 +26,7 @@ class BackendController
             if (isset($get_post['submit'])) {
                 if (isset($get_post['title']) && isset($get_post['fragment']) && isset($get_post['content'])
                     && !empty($get_post['title']) && !empty($get_post['fragment']) && !empty($get_post['content'])) {
-                    $backendPostManager = new OC\Blog_php\Model\BackendPostManager();
+                    $backendPostManager = new BackendPostManager();
                     $added_post = $backendPostManager->addNewPost($get_post['title'], $get_post['fragment'], $get_post['content'], $get_session['admin']['id']);
 
                     if ($added_post == false) {
@@ -42,7 +47,7 @@ class BackendController
         $get_session = $key->get_SESSION();
 
         if (isset($get_session['admin']) && !empty($get_session['admin'])) {
-            $backendPostManager = new OC\Blog_php\Model\BackendPostManager();
+            $backendPostManager = new BackendPostManager();
             $allPosts = $backendPostManager->getAllPosts();
             require_once 'view/backend/backendListPostsView.php';
         } else {
@@ -54,7 +59,7 @@ class BackendController
     function modifyPost()
     {
         if (isset($_GET['id']) && $_GET['id'] > 0) {
-            $postManager = new OC\Blog_php\Model\PostManager();
+            $postManager = new PostManager();
             $post = $postManager->getPost($_GET['id']);
             require_once 'view/backend/editPostView.php';
         } else {
@@ -75,7 +80,7 @@ class BackendController
         $get_get = $get->get_GET();
 
         if (isset($get_post['edit']) && !empty($get_post['edit'])) {
-            $backendPostManager = new OC\Blog_php\Model\BackendPostManager();
+            $backendPostManager = new BackendPostManager();
             $edit = $backendPostManager->editPost(
                                                     $get_post['edit-title'],
                                                     $get_post['edit-content'],
@@ -102,7 +107,7 @@ class BackendController
         $get_post = $post->get_POST();
 
         if (isset($get_post['delete']) && !empty($get_post['delete'])) {
-            $backendPostManager = new OC\Blog_php\Model\BackendPostManager();
+            $backendPostManager = new BackendPostManager();
             $delete = $backendPostManager->deletePost($get_post['id']);
             if ($delete === false) {
                 $get_session['error'] = "Une erreur est survenue. Impossible de supprimer l'article!";
@@ -117,7 +122,7 @@ class BackendController
 
     function displayAllComments()
     {
-        $backendCommentManager = new OC\Blog_php\Model\BackendCommentManager();
+        $backendCommentManager = new BackendCommentManager();
         $all_comments = $backendCommentManager->getAllComments();
         require_once './view/backend/backendCommentsView.php';
     }
@@ -131,7 +136,7 @@ class BackendController
             $get_post = $post->get_POST();
 
             if (isset($get_post['validate']) && !empty($get_post['validate'])) {
-            $backendCommentManager = new OC\Blog_php\Model\BackendCommentManager();
+            $backendCommentManager = new BackendCommentManager();
             $valid_comment = $backendCommentManager->approveComment($get_post['commentId']);
             if ($valid_comment === false) {
                 $get_session['error'] = "Une erreur est survenue. Impossible de valider le commentaire!";
@@ -154,7 +159,7 @@ class BackendController
         $get_post = $post->get_POST();
 
         if (isset($get_post['not_validate']) && !empty($get_post['not_validate'])) {
-            $backendCommentManager = new OC\Blog_php\Model\BackendCommentManager();
+            $backendCommentManager = new BackendCommentManager();
             $not_valid_comment = $backendCommentManager->notApproveComment($get_post['commentId']);
 
             if ($not_valid_comment === false) {

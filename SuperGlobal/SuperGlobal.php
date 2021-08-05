@@ -25,13 +25,11 @@ class SuperGlobals
     public function get_POST($key = null)
     {
         if (null !== $key) {
-            return (isset($this->_POST["$key"])) ? $this->_POST["$key"] : null;
+            return (isset($this->_POST["$key"])) && !empty($this->_SESSION["$key"]) ? $this->_POST["$key"] : null;
         } else {
             return $this->_POST;
         }
     }
-
-
     /**
      * Returns a key from the superglobal,
      * as it was at the time of instantiation.
@@ -42,7 +40,7 @@ class SuperGlobals
     public function get_GET($key = null)
     {
         if (null !== $key) {
-            return (isset($this->_GET["$key"])) ? $this->_GET["$key"] : null;
+            return (isset($this->_GET["$key"])) && !empty($this->_SESSION["$key"]) ? $this->_GET["$key"] : null;
         } else {
             return $this->_GET;
         }
@@ -57,7 +55,7 @@ class SuperGlobals
     public function get_SESSION($key = null)
     {
         if (null !== $key) {
-            return (isset($this->_SESSION["$key"])) ? $this->_SESSION["$key"] : null;
+            return (isset($this->_SESSION["$key"])) && !empty($this->_SESSION["$key"]) ? $this->_SESSION["$key"] : null;
         } else {
             return $this->_SESSION;
         }
@@ -71,7 +69,6 @@ class SuperGlobals
      */
     private function define_superglobals()
     {
-
         // Store a local copy of the PHP superglobals
         // This should avoid dealing with the global scope directly
         // $this->_SERVER = $_SERVER;
@@ -89,8 +86,8 @@ class SuperGlobals
      */
     public function unset_superglobals()
     {
-        unset($_POST);
-        unset($_GET);
-        unset($_SESSION);
+        unset($this->_POST);
+        unset($this->_GET);
+        unset($this->_SESSION);
     }
 }

@@ -1,12 +1,12 @@
 <?php
 
-namespace OC\Blog_php\Model;
+namespace OC\Blog\Model;
 
-use Olha\Blog\Model\Manager;
+use OC\Blog\Model\ManagerPDO;
 
-require_once 'model/Manager.php';
+require_once 'model/ManagerPDO.php';
 
-class CommentManager extends Manager
+class CommentManager extends ManagerPDO
 {
 
     public function getComments($postId)

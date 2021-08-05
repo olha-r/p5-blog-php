@@ -1,5 +1,9 @@
 <?php
 session_start();
+
+use OC\Blog\Controller\BackendController;
+use OC\Blog\Controller\FrontendController;
+
 require_once 'controller/frontendController.php';
 require_once 'controller/backendController.php';
 $frontendController = new FrontendController();
