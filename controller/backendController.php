@@ -1,48 +1,52 @@
 <?php
 
+use OC\Blog\SuperGlobal\SuperGlobals;
+
+require_once 'SuperGlobal/SuperGlobal.php';
 require_once 'model/BackendPostManager.php';
 require_once 'model/PostManager.php';
 require_once 'model/BackendCommentManager.php';
 
 class BackendController
 {
-
     function addPost()
     {
-        if (isset($_SESSION['admin']) && !empty($_SESSION['admin'])) {
-            if (isset($_POST['submit'])) {
-                if (isset($_POST['title']) && isset($_POST['fragment']) && isset($_POST['content'])
-                    && !empty($_POST['title']) && !empty($_POST['fragment']) && !empty($_POST['content'])) {
+        $key = new SuperGlobals();
+        $get_session = $key->get_SESSION();
+
+        $post = new SuperGlobals();
+        $get_post = $post->get_POST();
+
+        if (isset($get_session['admin']) && !empty($get_session['admin'])) {
+            if (isset($get_post['submit'])) {
+                if (isset($get_post['title']) && isset($get_post['fragment']) && isset($get_post['content'])
+                    && !empty($get_post['title']) && !empty($get_post['fragment']) && !empty($get_post['content'])) {
                     $backendPostManager = new OC\Blog_php\Model\BackendPostManager();
-                    $added_post = $backendPostManager->addNewPost($_POST['title'], $_POST['fragment'], $_POST['content'], $_SESSION['admin']['id']);
+                    $added_post = $backendPostManager->addNewPost($get_post['title'], $get_post['fragment'], $get_post['content'], $get_session['admin']['id']);
 
-                    if ($added_post === false) {
-                        $_SESSION['error'] = "Une erreur est survenue. Impossible d'enregistrer l'article.!";
+                    if ($added_post == false) {
+                        $get_session['error'] = "Une erreur est survenue. Impossible d'enregistrer l'article.!";
                         header('Location: index.php?action=createPost');
-                    } else {
-                        $_SESSION['success'] = "Votre article est ajouté.";
-                        header('Location: index.php?action=dashboardAdmin');
                     }
-                } else {
-                    require_once './view/backend/createPostView.php';
+                    $get_session['success'] = "Votre article est ajouté.";
+                    header('Location: index.php?action=dashboardAdmin');
                 }
-            } else {
-                require_once './view/backend/createPostView.php';
             }
-        } else {
-            require_once './view/backend/createPostView.php';
         }
-
+        require_once './view/backend/createPostView.php';
     }
 
     function displayAllPosts()
     {
-        if (isset($_SESSION['admin']) && !empty($_SESSION['admin'])) {
+        $key = new SuperGlobals();
+        $get_session = $key->get_SESSION();
+
+        if (isset($get_session['admin']) && !empty($get_session['admin'])) {
             $backendPostManager = new OC\Blog_php\Model\BackendPostManager();
             $allPosts = $backendPostManager->getAllPosts();
-            require_once 'view/backend/backendListPostView.php';
+            require_once 'view/backend/backendListPostsView.php';
         } else {
-            $_SESSION['error'] = "Vous n'avez pas le droit !";
+            $get_session['error'] = "Vous n'avez pas le droit !";
             header('Location: index.php?action=homePage');
         }
     }
@@ -61,83 +65,108 @@ class BackendController
 
     function editPost()
     {
+        $key = new SuperGlobals();
+        $get_session = $key->get_SESSION();
 
-        if (isset($_POST['edit']) && !empty($_POST['edit'])) {
+        $post = new SuperGlobals();
+        $get_post = $post->get_POST();
+
+        $get = new SuperGlobals();
+        $get_get = $get->get_GET();
+
+        if (isset($get_post['edit']) && !empty($get_post['edit'])) {
             $backendPostManager = new OC\Blog_php\Model\BackendPostManager();
-            $edit = $backendPostManager->editPost($_POST['edit-title'], $_POST['edit-content'], $_GET['id']);
-            if ($edit === false) {
-                $_SESSION['error'] = "Une erreur est survenue. Impossible de mofifier l'article !";
+            $edit = $backendPostManager->editPost(
+                                                    $get_post['edit-title'],
+                                                    $get_post['edit-content'],
+                                                    $get_get['id']);
+            if ($edit == false) {
+                $get_session['error'] = "Une erreur est survenue. Impossible de mofifier l'article !";
                 header('Location: index.php?action=dashboardAdmin');
             } else {
-                $_SESSION['success'] = "Votre article est modifié !";
+                $get_session['success'] = "Votre article est modifié !";
                 header('Location: index.php?action=dashboardAdmin');
             }
-
         } else {
-            $_SESSION['error'] = "Aucun identifiant de billet envoyé !";
+            $get_session['error'] = "Aucun identifiant de billet envoyé !";
             header('Location: index.php?action=editPost');
         }
     }
 
     function deletePost()
     {
-        if (isset($_POST['delete']) && !empty($_POST['delete'])) {
+        $key = new SuperGlobals();
+        $get_session = $key->get_SESSION();
+
+        $post = new SuperGlobals();
+        $get_post = $post->get_POST();
+
+        if (isset($get_post['delete']) && !empty($get_post['delete'])) {
             $backendPostManager = new OC\Blog_php\Model\BackendPostManager();
-            $delete = $backendPostManager->deletePost($_POST['id']);
+            $delete = $backendPostManager->deletePost($get_post['id']);
             if ($delete === false) {
-                $_SESSION['error'] = "Une erreur est survenue. Impossible de supprimer l'article!";
+                $get_session['error'] = "Une erreur est survenue. Impossible de supprimer l'article!";
                 header('Location: index.php?action=dashboardAdmin');
             } else {
-                $_SESSION['success'] = "Votre article est supprimé.";
+                $get_session['success'] = "Votre article est supprimé.";
                 header('Location: index.php?action=dashboardAdmin');
             }
-        } else {
-            require_once './view/backend/backendListPostsView.php';
         }
+            require_once './view/backend/backendListPostsView.php';
     }
 
     function displayAllComments()
     {
         $backendCommentManager = new OC\Blog_php\Model\BackendCommentManager();
         $all_comments = $backendCommentManager->getAllComments();
-
         require_once './view/backend/backendCommentsView.php';
     }
 
     function validateComment()
     {
-        if (isset($_POST['validate']) && !empty($_POST['validate'])) {
+            $key = new SuperGlobals();
+            $get_session = $key->get_SESSION();
+
+            $post = new SuperGlobals();
+            $get_post = $post->get_POST();
+
+            if (isset($get_post['validate']) && !empty($get_post['validate'])) {
             $backendCommentManager = new OC\Blog_php\Model\BackendCommentManager();
-            $valid_comment = $backendCommentManager->approveComment($_POST['commentId']);
+            $valid_comment = $backendCommentManager->approveComment($get_post['commentId']);
             if ($valid_comment === false) {
-                $_SESSION['error'] = "Une erreur est survenue. Impossible de valider le commentaire!";
+                $get_session['error'] = "Une erreur est survenue. Impossible de valider le commentaire!";
                 header('Location: index.php?action=displayComments');
             } else {
-                $_SESSION['success'] = "Le commentaire est validé et publié.";
+                $get_session['success'] = "Le commentaire est validé et publié.";
                 header('Location: index.php?action=displayComments');
             }
-        } else {
-            require_once './view/backend/backendCommentsView.php';
         }
+            require_once './view/backend/backendCommentsView.php';
 
     }
 
     function notValidateComment()
     {
-        if (isset($_POST['not_validate']) && !empty($_POST['not_validate'])) {
+        $key = new SuperGlobals();
+        $get_session = $key->get_SESSION();
+
+        $post = new SuperGlobals();
+        $get_post = $post->get_POST();
+
+        if (isset($get_post['not_validate']) && !empty($get_post['not_validate'])) {
             $backendCommentManager = new OC\Blog_php\Model\BackendCommentManager();
-            $not_valid_comment = $backendCommentManager->notApproveComment($_POST['commentId']);
+            $not_valid_comment = $backendCommentManager->notApproveComment($get_post['commentId']);
 
             if ($not_valid_comment === false) {
-                $_SESSION['error'] = "Une erreur est survenue. Impossible de supprimer le commentaire!";
+                $get_session['error'] = "Une erreur est survenue. Impossible de supprimer le commentaire!";
                 header('Location: index.php?action=displayComments');
             } else {
-                $_SESSION['success'] = "Le commentaire est supprimé.";
+                $get_session['success'] = "Le commentaire est supprimé.";
                 header('Location: index.php?action=displayComments');
             }
-        } else {
-            require_once './view/backend/backendCommentsView.php';
         }
+            require_once './view/backend/backendCommentsView.php';
     }
 
 }
+
