@@ -36,19 +36,16 @@ unset($_SESSION['error']);
         <form method="post" action="index.php?action=createPost" class="center mb-3">
             <div class="form-group">
                 <h4>Titre de l'article</h4>
-                <input type="text" class="form-control" name="title" required rows="1" cols="30"
-                       value="<?php if (isset($_POST['title'])) {
-                           echo $_POST['title'];
-                       } ?> ">
+                <input type="text" class="form-control" name="title" required>
             </div>
             <div class="form-group">
                 <h4>Extrait de l'article</h4>
-                <textarea type="text" class="form-control" name="fragment" required rows="5"
+                <textarea class="form-control" name="fragment" required rows="5"
                           cols="30" placeholder="Décrivez votre extrait"></textarea>
             </div>
             <div class="form-group">
                 <h4>Contenu de l'article</h4>
-                <textarea id="editor" type="text" class="form-control" name="content" required rows="20"
+                <textarea id="editor" class="form-control" name="content" required rows="20"
                           cols="30" placeholder="Décrivez votre article"></textarea>
             </div>
     </div>

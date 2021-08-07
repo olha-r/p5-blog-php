@@ -1,12 +1,11 @@
 <?php
 
-namespace OC\Blog_php\Model;
+namespace OC\Blog\Model;
 
-use Olha\Blog\Model\Manager;
+use OC\Blog\Model\ManagerPDO;
+require_once 'model/ManagerPDO.php';
 
-require_once 'model/Manager.php';
-
-class UsersManager extends Manager
+class UsersManager extends ManagerPDO
 {
 
     public function checkIfUserExist($pseudo)

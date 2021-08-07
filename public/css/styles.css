@@ -12,7 +12,8 @@ h1 {
   line-height: 100px;
 }
 
-h2, h3 {
+h2,
+h3 {
   font-family: 'Playfair Display 400', 'Georgia', serif;
   font-size: 2.5rem;
 }
@@ -28,7 +29,8 @@ p {
     font-size: 2rem;
   }
 
-  h2, h3 {
+  h2,
+  h3 {
     font-size: 1.8rem;
   }
 
@@ -37,7 +39,6 @@ p {
   }
 }
 
-
 /* Navigation section */
 .navbar {
   font-family: 'Playfair Display 400', 'Georgia', serif;
@@ -45,7 +46,8 @@ p {
   font-size: 1.2rem;
 }
 
-.navbar li, a {
+.navbar li,
+a {
   padding: 5px;
 }
 
@@ -63,7 +65,8 @@ p {
 }
 
 @media (max-width: 1000px) {
-  .navbar li, .navbar a {
+  .navbar li,
+  .navbar a {
     font-size: 16px;
     padding: 2px;
   }
@@ -145,7 +148,6 @@ div {
   color: #18446e;
 }
 
-
 /* Home page */
 .jumbotron {
   background-color: #eee;
@@ -205,15 +207,6 @@ img {
   border-color: #337ab7;
 }
 
-#btn-user-comment:hover,
-#btn-posts:hover,
-#btn-admin-posts:hover,
-#btn-validate-comment:hover,
-#btn-create-post:hover {
-  background-color: #18446e;
-  border-color: #18446e;
-}
-
 .btn-secondary {
   width: 280px;
   text-align: left;
@@ -228,7 +221,6 @@ img {
   margin-bottom: 20px;
 }
 
-
 #del-user,
 #edit-user-info,
 #edit-password,
@@ -242,15 +234,24 @@ img {
   margin-bottom: 5px;
 }
 
-@media (max-width: 1000px) {
-  #post-content .btn {
-    margin-top: 10px;
-  }
+#btn-user-comment:hover,
+#btn-posts:hover,
+#btn-admin-posts:hover,
+#btn-validate-comment:hover,
+#btn-create-post:hover {
+  background-color: #18446e;
+  border-color: #18446e;
+}
 
+@media (max-width: 1000px) {
   .btn {
     font-size: 16px;
     margin-bottom: 10px;
     justify-content: center;
+  }
+
+  #post-content .btn {
+    margin-top: 10px;
   }
 
   .btn-secondary {
@@ -259,7 +260,6 @@ img {
 }
 
 /* User Pages */
-
 #post-content,
 #post-view,
 #contact-form,
@@ -353,7 +353,6 @@ img {
 #btn-edit-post {
   margin-bottom: 30px;
 }
-
 
 /* Post Create View */
 #post-create {

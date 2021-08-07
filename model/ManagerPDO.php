@@ -1,8 +1,8 @@
 <?php
 
-namespace Olha\Blog\Model;
+namespace OC\Blog\Model;
 
-class Manager
+class ManagerPDO
 {
 
     protected function dbConnect()
