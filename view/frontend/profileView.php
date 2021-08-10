@@ -6,12 +6,14 @@
 <?php if (isset($_SESSION['success']) && !empty($_SESSION['success'])) : ?>
     <div class="alert alert-success"><?= $_SESSION['success']; ?></div>
 <?php endif; ?>
+<?php if (isset($_SESSION['error']) && !empty($_SESSION['error'])) : ?>
+    <div class="alert alert-danger"><?= $_SESSION['error']; ?></div>
+<?php endif; ?>
+
 
 <?php
 if (isset($_SESSION['member'])) : ?>
     <h1 class="display-2 text-white"> Bonjour, <?= htmlspecialchars($_SESSION['member']['user_name']) ?></h1>
-<?php elseif (isset($_SESSION['admin'])) : ?>
-    <h1 class="display-2 text-white"> Bonjour, <?= htmlspecialchars($_SESSION['admin']['user_name']) ?></h1>
 <?php endif; ?>
 
 <div class="container-fluid">
@@ -85,12 +87,14 @@ if (isset($_SESSION['member'])) : ?>
                 Mes commentaires
             </h3>
             <hr>
-            <?php
-            while ($comment = $user_comments->fetch()) {
-                ?>
-                <p><strong><?= htmlspecialchars($comment['user_name']) ?></strong>
-                    le <?= $comment['comment_date_fr'] ?>
-                </p>
+            <?php while ($comment = $user_comments->fetch()) : ?>
+
+                <p><?= $comment['comment_date_fr'] ?></p>
+                <?php if ($comment['is_approved'] == 1) : ?>
+                    <p style="color: #18446e">Commentaire est publié.</p>
+                <?php else : ?>
+                    <p style="color: #d54c4c">Commentaire n'est pas encore validé.</p>
+                <?php endif; ?>
                 <p><?= nl2br(htmlspecialchars($comment['comment'])) ?></p>
                 <form action="index.php?action=deleteUserComment" method="POST">
                     <input type="hidden" value="<?= $comment['id_comment']; ?>" name="commentUserId">
@@ -98,9 +102,7 @@ if (isset($_SESSION['member'])) : ?>
                            class="btn btn-danger" id="del-user-comment">
                 </form>
                 <hr>
-                <?php
-            }
-            ?>
+            <?php endwhile; ?>
         </div>
     </div>
 </div>

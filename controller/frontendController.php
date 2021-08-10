@@ -2,44 +2,20 @@
 
 namespace OC\Blog\Controller;
 // Chargement des classes
-use OC\Blog\SuperGlobal\SuperGlobals;
+use OC\Blog\Core\SuperGlobals;
 use OC\Blog\Model\PostManager;
 use OC\Blog\Model\CommentManager;
 use OC\Blog\Model\UsersManager;
 use OC\Blog\Model\PaginationManager;
 
-require_once 'SuperGlobal/SuperGlobal.php';
+require_once 'core/SuperGlobal.php';
 require_once 'model/PostManager.php';
 require_once 'model/CommentManager.php';
 require_once 'model/UsersManager.php';
-require_once 'model/PaginationManager.php';
 
 class FrontendController
 {
     //POST FUNCTIONS
-
-    public function paginate()
-    {
-        if (isset($_GET['page'])) {
-            if ($_GET['page'] < 100) {
-                $page = (int)$_GET['page'];
-            }
-                header('Location:index.php');
-        } else {
-            $page = 1;
-        }
-        $nb_posts_per_page = 5;
-        $paginateManager = new PaginationManager();
-        $nb_posts = $paginateManager->count_posts();
-        $nb_pages = ceil($nb_posts / $nb_posts_per_page);
-        $firstPostToDisplay = ($page - 1) * $nb_posts_per_page;
-
-        $paginateManager = new PaginationManager();
-        $posts = $paginateManager->getPosts($firstPostToDisplay, $nb_posts_per_page);
-
-        require_once 'view/frontend/allPosts.php';
-    }
-
 
     public function listPosts()
     {
@@ -50,13 +26,10 @@ class FrontendController
 
     public function post()
     {
-        $key = new SuperGlobals();
-        $get_session = $key->get_SESSION();
-
         $get = new SuperGlobals();
         $get_get = $get->get_GET();
 
-        if (isset($get_get['id']) && $get_get['id'] > 0) {
+        if (isset($get_get['id']) && !empty($get_get['id']) && $get_get['id'] > 0) {
             $postManager = new PostManager();
             $commentManager = new CommentManager();
 
@@ -65,7 +38,8 @@ class FrontendController
 
             require_once 'view/frontend/postView.php';
         } else {
-            $get_session['error'] = "Aucun identifiant de billet envoyé !";
+            header('Location: index.php?action=homePage');
+            $_SESSION['error'] = "Aucun identifiant de billet envoyé !";
         }
     }
 
@@ -73,46 +47,40 @@ class FrontendController
 
     public function addComment()
     {
-        $key = new SuperGlobals();
-        $get_session = $key->get_SESSION();
-
         $post = new SuperGlobals();
         $get_post = $post->get_POST();
 
         $get = new SuperGlobals();
         $get_get = $get->get_GET();
 
-        if (isset($get_get['id']) && $get_get['id'] > 0) {
+        if (isset($get_get['id']) && !empty($get_get['id']) && $get_get['id'] > 0) {
             if (!empty($get_post['comment'])) {
                 $commentManager = new CommentManager();
                 $comments = $commentManager->postComment($get_get['id'], $_SESSION['member']['id'], $get_post['comment']);
                 if ($comments === false) {
-                    $get_session['error'] = "Impossible d'ajouter le commentaire !";
+                    $_SESSION['error'] = "Impossible d'ajouter le commentaire !";
                     header('Location: index.php?action=post&id=' . $get_get['id']);
                 } else {
-                   $get_session['success'] = "Votre commentaire est publié.";
                     header('Location: index.php?action=post&id=' . $get_get['id']);
-
+                    $_SESSION['success'] = "Votre commentaire sera publié après la vadidation.";
                 }
             } else {
-                $get_session['error'] = "Tous les champs ne sont pas remplis !";
                 header('Location: index.php?action=post&id=' . $get_get['id']);
+                $_SESSION['error'] = "Tous les champs ne sont pas remplis !";
             }
         } else {
-            $get_session['error'] = "Aucun identifiant de billet envoyé";
+            header('Location: index.php?action=post&id=' . $get_get['id']);
+            $_SESSION['error'] = "Aucun identifiant de billet envoyé";
         }
     }
 
     public function contactMail()
     {
-        $key = new SuperGlobals();
-        $get_session = $key->get_SESSION();
-
         $post = new SuperGlobals();
         $get_post = $post->get_POST();
 
         if (isset($get_post['submit']) && !empty($get_post['submit'])) {
-            $to = "ole4ka.safonova@gmail.com";
+            $send_to = "ole4ka.safonova@gmail.com";
             $from = $get_post['email'];
             $name = $get_post['name'];
             $subject = "Message de blog";
@@ -132,9 +100,9 @@ class FrontendController
 
             $headers = "De:" . $from;
 
-            mail($to, $subject, $message, $headers);
+            mail($send_to, $subject, $message, $headers);
 
-            $get_session['success'] = "Merci pour ton message, il a bien été envoyé.";
+            $_SESSION['success'] = "Merci pour ton message, il a bien été envoyé.";
             header('Location: index.php?action=contactUs');
         } else {
             require_once 'view/frontend/contactMailView.php';
@@ -151,14 +119,14 @@ class FrontendController
         if (isset($get_session['member']['id']) && $get_session['member']['id'] > 0) {
             $userManager = new UsersManager();
 
-            $user_info = $userManager->getUser($get_session['member']['id']);
+            $user_info = $userManager->getUser();
             $frontendController = new CommentManager();
             $user_comments = $frontendController->getUserComments($get_session['member']['id']);
 
             require_once 'view/frontend/profileView.php';
         } else {
-            $get_session['error'] = "Aucun user identifiant envoyé !";
             header('Location: index.php?dashboard');
+            $_SESSION['error'] = "Aucun user identifiant envoyé !";
         }
     }
 
@@ -206,14 +174,15 @@ class FrontendController
             $added_user = $newUser->insertNewUser($get_post['new_user_name'], $new_password, $get_post['new_email'], "member");
 
             if ($added_user === false) {
-                $get_session['error'] = "Une erreur est survenue lors de l\'enregistrement";
                 header('Location: index.php?action=signUp');
+                $_SESSION['error'] = "Une erreur est survenue lors de l\'enregistrement";
                 /*throw new Exception('Une erreur est survenue lors de l\'enregistrement');*/
             } else {
-                $get_session['member'] = array('id' => $added_user,
+                $_SESSION['member'] = array('id' => $added_user,
                     'user_name' => $get_post['new_user_name']);
-                $get_session['success'] = 'Votre compte est créé, ' . $get_post['new_user_name'] . ' !';
                 header('Location: index.php?action=dashboard');
+                $_SESSION['success'] = 'Votre compte est créé, ' . $get_post['new_user_name'] . ' !';
+
             }
         } else {
             require_once 'view/frontend/signUpView.php';
@@ -222,12 +191,9 @@ class FrontendController
 
     public function login_user()
     {
-
         if (isset($_POST['user_name']) && isset($_POST['password'])
             && !empty($_POST['user_name']) && !empty($_POST['password'])
         ) {
-            /* strip_tags($_POST['user_name']),
-                 strip_tags($_POST['password'])*/
             $loginManager = new UsersManager();
             $resultat = $loginManager->signIn();
 
@@ -238,16 +204,12 @@ class FrontendController
                 $isPasswordCorrect = password_verify($_POST['password'], $resultat['password']);
                 if ($isPasswordCorrect) {
                     if ($resultat['role'] == 'admin') {
-                        // $_SESSION['id'] = $resultat['id'];
-                        // $_SESSION['admin'] = $_POST['user_name'];
                         $_SESSION['admin'] = array('id' => $resultat['id'], 'email' => $resultat['email'],
                             'user_name' => $_POST['user_name']);
                         $_SESSION['success'] = 'Bienvenue, ' . $_POST['user_name'] . '!';
 
                         header('Location: index.php?action=dashboardAdmin');
                     } else {
-                        // $_SESSION['id'] = $resultat['id'];
-                        // $_SESSION['member'] = $_POST['user_name'];
                         $_SESSION['member'] = array('id' => $resultat['id'], 'email' => $resultat['email'],
                             'user_name' => $_POST['user_name']);
                         $_SESSION['success'] = 'Vous êtes connecté ! ';
@@ -259,18 +221,13 @@ class FrontendController
                 }
             }
         } else {
-            //$_SESSION['error'] = "Tous les champs ne sont pas remplis !";
             require_once 'view/frontend/loginView.php';
         }
     }
 
     public function logout()
     {
-
-        $key = new SuperGlobals();
-        $get_session = $key->get_SESSION();
-
-        $get_session = array();
+        $_SESSION = array();
         session_destroy();
         header('Location: index.php?action=homePage');
     }
@@ -283,15 +240,8 @@ class FrontendController
 
     public function updateUserInfo()
     {
-
-        $key = new SuperGlobals();
-        $get_session = $key->get_SESSION();
-
         $post = new SuperGlobals();
         $get_post = $post->get_POST();
-
-        $get = new SuperGlobals();
-        $get_get = $get->get_GET();
 
         if (isset($get_post['edit-user-info']) && !empty($get_post['edit-user-info'])) {
             $frontendController = new UsersManager();
@@ -312,42 +262,39 @@ class FrontendController
 
     public function updateUserPassword()
     {
-        if (isset($_POST['update-password']) && !empty($_POST['update-password'])) {
-            $frontendController = new UsersManager();
-            $resultat = $frontendController->getUser($_GET['id']);
+        $post = new SuperGlobals();
+        $get_post = $post->get_POST();
 
-            if (!$resultat) {
-                $_SESSION['error'] = 'Mauvais mot de passe !';
+        if (isset($get_post['update-password']) && !empty($get_post['update-password'])) {
+            if ($get_post['edit-password-first'] !== $get_post['edit-password-second']) {
+                $_SESSION['error'] = 'Les mots de passe ne sont pas identiques !';
                 header('Location: index.php?action=dashboard');
             } else {
-                $isPasswordIdentic = password_verify($_POST['edit-password-first'], $resultat['password']);
-                if (!$isPasswordIdentic) {
-                    $_SESSION['error'] = 'Les mots de passe ne sont pas identiques !';
+                $frontendController = new UsersManager();
+                $edited_password = password_hash($get_post['edit-password-first'], PASSWORD_DEFAULT);
+                $edit_password = $frontendController->update_password($edited_password, $_GET['id']);
+                if ($edit_password === false) {
+                    $_SESSION['error'] = "Une erreur est survenue. Impossible de mofifier mot de passe !";
                     header('Location: index.php?action=dashboard');
                 } else {
-                    $frontendController = new UsersManager();
-                    $edited_password = password_hash($_POST['edit-password-first'], PASSWORD_DEFAULT);
-                    $edit_password = $frontendController->update_password($edited_password, $_GET['id']);
-                    if ($edit_password === false) {
-                        $_SESSION['error'] = "Une erreur est survenue. Impossible de mofifier mot de passe !";
-                        header('Location: index.php?action=dashboard');
-                    } else {
-                        $_SESSION['success'] = "Vos mot de passe été modifiés !";
-                        header('Location: index.php?action=dashboard');
-                    }
+                    $_SESSION['success'] = "Votre mot de passe a été modifiés !";
+                    header('Location: index.php?action=dashboard');
                 }
             }
         } else {
-            $_SESSION['error'] = "Aucun mot de passe envoyé !";
             header('Location: index.php?action=dashboard');
+            $_SESSION['error'] = "Aucun mot de passe envoyé !";
         }
     }
 
     function deleteUserComment()
     {
-        if (isset($_POST['delete_user_comment']) && !empty($_POST['delete_user_comment'])) {
+        $post = new SuperGlobals();
+        $get_post = $post->get_POST();
+
+        if (isset($get_post['delete_user_comment']) && !empty($get_post['delete_user_comment'])) {
             $commentManager = new CommentManager();
-            $deleted_comment = $commentManager->deleteUserComment($_POST['commentUserId']);
+            $deleted_comment = $commentManager->deleteUserComment($get_post['commentUserId']);
 
             if ($deleted_comment === false) {
                 $_SESSION['error'] = "Une erreur est survenue. Impossible de supprimer le commentaire!";
@@ -363,7 +310,10 @@ class FrontendController
 
     function deleteUser()
     {
-        if (isset($_POST['delete_user']) && !empty($_POST['delete_user'])) {
+        $post = new SuperGlobals();
+        $get_post = $post->get_POST();
+
+        if (isset($get_post['delete_user']) && !empty($get_post['delete_user'])) {
             $userManager = new UsersManager();
             $deleted_user = $userManager->delete_user($_SESSION['member']['id']);
 

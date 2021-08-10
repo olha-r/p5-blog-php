@@ -11,8 +11,8 @@ class BackendCommentManager extends ManagerPDO
 
     public function getAllComments()
     {
-        $db = $this->dbConnect();
-        $all_comments = $db->query('
+        $db_connect = $this->dbConnect();
+        $all_comments = $db_connect->query('
                             SELECT *, DATE_FORMAT(comment_date, \'%d/%m/%Y à %Hh%imin%ss\') AS comment_date_fr
                             FROM comments
                             LEFT JOIN users on users.id = comments.author_comment
@@ -20,14 +20,13 @@ class BackendCommentManager extends ManagerPDO
                             ORDER BY comment_date 
                             DESC
                             ');
-
         return $all_comments;
     }
 
     public function notApproveComment($commentId)
     {
-        $db = $this->dbConnect();
-        $not_approved_comment = $db->prepare('
+        $db_connect = $this->dbConnect();
+        $not_approved_comment = $db_connect->prepare('
                                             DELETE FROM comments
                                             WHERE id_comment=?
                                             ');
@@ -37,8 +36,8 @@ class BackendCommentManager extends ManagerPDO
 
     public function approveComment($commentId)
     {
-        $db = $this->dbConnect();
-        $approved_comment = $db->prepare('
+        $db_connect = $this->dbConnect();
+        $approved_comment = $db_connect->prepare('
                                         UPDATE comments SET is_approved=1
                                         WHERE id_comment=?
                                         ');

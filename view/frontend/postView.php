@@ -2,6 +2,13 @@
 
 <?php ob_start(); ?>
 
+<?php if (isset($_SESSION['success']) && !empty($_SESSION['success'])) : ?>
+    <div class="alert alert-success"><?= $_SESSION['success']; ?></div>
+<?php endif; ?>
+<?php if (isset($_SESSION['error']) && !empty($_SESSION['error'])) : ?>
+    <div class="alert alert-danger"><?= $_SESSION['error']; ?></div>
+<?php endif; ?>
+
 <div class="row">
     <div class="col-lg-12">
         <a href="index.php?action=listPosts" class="btn btn-secondary">
@@ -46,16 +53,12 @@
             Commentaires
         </h3>
         <hr>
-        <?php
-        while ($comment = $comments->fetch()) {
-            ?>
+        <?php while ($comment = $comments->fetch()) : ?>
             <p><strong><?= htmlspecialchars($comment['user_name']) ?></strong> le <?= $comment['comment_date_fr'] ?>
             </p>
             <p><?= nl2br(htmlspecialchars($comment['comment'])) ?></p>
             <hr>
-            <?php
-        }
-        ?>
+        <?php endwhile; ?>
     </div>
 </div>
 

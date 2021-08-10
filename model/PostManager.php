@@ -11,9 +11,9 @@ class PostManager extends ManagerPDO
 
     public function getPosts()
     {
-        $db = $this->dbConnect();
+        $db_connect = $this->dbConnect();
 
-        $req = $db->query('
+        $req = $db_connect->query('
                     SELECT *, DATE_FORMAT(creation_date, \'%d/%m/%Y à %Hh%imin%ss\') AS creation_date_fr
                     FROM posts
                     ORDER BY creation_date
@@ -27,8 +27,8 @@ class PostManager extends ManagerPDO
 
     public function getPost($postId)
     {
-        $db = $this->dbConnect();
-        $req = $db->prepare('
+        $db_connect = $this->dbConnect();
+        $req = $db_connect->prepare('
                     SELECT *, posts.id AS postId, DATE_FORMAT(posts.creation_date, \'%d/%m/%Y à %Hh%imin%ss\') AS creation_date_fr
                     FROM posts
                     LEFT JOIN users on users.id = posts.author_post
@@ -40,6 +40,4 @@ class PostManager extends ManagerPDO
 
         return $post;
     }
-
-
 }

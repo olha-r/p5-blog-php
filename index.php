@@ -7,49 +7,53 @@ use OC\Blog\Controller\FrontendController;
 require_once 'controller/frontendController.php';
 require_once 'controller/backendController.php';
 $frontendController = new FrontendController();
+if (isset($_GET['p'])) {
+    $page = $_GET['p'];
+}
 try {
-    if (isset($_GET['action'])) {
-        if ($_GET['action'] === 'homePage') {
+    if (isset($_GET['action']) && !empty($_GET['action'])) {
+        $page = $_GET['action'];
+        if ($page === 'homePage') {
             $frontendController->home_page();
-        }   elseif ($_GET['action'] === 'listPosts') {
+        }   elseif ($page === 'listPosts') {
             $frontendController->listPosts();
-        } elseif ($_GET['action'] === 'post') {
+        } elseif ($page === 'post') {
             $frontendController->post();
-        } elseif ($_GET['action'] === 'addComment') {
+        } elseif ($page === 'addComment') {
             $frontendController->addComment();
-        } elseif ($_GET['action'] === 'contactUs') {
+        } elseif ($page === 'contactUs') {
             $frontendController->contactMail();
-        } elseif ($_GET['action'] === 'signUp') {
+        } elseif ($page === 'signUp') {
             $frontendController->addNewUser();
-        } elseif ($_GET['action'] === 'signIn') {
+        } elseif ($page === 'signIn') {
             $frontendController->login_user();
-        } elseif ($_GET['action'] === 'dashboard') {
+        } elseif ($page === 'dashboard') {
             $frontendController->user_dashboard();
-        } elseif ($_GET['action'] === 'logout') {
+        } elseif ($page === 'logout') {
             $frontendController->logout();
-        } elseif ($_GET['action'] === 'editUser') {
+        } elseif ($page === 'editUser') {
             $frontendController->updateUserInfo();
-        } elseif ($_GET['action'] === 'editPassword') {
+        } elseif ($page === 'editPassword') {
             $frontendController->updateUserPassword();
-        } elseif ($_GET['action'] === 'deleteUserComment') {
+        } elseif ($page === 'deleteUserComment') {
             $frontendController->deleteUserComment();
-        } elseif ($_GET['action'] === 'deleteUser') {
+        } elseif ($page === 'deleteUser') {
             $frontendController->deleteUser();
-        } elseif ($_GET['action'] === 'dashboardAdmin') {
+        } elseif ($page === 'dashboardAdmin') {
             (new BackendController())->displayAllPosts();
-        } elseif ($_GET['action'] === 'createPost') {
+        } elseif ($page === 'createPost') {
             (new BackendController())->addPost();
-        } elseif ($_GET['action'] === 'displayComments') {
+        } elseif ($page === 'displayComments') {
             (new BackendController())->displayAllComments();
-        } elseif ($_GET['action'] === 'deletePost') {
+        } elseif ($page === 'deletePost') {
             (new BackendController())->deletePost();
-        } elseif ($_GET['action'] === 'modifyPost') {
+        } elseif ($page === 'modifyPost') {
             (new BackendController())->modifyPost();
-        } elseif ($_GET['action'] === 'editPost') {
+        } elseif ($page === 'editPost') {
             (new BackendController())->editPost();
-        } elseif ($_GET['action'] === 'validateComment') {
+        } elseif ($page === 'validateComment') {
             (new BackendController())->validateComment();
-        } elseif ($_GET['action'] === 'notValidateComment') {
+        } elseif ($page === 'notValidateComment') {
             (new BackendController())->notValidateComment();
         }
     } else {

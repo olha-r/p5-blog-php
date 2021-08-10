@@ -1,24 +1,13 @@
 <?php $title = "Administration du blog"; ?>
 <?php $nav = "admin-posts"; ?>
 <?php ob_start(); ?>
-<?php
-if (isset($_SESSION['success'])) {
-    ?>
-    <div class="alert alert-success">
-        <?php echo $_SESSION['success']; ?>
-    </div>
-    <?php
-}
-unset($_SESSION['success']);
-if (isset($_SESSION['error'])) {
-    ?>
-    <div class="alert alert-danger">
-        <?php echo $_SESSION['error']; ?>
-    </div>
-    <?php
-}
-unset($_SESSION['error']);
-?>
+
+<?php if (isset($_SESSION['success']) && !empty($_SESSION['success'])) : ?>
+    <div class="alert alert-success"><?= $_SESSION['success']; ?></div>
+<?php endif; ?>
+<?php if (isset($_SESSION['error']) && !empty($_SESSION['error'])) : ?>
+    <div class="alert alert-danger"><?= $_SESSION['error']; ?></div>
+<?php endif; ?>
 
 <div class="row justify-content-center" id="dashboard-admin">
     <div class="col-sm-11 col-lg-6">
