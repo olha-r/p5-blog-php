@@ -5,8 +5,7 @@
 
 
 <?php
-while ($data = $posts->fetch()) {
-    $id = (int)$data['id']; ?>
+while ($data = $posts->fetch()) : ?>
 
 
     <div class="row justify-content-center" id="post-content">
@@ -34,16 +33,8 @@ while ($data = $posts->fetch()) {
         </div>
     </div>
 
-
-    <?php
-}
-$posts->closeCursor();
-?>
+<?php endwhile; ?>
+<?php $posts->closeCursor(); ?>
 <?php $content = ob_get_clean(); ?>
 
 <?php require_once 'template.php'; ?>
-
-<?php unset($_SESSION['error']); ?>
-
-<?php unset($_SESSION['success']); ?>
-

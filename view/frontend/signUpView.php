@@ -3,24 +3,13 @@
 
 <?php ob_start(); ?>
 
-<?php
-if (isset($_SESSION['success'])) {
-    ?>
-    <div class="alert alert-success">
-        <?php echo $_SESSION['success']; ?>
-    </div>
-    <?php
-}
-unset($_SESSION['success']);
-if (isset($_SESSION['error'])) {
-    ?>
-    <div class="alert alert-danger">
-        <?php echo $_SESSION['error']; ?>
-    </div>
-    <?php
-}
-unset($_SESSION['error']);
-?>
+<?php if (isset($_SESSION['success']) && !empty($_SESSION['success'])) : ?>
+    <div class="alert alert-success"><?= $_SESSION['success']; ?></div>
+<?php endif; ?>
+<?php if (isset($_SESSION['error']) && !empty($_SESSION['error'])) : ?>
+    <div class="alert alert-danger"><?= $_SESSION['error']; ?></div>
+<?php endif; ?>
+
 
 <div class="row justify-content-center">
     <div class="col-md-8  col-lg-6" id="signup-form">
@@ -67,4 +56,3 @@ unset($_SESSION['error']);
 <?php unset($_SESSION['error']); ?>
 
 <?php unset($_SESSION['success']); ?>
-

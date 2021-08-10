@@ -63,10 +63,7 @@
                     </li>
 
                 <?php else : ?>
-                    <li class="nav-item">
-                        <a class="nav-link <?php if ($nav === "page") : ?> active <?php endif; ?>" aria-current="page"
-                           href="index.php?action=page">Page</a>
-                    </li>
+
                     <li class="nav-item">
                         <a class="nav-link <?php if ($nav === "contact") : ?> active <?php endif; ?>"
                            aria-current="page"
