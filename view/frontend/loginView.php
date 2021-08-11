@@ -28,6 +28,7 @@
                         <input type="password" class="form-control" name="password" required="required">
                     </div>
                 </div>
+                <input type="hidden" name="token" value="<?= $_SESSION['token'] ?? '' ?>">
                 <input type="submit" value="Se connecter" class="btn btn-lg btn-outline-danger" id="btn-login">
                 <br/>
                 <div class="text-center">Vous n'avez pas encore de compte ? <a

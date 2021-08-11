@@ -41,6 +41,7 @@
     <div class="row justify-content-md-center">
         <div class="col-lg-3">
             <div class="form-group">
+                <input type="hidden" name="token" value="<?= $_SESSION['token'] ?? '    ' ?>">
                 <button type="submit" name="submit" class="btn btn-primary" id="btn-create-post">Enregistrer
                 </button>
             </div>
@@ -59,4 +60,3 @@
 <?php unset($_SESSION['error']); ?>
 
 <?php unset($_SESSION['success']); ?>
-

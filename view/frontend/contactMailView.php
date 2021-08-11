@@ -37,6 +37,7 @@
                     <textarea class="form-control" name="message" rows="4" required></textarea>
                 </div>
             </div>
+            <input type="hidden" name="token" value="<?= $_SESSION['token'] ?? '    ' ?>">
             <!-- Submit button -->
             <input type="submit" value="Envoyer" name="submit" class="btn btn-lg btn-outline-danger"
                    id="btn-contact">

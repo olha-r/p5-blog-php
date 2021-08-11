@@ -20,18 +20,27 @@ class BackendController
             $post = new SuperGlobals();
             $get_post = $post->get_POST();
             if (isset($get_post['submit'])) {
-                if (isset($get_post['title']) && isset($get_post['fragment']) && isset($get_post['content'])
-                    && !empty($get_post['title']) && !empty($get_post['fragment']) && !empty($get_post['content'])) {
-                    $backendPostManager = new BackendPostManager();
-                    $added_post = $backendPostManager->addNewPost($get_post['title'], $get_post['fragment'], $get_post['content'], $_SESSION['admin']['id']);
+                $token = filter_input(INPUT_POST, 'token', FILTER_SANITIZE_STRING);
 
-                    if ($added_post === false) {
-                        header('Location: index.php?action=createPost');
-                        $_SESSION['error'] = "Une erreur est survenue. Impossible d'enregistrer l'article.!";
-                    } else {
-                        header('Location: index.php?action=dashboardAdmin');
-                        $_SESSION['success'] = "Votre article est ajouté.";
+                if (!$token || $token !== $_SESSION['token']) {
+                    // return 405 http status code
+                    header($_SERVER['SERVER_PROTOCOL'] . ' 405 Method Not Allowed');
+                    exit;
+                } else {
+                    if (isset($get_post['title']) && isset($get_post['fragment']) && isset($get_post['content'])
+                        && !empty($get_post['title']) && !empty($get_post['fragment']) && !empty($get_post['content'])) {
+                        $backendPostManager = new BackendPostManager();
+                        $added_post = $backendPostManager->addNewPost($get_post['title'], $get_post['fragment'], $get_post['content'], $_SESSION['admin']['id']);
+
+                        if ($added_post === false) {
+                            header('Location: index.php?action=createPost');
+                            $_SESSION['error'] = "Une erreur est survenue. Impossible d'enregistrer l'article.!";
+                        } else {
+                            header('Location: index.php?action=dashboardAdmin');
+                            $_SESSION['success'] = "Votre article est ajouté.";
+                        }
                     }
+
                 }
             }
             require_once './view/backend/createPostView.php';
@@ -83,18 +92,27 @@ class BackendController
             $get_get = $get->get_GET();
 
             if (isset($get_post['edit']) && !empty($get_post['edit'])) {
-                $backendPostManager = new BackendPostManager();
-                $edit = $backendPostManager->editPost(
-                    $get_post['edit-title'],
-                    $get_post['edit-content'],
-                    $get_get['id']);
-                if ($edit === false) {
-                    header('Location: index.php?action=dashboardAdmin');
-                    $_SESSION['error'] = "Une erreur est survenue. Impossible de mofifier l'article !";
+                $token = filter_input(INPUT_POST, 'token', FILTER_SANITIZE_STRING);
+
+                if (!$token || $token !== $_SESSION['token']) {
+                    // return 405 http status code
+                    header($_SERVER['SERVER_PROTOCOL'] . ' 405 Method Not Allowed');
+                    exit;
                 } else {
-                    header('Location: index.php?action=dashboardAdmin');
-                    $_SESSION['success'] = "Votre article est modifié !";
+                    $backendPostManager = new BackendPostManager();
+                    $edit = $backendPostManager->editPost(
+                        $get_post['edit-title'],
+                        $get_post['edit-content'],
+                        $get_get['id']);
+                    if ($edit === false) {
+                        header('Location: index.php?action=dashboardAdmin');
+                        $_SESSION['error'] = "Une erreur est survenue. Impossible de mofifier l'article !";
+                    } else {
+                        header('Location: index.php?action=dashboardAdmin');
+                        $_SESSION['success'] = "Votre article est modifié !";
+                    }
                 }
+
             } else {
                 $_SESSION['error'] = "Aucun identifiant de billet envoyé !";
                 header('Location: index.php?action=editPost');
@@ -113,14 +131,22 @@ class BackendController
             $get_post = $post->get_POST();
 
             if (isset($get_post['delete']) && !empty($get_post['delete'])) {
-                $backendPostManager = new BackendPostManager();
-                $delete = $backendPostManager->deletePost($get_post['id']);
-                if ($delete === false) {
-                    $_SESSION['error'] = "Une erreur est survenue. Impossible de supprimer l'article!";
-                    header('Location: index.php?action=dashboardAdmin');
+                $token = filter_input(INPUT_POST, 'token', FILTER_SANITIZE_STRING);
+
+                if (!$token || $token !== $_SESSION['token']) {
+                    // return 405 http status code
+                    header($_SERVER['SERVER_PROTOCOL'] . ' 405 Method Not Allowed');
+                    exit;
                 } else {
-                    $_SESSION['success'] = "Votre article est supprimé.";
-                    header('Location: index.php?action=dashboardAdmin');
+                    $backendPostManager = new BackendPostManager();
+                    $delete = $backendPostManager->deletePost($get_post['id']);
+                    if ($delete === false) {
+                        $_SESSION['error'] = "Une erreur est survenue. Impossible de supprimer l'article!";
+                        header('Location: index.php?action=dashboardAdmin');
+                    } else {
+                        $_SESSION['success'] = "Votre article est supprimé.";
+                        header('Location: index.php?action=dashboardAdmin');
+                    }
                 }
             }
             require_once './view/backend/backendListPostsView.php';
@@ -149,14 +175,22 @@ class BackendController
             $get_post = $post->get_POST();
 
             if (isset($get_post['validate']) && !empty($get_post['validate'])) {
-                $commentManager = new BackendCommentManager();
-                $valid_comment = $commentManager->approveComment($get_post['commentId']);
-                if ($valid_comment === false) {
-                    $_SESSION['error'] = "Une erreur est survenue. Impossible de valider le commentaire!";
-                    header('Location: index.php?action=displayComments');
+                $token = filter_input(INPUT_POST, 'token', FILTER_SANITIZE_STRING);
+
+                if (!$token || $token !== $_SESSION['token']) {
+                    // return 405 http status code
+                    header($_SERVER['SERVER_PROTOCOL'] . ' 405 Method Not Allowed');
+                    exit;
                 } else {
-                    $_SESSION['success'] = "Le commentaire est validé et publié.";
-                    header('Location: index.php?action=displayComments');
+                    $commentManager = new BackendCommentManager();
+                    $valid_comment = $commentManager->approveComment($get_post['commentId']);
+                    if ($valid_comment === false) {
+                        $_SESSION['error'] = "Une erreur est survenue. Impossible de valider le commentaire!";
+                        header('Location: index.php?action=displayComments');
+                    } else {
+                        $_SESSION['success'] = "Le commentaire est validé et publié.";
+                        header('Location: index.php?action=displayComments');
+                    }
                 }
             }
             require_once './view/backend/backendCommentsView.php';
@@ -174,15 +208,24 @@ class BackendController
             $get_post = $post->get_POST();
 
             if (isset($get_post['not_validate']) && !empty($get_post['not_validate'])) {
-                $commentManager = new BackendCommentManager();
-                $not_valid_comment = $commentManager->notApproveComment($get_post['commentId']);
+                $token = filter_input(INPUT_POST, 'token', FILTER_SANITIZE_STRING);
 
-                if ($not_valid_comment === false) {
-                    $_SESSION['error'] = "Une erreur est survenue. Impossible de supprimer le commentaire!";
+                if (!$token || $token !== $_SESSION['token']) {
+                    // return 405 http status code
+                    header($_SERVER['SERVER_PROTOCOL'] . ' 405 Method Not Allowed');
+                    exit;
+                } else {
+                    $commentManager = new BackendCommentManager();
+                    $not_valid_comment = $commentManager->notApproveComment($get_post['commentId']);
+
+                    if ($not_valid_comment === false) {
+                        $_SESSION['error'] = "Une erreur est survenue. Impossible de supprimer le commentaire!";
+                        header('Location: index.php?action=displayComments');
+                    }
+                    $_SESSION['success'] = "Le commentaire est supprimé.";
                     header('Location: index.php?action=displayComments');
                 }
-                $_SESSION['success'] = "Le commentaire est supprimé.";
-                header('Location: index.php?action=displayComments');
+
             }
             require_once './view/backend/backendCommentsView.php';
         } else {
@@ -192,4 +235,3 @@ class BackendController
     }
 
 }
-

@@ -1,5 +1,9 @@
 <?php
 session_start();
+if (empty($_SESSION['token'])) {
+    $_SESSION['token'] = bin2hex(random_bytes(32));
+}
+$token = $_SESSION['token'];
 
 use OC\Blog\Controller\BackendController;
 use OC\Blog\Controller\FrontendController;
@@ -55,6 +59,8 @@ try {
             (new BackendController())->validateComment();
         } elseif ($page === 'notValidateComment') {
             (new BackendController())->notValidateComment();
+        } else {
+            echo '404';
         }
     } else {
         $frontendController->home_page();

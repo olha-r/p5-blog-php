@@ -79,6 +79,7 @@
                           required></textarea>
             </div>
             <div class="form-group">
+                <input type="hidden" name="token" value="<?= $_SESSION['token'] ?? '    ' ?>">
                 <button type="submit" name="submit" class="btn btn-outline-danger" id="btn-comment">Envoyer</button>
             </div>
             <?php endif; ?>

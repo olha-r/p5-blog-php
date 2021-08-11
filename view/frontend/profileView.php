@@ -27,6 +27,7 @@ if (isset($_SESSION['member'])) : ?>
                 <div class="col-lg-6 col-md-10">
                     <form action="index.php?action=deleteUser" method="POST">
                         <input type="hidden" value="<?= $_SESSION['member']['id'] ?>" name="user_id">
+                        <input type="hidden" name="token" value="<?= $_SESSION['token'] ?? '    ' ?>">
                         <input type="submit" value="Supprimer mon compte" name="delete_user" class="btn btn-danger"
                                id="del-user">
                     </form>
@@ -48,7 +49,7 @@ if (isset($_SESSION['member'])) : ?>
                             <input type="text" name="edit-email" placeholder="Email"
                                    value="<?= htmlspecialchars($user_info['email']) ?>"
                                    class="form-control">
-
+                            <input type="hidden" name="token" value="<?= $_SESSION['token'] ?? '    ' ?>">
                             <input type="submit" value="Modifier mon pfrofile" name="edit-user-info"
                                    class="btn btn-outline-danger" id="edit-user-info">
                         </div>
@@ -67,6 +68,7 @@ if (isset($_SESSION['member'])) : ?>
                             <input type="password" name="edit-password-second"
                                    placeholder="Confirmer le mot de passe"
                                    class="form-control" required>
+                            <input type="hidden" name="token" value="<?= $_SESSION['token'] ?? '    ' ?>">
                             <input type="submit" value="Modifier mot de passe" name="update-password"
                                    class="btn btn-outline-danger" id="edit-password">
                         </div>
@@ -98,6 +100,7 @@ if (isset($_SESSION['member'])) : ?>
                 <p><?= nl2br(htmlspecialchars($comment['comment'])) ?></p>
                 <form action="index.php?action=deleteUserComment" method="POST">
                     <input type="hidden" value="<?= $comment['id_comment']; ?>" name="commentUserId">
+                    <input type="hidden" name="token" value="<?= $_SESSION['token'] ?? '    ' ?>">
                     <input type="submit" value="Supprimer commentaire" name="delete_user_comment"
                            class="btn btn-danger" id="del-user-comment">
                 </form>
