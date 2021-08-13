@@ -1,4 +1,13 @@
-body {
+
+html
+{
+  position: relative;
+  min-height: 100%;
+}
+
+body
+{
+  margin: 0 0 250px;
   font-family: 'Roboto', 'Tahoma', sans-serif;
   line-height: 1.5;
   color: #333;
@@ -123,7 +132,12 @@ div {
 /* Footer section */
 #footer {
   background-color: #353535;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 250px;
   width: 100%;
+  overflow: hidden;
   padding: 30px 0 50px;
 }
 

@@ -35,9 +35,12 @@ class FrontendController
 
             $post = $postManager->getPost($get_get['id']);
             $comments = $commentManager->getComments($get_get['id']);
-//существует или нет пост
-
-            require_once 'view/frontend/postView.php';
+            if (!empty($post)) {
+                require_once 'view/frontend/postView.php';
+            } else {
+                header('Location: index.php?action=homePage');
+                $_SESSION['error'] = "Cet identifiant de billet n'existe pas !";
+            }
         } else {
             header('Location: index.php?action=homePage');
             $_SESSION['error'] = "Aucun identifiant de billet envoyé !";
@@ -390,6 +393,24 @@ class FrontendController
             require_once './view/frontend/profileView.php';
         }
     }
+
+    public function downloadCV()
+    {
+        $cv = 'CV.pdf'; // of course find the exact filename....
+        header('Pragma: public');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header('Cache-Control: private', false); // required for certain browsers
+        header('Content-Type: application/pdf');
+
+        header('Content-Disposition: attachment; filename="' . basename($cv) . '";');
+        header('Content-Transfer-Encoding: binary');
+        header('Content-Length: ' . filesize($cv));
+
+        readfile($cv);
+        exit;
+    }
+
     public function error404()
     {
         require_once 'view/errors/404.html';

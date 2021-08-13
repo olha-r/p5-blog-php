@@ -13,6 +13,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,700&family=Roboto&display=swap"
           rel="stylesheet">
     <script src="https://kit.fontawesome.com/55a2989d96.js" crossorigin="anonymous"></script>
+
 </head>
 
 <body>
@@ -122,7 +123,7 @@
                 </ul>
                 <ul class="list-inline text-center">
                     <li class="list-inline-item">
-                        <a href="index.php"> Télécharger CV
+                        <a href="index.php?action=downloadCV"> Télécharger CV
                             <span class="fa-stack">
                                 <i class="fa fa-circle fa-stack-2x"></i>
                                 <i class="fa fa-download fa-stack-1x fa-inverse"></i>

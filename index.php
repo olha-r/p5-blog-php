@@ -43,6 +43,8 @@ try {
             $frontendController->deleteUserComment();
         } elseif ($page === 'deleteUser') {
             $frontendController->deleteUser();
+        } elseif ($page === 'downloadCV') {
+            $frontendController->downloadCV();
         } elseif ($page === 'dashboardAdmin') {
             (new BackendController())->displayAllPosts();
         } elseif ($page === 'createPost') {
