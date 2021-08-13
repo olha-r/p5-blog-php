@@ -18,7 +18,7 @@
 <body>
 <!-- Header-->
 <div id="frontend-header" class="container-fluid">
-    <?php if (isset($_SESSION['admin'])) : ?>
+    <?php if (isset($_SESSION['admin']) && !empty($_SESSION['admin'])) : ?>
         <h1 class="fw-bold">Administration du blog !</h1>
     <?php else : ?>
         <h1 class="fw-bold">Mon blog !</h1>
@@ -37,27 +37,27 @@
         <div class="collapse navbar-collapse" id="navbar">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link  <?php if ($nav === "home_page") : ?> active <?php endif; ?>" aria-current="page"
+                    <a class="nav-link  <?php if (isset($nav) && !empty($nav) && ($nav === "home_page")) : ?> active <?php endif; ?>" aria-current="page"
                        href="index.php?action=homePage">Accueil</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link <?php if ($nav === "list_post") : ?> active <?php endif; ?>" aria-current="page"
+                    <a class="nav-link <?php if (isset($nav) && !empty($nav) && ($nav === "list_post")) : ?> active <?php endif; ?>" aria-current="page"
                        href="index.php?action=listPosts"><i class="fas fa-th-list"></i> Tous les billets</a>
                 </li>
 
-                <?php if (isset($_SESSION['admin'])) : ?>
+                <?php if (isset($_SESSION['admin']) && !empty($_SESSION['admin'])) : ?>
                     <li class="nav-item">
-                        <a class="nav-link  <?php if ($nav === "admin-posts") : ?> active <?php endif; ?>"
+                        <a class="nav-link  <?php if (isset($nav) && !empty($nav) && ($nav === "admin-posts")) : ?> active <?php endif; ?>"
                            aria-current="page"
                            href="index.php?action=dashboardAdmin"><i class="fas fa-list-ol"></i> Liste des billets</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link <?php if ($nav === "admin-comment") : ?> active <?php endif; ?>"
+                        <a class="nav-link <?php if (isset($nav) && !empty($nav) && ($nav === "admin-comment")) : ?> active <?php endif; ?>"
                            aria-current="page"
                            href="index.php?action=displayComments"><i class="fas fa-comments"></i> Commentaires</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link <?php if ($nav === "admin-create-post") : ?> active <?php endif; ?>"
+                        <a class="nav-link <?php if (isset($nav) && !empty($nav) && ($nav === "admin-create-post")) : ?> active <?php endif; ?>"
                            aria-current="page"
                            href="index.php?action=createPost"><i class="fas fa-newspaper"></i> Créer un billet</a>
                     </li>
@@ -65,7 +65,7 @@
                 <?php else : ?>
 
                     <li class="nav-item">
-                        <a class="nav-link <?php if ($nav === "contact") : ?> active <?php endif; ?>"
+                        <a class="nav-link <?php if (isset($nav) && !empty($nav) && ($nav === "contact")) : ?> active <?php endif; ?>"
                            aria-current="page"
                            href="index.php?action=contactUs"><i class="fas fa-envelope-open-text"></i> Contact</a>
                     </li>
@@ -73,12 +73,12 @@
             </ul>
             <ul class="navbar-nav">
                 <?php if (!isset($_SESSION['member']) && !isset($_SESSION['admin'])) : ?>
-                    <a class="btn btn-outline-dark navbar-right <?php if ($nav === "signup") : ?> active <?php endif; ?>"
+                    <a class="btn btn-outline-dark navbar-right <?php if (isset($nav) && !empty($nav) && ($nav === "signup")) : ?> active <?php endif; ?>"
                        href="index.php?action=signUp">Inscription</a>
-                    <a class="btn btn-outline-dark navbar-right <?php if ($nav === "login") : ?> active <?php endif; ?>"
+                    <a class="btn btn-outline-dark navbar-right <?php if (isset($nav) && !empty($nav) && ($nav === "login")) : ?> active <?php endif; ?>"
                        href="index.php?action=signIn">Connexion</a>
                 <?php else : ?>
-                    <?php if (isset($_SESSION['member'])) : ?>
+                    <?php if (isset($_SESSION['member']) && !empty($_SESSION['member'])) : ?>
                         <a href="index.php?action=dashboard">
                         <span class="fa-stack">
                                 <i class="fa fa-circle fa-stack-2x"></i>

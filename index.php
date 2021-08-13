@@ -60,7 +60,7 @@ try {
         } elseif ($page === 'notValidateComment') {
             (new BackendController())->notValidateComment();
         } else {
-            echo '404';
+            $frontendController->error404();
         }
     } else {
         $frontendController->home_page();

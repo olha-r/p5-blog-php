@@ -332,7 +332,7 @@ class FrontendController
         }
     }
 
-    function deleteUserComment()
+    public function deleteUserComment()
     {
         $post = new SuperGlobals();
         $get_post = $post->get_POST();
@@ -361,7 +361,7 @@ class FrontendController
         }
     }
 
-    function deleteUser()
+    public function deleteUser()
     {
         $post = new SuperGlobals();
         $get_post = $post->get_POST();
@@ -389,5 +389,9 @@ class FrontendController
         } else {
             require_once './view/frontend/profileView.php';
         }
+    }
+    public function error404()
+    {
+        require_once 'view/errors/404.html';
     }
 }
