@@ -48,6 +48,7 @@
                 <p></p>
                 <hr>
                 <div class="row justify-content-md-center">
+                    <input type="hidden" name="token" value="<?= $_SESSION['token'] ?? '    ' ?>">
                     <input type="submit" value="Modifier" name="edit" class="btn btn-outline-danger"
                            id="btn-edit-post">
 

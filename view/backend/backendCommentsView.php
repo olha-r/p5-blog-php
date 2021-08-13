@@ -33,6 +33,7 @@
                             <div class="col-lg-4">
                                 <form action="index.php?action=validateComment" method="POST">
                                     <input type="hidden" value="<?= $comments['id_comment']; ?>" name="commentId">
+                                    <input type="hidden" name="token" value="<?= $_SESSION['token'] ?? '    ' ?>">
                                     <input type="submit" value="Valider" name="validate" class="btn btn-primary"
                                            id="btn-validate-comment">
                                 </form>
@@ -40,6 +41,7 @@
                             <div class="col-lg-4">
                                 <form action="index.php?action=notValidateComment" method="POST">
                                     <input type="hidden" value="<?= $comments['id_comment']; ?>" name="commentId">
+                                    <input type="hidden" name="token" value="<?= $_SESSION['token'] ?? '    ' ?>">
                                     <input type="submit" value="Supprimer" name="not_validate" class="btn btn-danger"
                                            id="btn-admin-del-comment">
                                 </form>

@@ -41,6 +41,7 @@
                     <input type="password" class="form-control" name="new_password_2" required="required">
                 </div>
             </div>
+            <input type="hidden" name="token" value="<?= $_SESSION['token'] ?? '    ' ?>">
             <input type="submit" name="submit" class="btn btn-lg btn-outline-danger" id="btn-signup"
                    value="S'inscrire">
             <div class="text-center">Vous avez déjà un compte ? <a href="index.php?action=signIn">Connectez-vous</a>

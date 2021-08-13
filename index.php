@@ -1,5 +1,9 @@
 <?php
 session_start();
+if (empty($_SESSION['token'])) {
+    $_SESSION['token'] = bin2hex(random_bytes(32));
+}
+$token = $_SESSION['token'];
 
 use OC\Blog\Controller\BackendController;
 use OC\Blog\Controller\FrontendController;
@@ -39,6 +43,8 @@ try {
             $frontendController->deleteUserComment();
         } elseif ($page === 'deleteUser') {
             $frontendController->deleteUser();
+        } elseif ($page === 'downloadCV') {
+            $frontendController->downloadCV();
         } elseif ($page === 'dashboardAdmin') {
             (new BackendController())->displayAllPosts();
         } elseif ($page === 'createPost') {
@@ -55,6 +61,8 @@ try {
             (new BackendController())->validateComment();
         } elseif ($page === 'notValidateComment') {
             (new BackendController())->notValidateComment();
+        } else {
+            $frontendController->error404();
         }
     } else {
         $frontendController->home_page();

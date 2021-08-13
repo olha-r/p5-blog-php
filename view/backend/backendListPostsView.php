@@ -36,6 +36,7 @@
                             <div class="col-lg-4">
                                 <form action="index.php?action=deletePost" method="POST">
                                     <input type="hidden" value="<?= $data['id']; ?>" name="id">
+                                    <input type="hidden" name="token" value="<?= $_SESSION['token'] ?? '    ' ?>">
                                     <input type="submit" value="Supprimer" name="delete" class="btn btn-danger"
                                            id="btn-admin-del-post">
                                 </form>
