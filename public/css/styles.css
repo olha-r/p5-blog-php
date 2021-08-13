@@ -1,12 +1,9 @@
-
-html
-{
+html {
   position: relative;
   min-height: 100%;
 }
 
-body
-{
+body {
   margin: 0 0 250px;
   font-family: 'Roboto', 'Tahoma', sans-serif;
   line-height: 1.5;
