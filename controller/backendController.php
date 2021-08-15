@@ -102,6 +102,7 @@ class BackendController
                     $backendPostManager = new BackendPostManager();
                     $edit = $backendPostManager->editPost(
                         $get_post['edit-title'],
+                        $get_post['edit-fragment'],
                         $get_post['edit-content'],
                         $get_get['id']);
                     if ($edit === false) {

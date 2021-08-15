@@ -37,9 +37,10 @@
                       Auteur:
                       <strong><?= $post['user_name'] ?></strong>
                   </span>
+            </br>
                 <span>
-                    le
-                    <em><?= $post['creation_date_fr'] ?></em>
+                    Dernière mise à jour le
+                    <em><?= $post['modify_date_fr'] ?></em>
                 </span>
             </div>
         </div>

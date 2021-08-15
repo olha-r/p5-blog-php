@@ -14,7 +14,8 @@ class PostManager extends ManagerPDO
         $db_connect = $this->dbConnect();
 
         $req = $db_connect->query('
-                    SELECT *, DATE_FORMAT(creation_date, \'%d/%m/%Y à %Hh%imin%ss\') AS creation_date_fr
+                    SELECT *, 
+                           DATE_FORMAT(modify_date, \'%d/%m/%Y à %Hh%imin%ss\') AS modify_date_fr
                     FROM posts
                     ORDER BY creation_date
                     DESC LIMIT 0, 5
@@ -29,7 +30,10 @@ class PostManager extends ManagerPDO
     {
         $db_connect = $this->dbConnect();
         $req = $db_connect->prepare('
-                    SELECT *, posts.id AS postId, DATE_FORMAT(posts.creation_date, \'%d/%m/%Y à %Hh%imin%ss\') AS creation_date_fr
+                    SELECT *, 
+                           posts.id AS postId,  
+                           DATE_FORMAT(posts.creation_date, \'%d/%m/%Y à %Hh%imin%ss\') AS creation_date_fr,
+                           DATE_FORMAT(modify_date, \'%d/%m/%Y à %Hh%imin%ss\') AS modify_date_fr
                     FROM posts
                     LEFT JOIN users on users.id = posts.author_post
                     WHERE posts.id = ?
