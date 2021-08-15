@@ -7,9 +7,9 @@ Contains UML diagrams and the files of the website.
 The objective of this project is to create a blog without using a framework.
 The website uses a standard MVC structure.
 
-### **How to install :**
+### **How to install**
 
-_**Download :**_
+_**Download**_
 Download projet-OC-blog file on gitHub. You can download, or clone it on : https://github.com/olha-r/projet-OC-blog
 
 _**Installing :**_

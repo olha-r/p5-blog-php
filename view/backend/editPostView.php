@@ -59,9 +59,15 @@
                       Auteur:
                       <strong><?= $post['user_name'] ?></strong>
                   </span>
+                        </br>
                         <span>
-                    le
+                    Publié le
                     <em><?= $post['creation_date_fr'] ?></em>
+                </span>
+                        </br>
+                        <span>
+                    Modifié le
+                    <em><?= $post['modify_date_fr'] ?></em>
                 </span>
                     </div>
                 </div>

@@ -13,8 +13,8 @@ class BackendPostManager extends ManagerPDO
     {
         $db_connect = $this->dbConnect();
         $new_post = $db_connect->prepare('
-                                INSERT INTO posts (title, fragment, content, author_post, creation_date) 
-                                VALUES(?, ?, ?, ?, NOW())');
+                                INSERT INTO posts (title, fragment, content, author_post, creation_date, modify_date) 
+                                VALUES(?, ?, ?, ?, NOW(), NOW())');
         $added_post = $new_post->execute(array($title, $fragment, $content, $id_user));
         return $added_post;
     }
@@ -23,7 +23,10 @@ class BackendPostManager extends ManagerPDO
     {
         $db_connect = $this->dbConnect();
         $allPosts = $db_connect->query('
-                    SELECT id, title,  DATE_FORMAT(creation_date, \'%d/%m/%Y à %Hh%imin%ss\') AS creation_date_fr
+                    SELECT id, 
+                           title,  
+                           DATE_FORMAT(creation_date, \'%d/%m/%Y à %Hh%imin%ss\') AS creation_date_fr, 
+                           DATE_FORMAT(modify_date, \'%d/%m/%Y à %Hh%imin%ss\') AS modify_date_fr
                     FROM posts
                     ORDER BY creation_date
                     DESC
@@ -42,13 +45,13 @@ class BackendPostManager extends ManagerPDO
         return $del_post;
     }
 
-    public function editPost($title, $content, $id_post)
+    public function editPost($title, $fragment, $content, $id_post)
     {
         $db_connect = $this->dbConnect();
         $edit_post = $db_connect->prepare('
-                    UPDATE posts SET title = ?, content = ?
+                    UPDATE posts SET title = ?, fragment = ?, content = ?, modify_date = NOW()
                     WHERE id = ? 
         ');
-        $edit_post->execute(array($title, $content, $id_post));
+        $edit_post->execute(array($title, $fragment, $content, $id_post));
     }
 }

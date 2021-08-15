@@ -25,7 +25,8 @@
             ?>
             <div class="col-sm-6" id="posts-admin">
                 <div class="card">
-                    <div class="card-header"><small class="text-muted"><?= $data['creation_date_fr'] ?></small></div>
+                    <div class="card-header">Date de publication:<small class="text-muted"><?= $data['creation_date_fr'] ?></small>
+                        </br>Date de modification:<small class="text-muted"><?= $data['modify_date_fr'] ?></small></div>
                     <div class="card-body text-center">
                         <h5 class="card-title"><?= htmlspecialchars($data['title']) ?></h5>
                         <div class="row justify-content-md-center">

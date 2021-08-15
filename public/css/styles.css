@@ -377,8 +377,7 @@ img {
 }
 
 @media (max-width: 1000px) {
-  #post-create
-  {
+  #post-create {
     margin: 40px 20px 30px;
     padding: 20px 10px;
   }

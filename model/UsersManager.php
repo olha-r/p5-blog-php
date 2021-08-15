@@ -55,7 +55,7 @@ class UsersManager extends ManagerPDO
         return $req->fetch();
     }
 
-    public function update_user($user_name, $email, $user_id)
+    public function updateUser($user_name, $email, $user_id)
     {
         $db_connect = $this->dbConnect();
         $edit_user_info = $db_connect->prepare('
@@ -65,7 +65,7 @@ class UsersManager extends ManagerPDO
         $edit_user_info->execute(array($user_name, $email, $user_id));
     }
 
-    public function update_password($password, $user_id)
+    public function updatePassword($password, $user_id)
     {
         $db_connect = $this->dbConnect();
         $edit_password = $db_connect->prepare('
@@ -75,7 +75,7 @@ class UsersManager extends ManagerPDO
         $edit_password->execute(array($password, $user_id));
     }
 
-    public function delete_user($user_id)
+    public function deleteUser($user_id)
     {
         $db_connect = $this->dbConnect();
         $deleted_user = $db_connect->prepare('

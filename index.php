@@ -18,7 +18,7 @@ try {
     if (isset($_GET['action']) && !empty($_GET['action'])) {
         $page = $_GET['action'];
         if ($page === 'homePage') {
-            $frontendController->home_page();
+            $frontendController->homePage();
         }   elseif ($page === 'listPosts') {
             $frontendController->listPosts();
         } elseif ($page === 'post') {
@@ -30,9 +30,9 @@ try {
         } elseif ($page === 'signUp') {
             $frontendController->addNewUser();
         } elseif ($page === 'signIn') {
-            $frontendController->login_user();
+            $frontendController->loginUser();
         } elseif ($page === 'dashboard') {
-            $frontendController->user_dashboard();
+            $frontendController->userDashboard();
         } elseif ($page === 'logout') {
             $frontendController->logout();
         } elseif ($page === 'editUser') {
@@ -65,7 +65,7 @@ try {
             $frontendController->error404();
         }
     } else {
-        $frontendController->home_page();
+        $frontendController->homePage();
     }
 } catch (Exception $e) {
     echo 'Erreur : ' . $e->getMessage();

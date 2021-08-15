@@ -22,8 +22,8 @@ while ($data = $posts->fetch()) : ?>
             <div class="row">
                 <div class="col-xs-7 col-sm-8 col-md-6 col-lg-6">
                 <span>
-                    Publié le
-                    <em><?= $data['creation_date_fr'] ?></em>
+                    Dernière mise à jour le
+                    <em><?= $data['modify_date_fr'] ?></em>
                 </span>
                 </div>
                 <div class="col-xs-5 col-sm-2 col-md-offset-3 col-md-3 col-lg-offset-4 col-lg-2">
