@@ -131,7 +131,7 @@ class FrontendController
     }
 
     //USERS FUNCTIONS
-    public function user_dashboard()
+    public function userDashboard()
     {
         $key = new SuperGlobals();
         $get_session = $key->get_SESSION();
@@ -213,7 +213,7 @@ class FrontendController
         }
     }
 
-    public function login_user()
+    public function loginUser()
     {
         if (isset($_POST['user_name']) && isset($_POST['password'])
             && !empty($_POST['user_name']) && !empty($_POST['password'])
@@ -266,7 +266,7 @@ class FrontendController
     }
 
     //HOME PAGE
-    public function home_page()
+    public function homePage()
     {
         require_once 'view/frontend/homePageView.php';
     }
@@ -285,7 +285,7 @@ class FrontendController
                 exit;
             } else {
                 $frontendController = new UsersManager();
-                $edit_user_info = $frontendController->update_user($get_post['edit-username'], $get_post['edit-email'], $_GET['id']);
+                $edit_user_info = $frontendController->updateUser($get_post['edit-username'], $get_post['edit-email'], $_GET['id']);
                 if ($edit_user_info === false) {
                     $_SESSION['error'] = "Une erreur est survenue. Impossible de mofifier user informations !";
                     header('Location: index.php?action=dashboard');
@@ -319,7 +319,7 @@ class FrontendController
                 } else {
                     $frontendController = new UsersManager();
                     $edited_password = password_hash($get_post['edit-password-first'], PASSWORD_DEFAULT);
-                    $edit_password = $frontendController->update_password($edited_password, $_GET['id']);
+                    $edit_password = $frontendController->updatePassword($edited_password, $_GET['id']);
                     if ($edit_password === false) {
                         $_SESSION['error'] = "Une erreur est survenue. Impossible de mofifier mot de passe !";
                         header('Location: index.php?action=dashboard');
@@ -378,7 +378,7 @@ class FrontendController
                 exit;
             } else {
                 $userManager = new UsersManager();
-                $deleted_user = $userManager->delete_user($_SESSION['member']['id']);
+                $deleted_user = $userManager->deleteUser($_SESSION['member']['id']);
 
                 if ($deleted_user === false) {
                     $_SESSION['error'] = "Une erreur est survenue. Impossible de supprimer le compte!";
